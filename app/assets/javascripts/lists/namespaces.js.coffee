@@ -1,0 +1,2 @@
+window.Lists = {}
+Lists.globals = {}

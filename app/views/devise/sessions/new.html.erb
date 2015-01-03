@@ -1,0 +1,40 @@
+<div class="mtm fsl text-center">SIGN IN</div>
+<div class="row nmhxs mtm">
+  <div class="col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4 phxs">
+    <div class="pam bg-15 bss bwas bc-12">
+      <%= devise_error_messages! %>
+      <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+        <div class="row nmhxs mtxxxs">
+          <div class="col-sm-4 phxs mtxxxs">
+            <%= f.label :login %>
+          </div>
+          <div class="col-sm-8 phxs mtxxxs">
+            <%= f.text_field :login, autofocus: true, class: "phxs pvxxxs bss bwas bc-4 full-width" %>
+          </div>
+        </div>
+        <div class="row nmhxs mtxxxs">
+          <div class="col-sm-4 phxs mtxxxs">
+            <%= f.label :password %>
+          </div>
+          <div class="col-sm-8 phxs mtxxxs">
+            <%= f.password_field :password, autocomplete: "off", class: "phxs pvxxxs bss bwas bc-4 full-width" %>
+          </div>
+        </div>
+        <% if devise_mapping.rememberable? %>
+          <div class="row nmhxs mtxxxs">
+            <div class="col-sm-4 phxs mtxxxs">
+              <%= f.label :remember_me %>
+            </div>
+            <div class="col-sm-8 phxs mtxxxs">
+              <%= f.check_box :remember_me %>
+            </div>
+          </div>
+        <% end %>
+        <%= f.submit "Sign in", class: "phs pvxxxs mtxs bg-4 c-15 full-width" %>
+      <% end %>
+      <div class="mtxs">
+        <%= render "devise/shared/links" %>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,65 @@
+<div class="mtm fsl text-center">SIGN UP</div>
+<div class="row nmhxs mtm">
+  <div class="col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4 phxs">
+    <div class="pam bg-15 bss bwas bc-12">
+      <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+        <div class="row nmhxs mtxxxs">
+          <div class="col-sm-4 phxs mtxxxs">
+            <%= f.label :username %>
+          </div>
+          <div class="col-sm-8 phxs mtxxxs">
+            <%= f.text_field :username, autofocus: true, class: "phxs pvxxxs bss bwas bc-4 full-width" %>
+            <% if resource.errors[:username].present? %>
+              <div class="mtxxxs c-1">
+                <%= resource.errors[:username].join(", ").downcase %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+        <div class="row nmhxs mtxxxs">
+          <div class="col-sm-4 phxs mtxxxs">
+            <%= f.label :email %>
+          </div>
+          <div class="col-sm-8 phxs mtxxxs">
+            <%= f.email_field :email, class: "phxs pvxxxs bss bwas bc-4 full-width" %>
+            <% if resource.errors[:email].present? %>
+              <div class="mtxxxs c-1">
+                <%= resource.errors[:email].join(", ").downcase %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+        <div class="row nmhxs mtxxxs">
+          <div class="col-sm-4 phxs mtxxxs">
+            <%= f.label :password %>
+          </div>
+          <div class="col-sm-8 phxs mtxxxs">
+            <%= f.password_field :password, autocomplete: "off", class: "phxs pvxxxs bss bwas bc-4 full-width" %>
+            <% if resource.errors[:password].present? %>
+              <div class="mtxxxs c-1">
+                <%= resource.errors[:password].join(", ").downcase %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+        <div class="row nmhxs mtxxxs">
+          <div class="col-sm-4 phxs mtxxxs">
+            <%= f.label :password_confirmation %>
+          </div>
+          <div class="col-sm-8 phxs mtxxxs">
+            <%= f.password_field :password_confirmation, autocomplete: "off", class: "phxs pvxxxs bss bwas bc-4 full-width" %>
+            <% if resource.errors[:password_confirmation].present? %>
+              <div class="mtxxxs c-1">
+                <%= resource.errors[:password_confirmation].join(", ").downcase %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+        <%= f.submit "Sign up", class: "phs pvxxxs mtxs bg-4 c-15 full-width" %>
+      <% end %>
+      <div class="mtxs">
+        <%= render "devise/shared/links" %>
+      </div>
+    </div>
+  </div>
+</div>

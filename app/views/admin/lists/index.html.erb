@@ -1,0 +1,45 @@
+<div class="">
+  <%= link_to "New List", new_admin_list_path, class: "phxs pvxxxs bg-4 bg-3-hover c-13 c-15-hover" %>
+</div>
+<table class="mtm full-width">
+  <thead>
+    <tr>
+      <th class="fwl">
+        Title
+      </th>
+      <th class="fwl">
+        Created At
+      </th>
+      <th class="fwl">
+        Products
+      </th>
+      <th class="fwl">
+        Ratings
+      </th>
+      <th>
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @lists.each do |list| %>
+      <tr>
+        <td>
+          <%= link_to list.name, admin_list_path(list) %>
+        </td>
+        <td>
+          <%= list.created_at.strftime("%m/%d/%y") %>
+        </td>
+        <td>
+          <%= list.products_count %>
+        </td>
+        <td>
+          <%= rand(12) %>
+        </td>
+        <td>
+          <%= link_to "edit", edit_admin_list_path(list) %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<%= will_paginate(@lists) %>

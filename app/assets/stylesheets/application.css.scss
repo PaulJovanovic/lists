@@ -1,0 +1,32 @@
+/*
+*= require_self
+*/
+
+@import "config/colors";
+@import "config/borders";
+@import "config/dimensions";
+@import "config/fades";
+@import "config/fonts";
+@import "config/rounds";
+@import "config/spaces";
+@import "layout/bootstrap-custom";
+@import "font-awesome";
+
+html
+  {
+
+  body {
+    @import "atoms/bordering";
+    @import "atoms/coloring";
+    @import "atoms/dimensioning";
+    @import "atoms/fading";
+    @import "atoms/fonting";
+    @import "atoms/layout";
+    @import "atoms/spacing";
+    @import "atoms/rounding";
+
+		a, a:focus {
+			outline: 0;
+		}
+	}
+}

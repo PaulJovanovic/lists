@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title><%= content_for?(:title) ? "#{ content_for(:title) } | Lists" : "Lists" %></title>
+  <%= stylesheet_link_tag    'application', media: 'all' %>
+  <%= javascript_include_tag 'application' %>
+  <%= csrf_meta_tags %>
+  <meta name='viewport' content='width=device-width, minimum-scale=1.0, maximum-scale=1.0'>
+</head>
+<body>
+  <div class="pbxxl bg-14">
+    <div class="dvm lhm bg-4 bss bwbs bc-2">
+      <div class="container phxs">
+        <div class="row nmhxxxs">
+          <div class="col-sm-9 phxxxs">
+            <div class="c-15 fsl">
+              <%= link_to "Lists", root_path %>
+            </div>
+          </div>
+          <div class="col-sm-3 phxxxs">
+            <div class="c-15 text-right">
+              <% if current_user %>
+                <%= link_to "+ list", new_list_path %> | <%= link_to "logout", destroy_user_session_path, method: :delete %>
+              <% else %>
+                <%= link_to "login", new_user_session_path %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container phxs">
+      <%= yield %>
+    </div>
+  </div>
+  <div class="pvxxl bg-4">
+    <div class="container phxs">
+      <div class="row nmhxs">
+        <div class="col-sm-6 phxs">
+          <div class="c-15 fsxxl">
+            Lists
+          </div>
+        </div>
+        <div class="col-sm-6 phxs">
+          <%= link_to "Admin", admin_root_path, class: "c-13 c-15-hover" %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    Lists.globals.apiToken = "<%= current_or_guest_user.api_token || current_or_guest_user.generate_api_token %>";
+  </script>
+  <%= content_for :javascript %>
+</body>
+</html>

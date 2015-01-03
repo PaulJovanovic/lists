@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>List</title>
+  <%= stylesheet_link_tag    'application', media: 'all' %>
+  <%= javascript_include_tag 'application' %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+  <div class="pbxxl bg-14">
+    <div class="dvm lhm bg-4 bss bwbs bc-2">
+      <div class="container phxs">
+        <div class="c-15 fsl">
+          <%= link_to "Lists", root_path %>
+        </div>
+      </div>
+    </div>
+    <div class="container phxs">
+      <div class="row nmhxs">
+        <div class="col-sm-3 phxs mtm">
+          <%= link_to "Lists", admin_lists_path %>
+        </div>
+        <div class="col-sm-9 phxs mtm">
+          <%= yield %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    Lists.globals.apiToken = "<%= current_or_guest_user.api_token || current_or_guest_user.generate_api_token %>";
+  </script>
+  <%= content_for :javascript %>
+</body>
+</html>

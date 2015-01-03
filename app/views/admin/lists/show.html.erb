@@ -1,0 +1,60 @@
+<div class="phm pbm ptxs bg-15 bss bwas bc-12">
+  <div class="row nmhxs">
+    <div class="col-sm-8 mtxs phxs fss">
+      <%= link_to list_path(@list) do %>
+        <%= @list.name %> <i class="fa fa-circle fsxxs <%= @list.active? ? "c-green" : "c-red" %>" title="<%= @list.active? ? "active" : "inactive" %>"></i>
+      <% end %>
+    </div>
+    <div class="col-sm-4 phxs mtxs c-8 fss text-right-sm">
+      <%= pluralize(@list.products_count, "Product") %>
+    </div>
+  </div>
+</div>
+<div class="phm pbm ptxs mtxs bg-15 bss bwas bc-12">
+  <% @list.items.each do |item| %>
+    <div class="row nmhxs mtm-plus">
+      <div class="col-sm-2 phxs">
+        <%= image_tag item.product.image.url(:profile), class: "img-responsive" %>
+      </div>
+      <div class="col-sm-8 phxs fsxs">
+        <div class="fwl">
+          <%= item.product.name %>
+        </div>
+        <div class="fws">
+          <%= item.product.manufacturer %>
+        </div>
+      </div>
+      <div class="col-sm-2 phxs">
+        POINTS
+      </div>
+    </div>
+  <% end %>
+</div>
+<div class="phm pbm ptxs mtxs bg-15 bss bwas bc-12">
+  <div class="fss">
+    Add Product
+  </div>
+  <div class="mtxs ptxs bss bwts bc-12">
+    <%= form_tag v0_products_url(host: api_domain, subdomain: api_subdomain), remote: true, class: "js-lists-api-form js-products-form-new" do %>
+      <%= hidden_field_tag :type, "AmazonProduct" %>
+      <%= hidden_field_tag :id, nil %>
+      <div class="mtm-plus">
+        <div class="fsxxs">
+          <%= label_tag :sku %>
+        </div>
+        <div class="fsxs">
+          <%= text_field_tag :sku, nil, class: "paxxxs bss bwas bc-8 full-width" %>
+          <div class="c-red hide js-lists-api-form-error" data-input-name="product[sku]"></div>
+        </div>
+      </div>
+    <% end %>
+    <%= form_tag add_product_v0_list_url(host: api_domain, subdomain: api_subdomain), remote: true, class: "js-lists-api-form js-admin-lists-form-add-product" do %>
+      <%= hidden_field_tag :id, @list.id %>
+      <%= hidden_field_tag :user_id, current_user.id %>
+      <%= hidden_field_tag :product_id, nil, data: { dependent: true, dependent_on_form: ".js-products-form-new", dependent_on_input: "id" } %>
+      <div class="mtm">
+        <%= submit_tag "Create", class: "paxxxs bss bwas bc-8 full-width", data: { disable_with: "Creating" } %>
+      </div>
+    <% end %>
+  </div>
+</div>

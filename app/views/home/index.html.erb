@@ -1,0 +1,27 @@
+<div class="row nmhxs">
+  <div class="col-sm-8 phxs mtm">
+    <div class="pam bg-15 bss bwas bc-12">
+      <div class="fsm">
+        Top Rankings
+      </div>
+    </div>
+    <% @lists.each do |list| %>
+      <%= link_to list_path(list) do %>
+        <div class="mtxs pam bg-15 bss bwas bc-12">
+          <div class="row nmhxs">
+            <div class="col-sm-9 phxs">
+              <%= list.name %>
+            </div>
+            <div class="col-sm-3 phxs c-10 text-right-sm">
+              <%= pluralize(list.products_count, "Product") %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+  <div class="col-sm-4 phxs mtm">
+    <div class="paxs bg-15 bss bwas bc-12">
+    </div>
+  </div>
+</div>

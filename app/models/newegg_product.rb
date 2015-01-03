@@ -1,0 +1,3 @@
+class NeweggProduct < Product
+
+end
