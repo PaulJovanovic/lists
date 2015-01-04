@@ -10,9 +10,23 @@ class ListItem < ActiveRecord::Base
 
   default_scope { order(likes_count: :desc, created_at: :asc) }
 
+  def liked
+    recalculate_rank
+  end
+
+  def unliked
+    recalculate_rank
+  end
+
+  def recalculate_rank
+    new_rank = list.items.index(self)
+    ranks = [rank , new_rank].sort
+    list.recalculate_ranks(ranks[0], ranks[1])
+  end
+
   private
 
   def set_rank
-    update_column(:rank, list.items.count)
+    update_column(:rank, list.items.count - 1)
   end
 end

@@ -10,4 +10,10 @@ class List < ActiveRecord::Base
   def add_product(product, user)
     items.create(product: product, user: user)
   end
+
+  def recalculate_ranks(start, finish)
+    items[start..finish].each do |item|
+      item.update_column(:rank, items.index(item))
+    end
+  end
 end

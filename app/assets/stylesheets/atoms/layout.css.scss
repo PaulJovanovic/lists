@@ -194,7 +194,6 @@ table {
 }
 
 .ribbon {
-  background-color: $shade15;
   width: auto;
 
   &:before {
@@ -204,7 +203,18 @@ table {
     border-style: solid;
     bottom: -10px;
     content: '';
-    left: 0;
-    border-width: 10px 0 0 10px;
+    left: 0px;
+    border-width: 10px 0 0 7px;
+  }
+
+  &:after {
+    border-color: $shade12 transparent transparent transparent;
+    position: absolute;
+    display: block;
+    border-style: solid;
+    bottom: -10px;
+    content: '';
+    right: 0px;
+    border-width: 10px 7px 0 0;
   }
 }

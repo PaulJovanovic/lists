@@ -11,10 +11,12 @@ class Like < ActiveRecord::Base
 
   def increment_like_count
     likable_type.constantize.increment_counter(:likes_count, likable_id)
+    likable.liked
   end
 
   def decrement_like_count
     likable_type.constantize.decrement_counter(:likes_count, likable_id)
+    likable.unliked
   end
 
 end

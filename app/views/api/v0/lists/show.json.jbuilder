@@ -4,6 +4,7 @@ json.list do
   json.items do
     json.array! @list.items.includes(product: :image).each do |item|
       json.id item.id
+      json.rank item.rank
       json.product do
         json.partial! "api/v0/products/product", product: item.product
       end
