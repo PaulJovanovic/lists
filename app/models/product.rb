@@ -7,11 +7,16 @@ class Product < ActiveRecord::Base
 
   validates :sku, presence: true, uniqueness: true
 
+  def price
+    Money.new(price_cents, "USD")
+  end
+
   private
 
   def create_api_attributes
     self.name = api_product_name
     self.manufacturer = api_product_manufacturer
+    self.price_cents = api_product_price_cents
     self.url = api_product_url
     build_image
     image.attachment_from_url(api_product_image_url)

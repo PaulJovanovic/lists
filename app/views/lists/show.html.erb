@@ -52,62 +52,56 @@
                 </div>
               </div>
               <div class="col-sm-2 phxs">
-                <div class="row nmhxxxs">
-                  <div class="col-sm-6 phxxxs">
-                    <%= link_to item.product.url do %>
-                      <div class="phxxs pvxxxs mtxs bg-1 c-15 fsxxxs text-center">
+                <%= link_to item.product.url do %>
+                  <div class="phxxs pvxxxs mtxs bg-1 c-15 fsxxxs text-center">
+                    <table class="mha">
+                      <tr>
+                        <td>
+                          <%= number_to_currency(item.product.price) %>
+                        </td>
+                        <td class="visible-xs">
+                          &nbsp;on <%= item.product.store_name %>
+                        </td>
+                      </tr>
+                    </table>
+                  </div>
+                <% end %>
+                <div class="<%= "active " if current_or_guest_user.likes?(item) %>js-like">
+                  <div class="hide-active">
+                    <%= form_tag like_v0_user_url(host: api_domain, subdomain: api_subdomain), remote: true, class: "js-lists-api-form js-likes-form-like js-list-items-like" do %>
+                      <%= hidden_field_tag :likable_type, "ListItem" %>
+                      <%= hidden_field_tag :likable_id, item.id %>
+                      <div class="phxxs pvxxxs mtxs bg-1 c-15 fsxxxs text-center pointer js-lists-api-form-submit">
                         <table class="mha">
                           <tr>
                             <td>
-                              <i class="fa fa-dollar"></i>
+                              <i class="fa fa-thumbs-up"></i>
                             </td>
                             <td class="visible-xs">
-                              &nbsp;Purchase
+                              &nbsp;Like
                             </td>
                           </tr>
                         </table>
                       </div>
                     <% end %>
                   </div>
-                  <div class="col-sm-6 phxxxs">
-                    <div class="<%= "active " if current_or_guest_user.likes?(item) %>js-like">
-                      <div class="hide-active">
-                        <%= form_tag like_v0_user_url(host: api_domain, subdomain: api_subdomain), remote: true, class: "js-lists-api-form js-likes-form-like js-list-items-like" do %>
-                          <%= hidden_field_tag :likable_type, "ListItem" %>
-                          <%= hidden_field_tag :likable_id, item.id %>
-                          <div class="phxxs pvxxxs mtxs bg-1 c-15 fsxxxs text-center pointer js-lists-api-form-submit">
-                            <table class="mha">
-                              <tr>
-                                <td>
-                                  <i class="fa fa-thumbs-up"></i>
-                                </td>
-                                <td class="visible-xs">
-                                  &nbsp;Like
-                                </td>
-                              </tr>
-                            </table>
-                          </div>
-                        <% end %>
+                  <div class="show-active">
+                    <%= form_tag unlike_v0_user_url(host: api_domain, subdomain: api_subdomain), remote: true, class: "js-lists-api-form js-likes-form-unlike js-list-items-like" do %>
+                      <%= hidden_field_tag :likable_type, "ListItem" %>
+                      <%= hidden_field_tag :likable_id, item.id %>
+                      <div class="phxxs pvxxxs mtxs bg-8 c-15 fsxxxs text-center pointer js-lists-api-form-submit">
+                        <table class="mha">
+                          <tr>
+                            <td>
+                              <i class="fa fa-thumbs-down"></i>
+                            </td>
+                            <td class="visible-xs">
+                              &nbsp;Unlike
+                            </td>
+                          </tr>
+                        </table>
                       </div>
-                      <div class="show-active">
-                        <%= form_tag unlike_v0_user_url(host: api_domain, subdomain: api_subdomain), remote: true, class: "js-lists-api-form js-likes-form-unlike js-list-items-like" do %>
-                          <%= hidden_field_tag :likable_type, "ListItem" %>
-                          <%= hidden_field_tag :likable_id, item.id %>
-                          <div class="phxxs pvxxxs mtxs bg-8 c-15 fsxxxs text-center pointer js-lists-api-form-submit">
-                            <table class="mha">
-                              <tr>
-                                <td>
-                                  <i class="fa fa-thumbs-down"></i>
-                                </td>
-                                <td class="visible-xs">
-                                  &nbsp;Unlike
-                                </td>
-                              </tr>
-                            </table>
-                          </div>
-                        <% end %>
-                      </div>
-                    </div>
+                    <% end %>
                   </div>
                 </div>
               </div>

@@ -20,6 +20,7 @@ gem 'devise'
 gem 'will_paginate'
 
 gem 'amazon-ecs'
+gem 'money'
 gem 'friendly_id'
 
 gem "rack-cors", require: "rack/cors"

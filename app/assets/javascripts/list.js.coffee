@@ -15,7 +15,6 @@ $(document).ready ->
     $items.sort (a, b) ->
       ordered_list_ids.indexOf($(a).data("id")) > ordered_list_ids.indexOf($(b).data("id"))
     for item in list.items
-      console.log("here")
       $item = $($items.shift())
       $item.find(".js-list-item-rank").html(item.rank + 1)
       $(".js-list-items").append($item)

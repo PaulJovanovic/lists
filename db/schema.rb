@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150103035207) do
+ActiveRecord::Schema.define(version: 20150104195346) do
 
   create_table "assets", force: true do |t|
     t.string   "type"
@@ -79,6 +79,7 @@ ActiveRecord::Schema.define(version: 20150103035207) do
     t.string   "url"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "price_cents",  default: 0
   end
 
   add_index "products", ["type", "sku"], name: "index_products_on_type_and_sku", unique: true, using: :btree

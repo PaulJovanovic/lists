@@ -1,4 +1,8 @@
 class AmazonProduct < Product
+  def store_name
+    "Amazon"
+  end
+
   def api_product
     @api_product ||= Amazon::Ecs.item_lookup(sku, {:response_group => 'Medium'}).items.first
   end
@@ -13,6 +17,10 @@ class AmazonProduct < Product
 
   def api_product_manufacturer
     api_product_attributes.get("Brand")
+  end
+
+  def api_product_price_cents
+    api_product_attributes.get("ListPrice/Amount").to_i
   end
 
   def api_product_url
