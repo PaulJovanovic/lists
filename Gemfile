@@ -24,6 +24,8 @@ gem 'money'
 gem 'friendly_id'
 
 gem "rack-cors", require: "rack/cors"
+gem 'execjs'
+gem 'therubyracer'
 
 group :development do
   gem 'pry-rails'
