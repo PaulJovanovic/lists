@@ -3,6 +3,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   has_many :likes
+  has_many :list_items
 
   validates :username, :uniqueness => { :case_sensitive => false }
 
