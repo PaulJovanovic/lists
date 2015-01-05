@@ -20,7 +20,7 @@ class AmazonProduct < Product
   end
 
   def api_product_price_cents
-    api_product_attributes.get("ListPrice/Amount").to_i
+    api_product.get_element("OfferSummary/LowestNewPrice/Amount").get_array.first.to_i
   end
 
   def api_product_url

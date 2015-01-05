@@ -5,6 +5,9 @@ $(document).ready ->
   $(".js-lists-form-new").on "ajax:success", (event, data, status, xhr) ->
     window.location = "/lists/#{data.list.slug}"
 
+  $(".js-lists-form-add-product").on "ajax:success", (event, data, status, xhr) ->
+    window.location.reload()
+
   $(".js-list-items-like").on "ajax:success", (event, data, status, xhr) ->
     $(".js-list-form").submit()
 

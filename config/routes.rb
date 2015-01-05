@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   root to: "home#index"
   devise_for :users
   resources :lists, only: [:new, :index, :show]
-  resources :products
+  resources :products, only: [:show]
   get "/amazon/search", to: "amazon#search"
 
   namespace :admin do

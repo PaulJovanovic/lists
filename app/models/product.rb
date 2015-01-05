@@ -3,7 +3,7 @@ class Product < ActiveRecord::Base
   has_many :list_items, dependent: :destroy
   has_many :lists, through: :list_items
 
-  before_save :create_api_attributes
+  before_create :fetch_api_attributes
 
   validates :sku, presence: true, uniqueness: true
 
@@ -11,9 +11,13 @@ class Product < ActiveRecord::Base
     Money.new(price_cents, "USD")
   end
 
+  def sync_price
+    update_column(:price_cents, api_product_price_cents)
+  end
+
   private
 
-  def create_api_attributes
+  def fetch_api_attributes
     self.name = api_product_name
     self.manufacturer = api_product_manufacturer
     self.price_cents = api_product_price_cents

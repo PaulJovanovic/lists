@@ -10,6 +10,10 @@ class ListItem < ActiveRecord::Base
 
   default_scope { order(likes_count: :desc, created_at: :asc) }
 
+  def display_rank
+    rank + 1
+  end
+
   def liked
     recalculate_rank
   end

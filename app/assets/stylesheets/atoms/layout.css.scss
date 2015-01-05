@@ -218,3 +218,9 @@ table {
     border-width: 10px 7px 0 0;
   }
 }
+
+.truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

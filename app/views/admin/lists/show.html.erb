@@ -48,7 +48,7 @@
         </div>
       </div>
     <% end %>
-    <%= form_tag add_product_v0_list_url(host: api_domain, subdomain: api_subdomain), remote: true, class: "js-lists-api-form js-admin-lists-form-add-product" do %>
+    <%= form_tag add_product_v0_list_url(host: api_domain, subdomain: api_subdomain), remote: true, class: "js-lists-api-form js-lists-form-add-product" do %>
       <%= hidden_field_tag :id, @list.id %>
       <%= hidden_field_tag :user_id, current_user.id %>
       <%= hidden_field_tag :product_id, nil, data: { dependent: true, dependent_on_form: ".js-products-form-new", dependent_on_input: "id" } %>

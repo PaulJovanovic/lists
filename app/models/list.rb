@@ -3,7 +3,7 @@ class List < ActiveRecord::Base
   friendly_id :name, use: [:slugged, :finders]
 
   has_many :items, class_name: "ListItem", dependent: :destroy
-  has_many :products, through: :list_items
+  has_many :products, through: :items
 
   validates :name, presence: true
 
@@ -15,5 +15,13 @@ class List < ActiveRecord::Base
     items[start..finish].each do |item|
       item.update_column(:rank, items.index(item))
     end
+  end
+
+  def minimum_price
+    Money.new(products.minimum("price_cents"))
+  end
+
+  def maximum_price
+    Money.new(products.maximum("price_cents"))
   end
 end
