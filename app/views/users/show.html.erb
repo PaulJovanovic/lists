@@ -25,22 +25,19 @@
   <div class="col-md-4 phxs mtm">
     <div class="paxs bg-15 bss bwas bc-12">
       Recent likes:
-      <% liked_items_counter = 0 %>
-      <% unless liked_items_counter >= 3 %>
-        <% @liked_items.reverse.each do |item|%>
-          <div class="row nmhxs">
-            <%= link_to item.product.url do %>
-              <div class="bss bwas bc-8 mvs">
-                <div class="col-sm-3 phxs mtxs">
-                  <%= image_tag item.product.image.url(:thumbnail), class: "img-responsive" %>
-                </div>
-                <div class="col-sm-7 c-10 fsxxxs mtxs">
-                  <%= item.product.name %>
-                </div>
+      <% @liked_items.reverse.each do |item|%>
+        <div class="row nmhxs">
+          <%= link_to item.product.url do %>
+            <div class="bss bwas bc-8 mvs">
+              <div class="col-sm-3 phxs mtxs">
+                <%= image_tag item.product.image.url(:thumbnail), class: "img-responsive" %>
               </div>
-            <% end %>
-          </div>
-        <% end %>
+              <div class="col-sm-7 c-10 fsxxxs mtxs">
+                <%= item.product.name %>
+              </div>
+            </div>
+          <% end %>
+        </div>
       <% end %>
     </div>
   </div>
