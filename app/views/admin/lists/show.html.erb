@@ -1,4 +1,4 @@
-<div class="phm pbm ptxs bg-15 bss bwas bc-12">
+<div class="phm pbm ptxs bg-15 bss bwas bc-13">
   <div class="row nmhxs">
     <div class="col-sm-8 mtxs phxs fss">
       <%= link_to list_path(@list) do %>
@@ -10,7 +10,7 @@
     </div>
   </div>
 </div>
-<div class="phm pbm ptxs mtxs bg-15 bss bwas bc-12">
+<div class="phm pbm ptxs mtxs bg-15 bss bwas bc-13">
   <% @list.items.each do |item| %>
     <div class="row nmhxs mtm-plus">
       <div class="col-sm-2 phxs">
@@ -30,11 +30,11 @@
     </div>
   <% end %>
 </div>
-<div class="phm pbm ptxs mtxs bg-15 bss bwas bc-12">
+<div class="phm pbm ptxs mtxs bg-15 bss bwas bc-13">
   <div class="fss">
     Add Product
   </div>
-  <div class="mtxs ptxs bss bwts bc-12">
+  <div class="mtxs ptxs bss bwts bc-13">
     <%= form_tag v0_products_url(host: api_domain, subdomain: api_subdomain), remote: true, class: "js-lists-api-form js-products-form-new" do %>
       <%= hidden_field_tag :type, "AmazonProduct" %>
       <%= hidden_field_tag :id, nil %>

@@ -2,47 +2,35 @@
 <%= form_tag v0_list_url(@list, host: api_domain, subdomain: api_subdomain), remote: true, method: :get, class: "js-lists-api-form js-list-form" do %>
 <% end %>
 <div class="row nmhxs">
-  <div class="col-md-8 col-lg-9 phxs mtm">
-    <div class="phxs pbxs bg-15 bss bwas bc-12">
-      <div class="row nmhxs">
-        <div class="col-sm-9 phxs mtxs">
-          <div class="fsm">
-            <%= @list.name %>
-          </div>
-        </div>
-        <div class="col-sm-3 phxs mtxs text-right-sm">
-          <div class="fss">
-            <i class="fa fa-twitter fa-fw pointer"></i>
-            <i class="fa fa-facebook fa-fw pointer"></i>
-          </div>
-        </div>
-      </div>
+  <div class="col-lg-3 phxs mtm">
+    <div class="fsm">
+      <%= @list.name %>
     </div>
-    <div class="mtxs js-list-items">
+    <div class="fss">
+      <i class="fa fa-twitter fa-fw pointer"></i>
+      <i class="fa fa-facebook fa-fw pointer"></i>
+    </div>
+  </div>
+  <div class="col-lg-9 phxs">
+    <div class="js-list-items">
       <% @list.items.each do |item| %>
-        <div class="paxs mtxs-plus bg-15 bss bwas bc-12 js-list-item" data-id="<%= item.id %>">
-          <div class="row nmhxs nmtxs">
-            <div class="col-sm-3 phxs mtxs">
-              <div class="relative">
-                <%= link_to product_path(item.product) do %>
-                  <%= image_tag item.product.image.url(:profile), class: "img-responsive" %>
-                <% end %>
-                <div class="absolute top left right bg-4 c-15 text-center">
-                  <table class="mha">
-                    <tr>
-                      <td>
-                        #<span class="js-list-item-rank"><%= item.display_rank %></span>
-                      </td>
-                      <td class="plxxxs c-10 fsxxxs">
-                        [ <span class="js-likes-count" data-likable="ListItem-<%= item.id %>"><%= item.likes_count %></span> ]
-                      </td>
-                    </tr>
-                  </table>
-                </div>
+        <div class="container-sm-height pvxs mtm bg-15 bss bwas bc-13 js-list-item" data-id="<%= item.id %>">
+          <div class="row row-sm-height mhn nmtxs">
+            <div class="list-rank col-sm-2 col-sm-height phxs mtxs text-center">
+              <div class="fsxl">
+                #<span class="js-list-item-rank"><%= item.display_rank %></span>
+              </div>
+              <div class="c-10 fsxxxs hidden-xs">
+                <span class="fsxs js-likes-count" data-likable="ListItem-<%= item.id %>"><%= item.likes_count %></span> point
               </div>
             </div>
-            <div class="col-sm-7 phxs mtxs">
-              <div class="fss fwl">
+            <div class="col-sm-2 col-sm-height col-sm-height-top phxs mtxs bss bwls bc-13">
+              <%= link_to product_path(item.product) do %>
+                <%= image_tag item.product.image.url(:profile), class: "img-responsive mha" %>
+              <% end %>
+            </div>
+            <div class="col-sm-6 col-sm-height col-sm-height-top phxs mtxs">
+              <div class="fsxs fwl">
                 <%= link_to item.product.name, product_path(item.product) %>
               </div>
               <div class="fws">
@@ -52,11 +40,11 @@
                 [ <%= item.user.username %> ]
               </div>
             </div>
-            <div class="col-sm-2 phxs">
+            <div class="col-sm-2 col-sm-height col-sm-height-top phxs">
               <div class="row nmhxxxs">
-                <div class="col-xs-6 col-sm-12 phxxxs">
+                <div class="col-xs-6 col-sm-12 phxxxs mtxs">
                   <%= link_to item.product.url do %>
-                    <div class="phxxs pvxxxs mtxs bg-1 c-15 fsxxxs text-center">
+                    <div class="phxxs pvxxxs bg-1 c-15 fsxxxs text-center">
                       <table class="mha">
                         <tr>
                           <td>
@@ -70,13 +58,13 @@
                     </div>
                   <% end %>
                 </div>
-                <div class="col-xs-6 col-sm-12 phxxxs">
+                <div class="col-xs-6 col-sm-12 phxxxs mtxs">
                   <div class="<%= "active " if current_or_guest_user.likes?(item) %>js-like">
                     <div class="hide-active">
                       <%= form_tag like_v0_user_url(host: api_domain, subdomain: api_subdomain), remote: true, class: "js-lists-api-form js-likes-form-like js-list-items-like" do %>
                         <%= hidden_field_tag :likable_type, "ListItem" %>
                         <%= hidden_field_tag :likable_id, item.id %>
-                        <div class="phxxs pvxxxs mtxs bg-1 c-15 fsxxxs text-center pointer js-lists-api-form-submit">
+                        <div class="phxxs pvxxxs bg-1 c-15 fsxxxs text-center pointer js-lists-api-form-submit">
                           <table class="mha">
                             <tr>
                               <td>
@@ -94,7 +82,7 @@
                       <%= form_tag unlike_v0_user_url(host: api_domain, subdomain: api_subdomain), remote: true, class: "js-lists-api-form js-likes-form-unlike js-list-items-like" do %>
                         <%= hidden_field_tag :likable_type, "ListItem" %>
                         <%= hidden_field_tag :likable_id, item.id %>
-                        <div class="phxxs pvxxxs mtxs bg-8 c-15 fsxxxs text-center pointer js-lists-api-form-submit">
+                        <div class="phxxs pvxxxs bg-8 c-15 fsxxxs text-center pointer js-lists-api-form-submit">
                           <table class="mha">
                             <tr>
                               <td>
@@ -117,11 +105,11 @@
       <% end %>
     </div>
     <% if current_user %>
-      <div class="paxs mtxs bg-15 bss bwas bc-12">
+      <div class="paxs mtxs bg-15 bss bwas bc-13">
         <div class="fss">
           Add Product
         </div>
-        <div class="mtxs ptxs bss bwts bc-12">
+        <div class="mtxs ptxs bss bwts bc-13">
           <%= form_tag v0_products_url(host: api_domain, subdomain: api_subdomain), remote: true, class: "js-lists-api-form js-products-form-new" do %>
             <%= hidden_field_tag :type, "AmazonProduct" %>
             <%= hidden_field_tag :id, nil %>
@@ -146,10 +134,5 @@
         </div>
       </div>
     <% end %>
-  </div>
-  <div class="col-md-4 col-lg-3 phxs mtm">
-    <div class="paxs bg-15 bss bwas bc-12">
-      html
-    </div>
   </div>
 </div>

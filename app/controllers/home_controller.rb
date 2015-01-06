@@ -1,5 +1,5 @@
 class HomeController < ApplicationController
   def index
-    @lists = List.order(products_count: :desc)
+    @lists = List.where("products_count > 0").order(products_count: :desc)
   end
 end

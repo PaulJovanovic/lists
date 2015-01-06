@@ -1,11 +1,12 @@
 <div class="row nmhxs">
   <div class="col-md-4 phxs mtm">
-    <div class="pam bg-15 bss bwas bc-12">
+    <div class="pam bg-15 bss bwas bc-13">
+      <%= image_tag @product.image.url(:original), class: "img-responsive" %>
       <div class="fsm">
         <%= @product.name %>
       </div>
-      <div class="mtxs bss bwas bc-12">
-        <%= image_tag @product.image.url(:original), class: "img-responsive" %>
+      <div class="fss c-10">
+        <%= @product.manufacturer %>
       </div>
       <%= link_to @product.url do %>
         <div class="phxxs pvxxxs mtxs bg-1 c-15 fsxxxs text-center">
@@ -23,12 +24,12 @@
       <% end %>
       <div class="row nmhxxxs">
         <div class="col-sm-6 phxxxs mtxs">
-          <div class="paxxxs bss bwas bc-12 text-center">
+          <div class="paxxxs bss bwas bc-13 text-center">
             <%= pluralize(@product.list_items.sum(:likes_count), "like") %>
           </div>
         </div>
         <div class="col-sm-6 phxxxs mtxs">
-          <div class="paxxxs bss bwas bc-12 text-center">
+          <div class="paxxxs bss bwas bc-13 text-center">
             <%= pluralize(@product.lists.count, "list") %>
           </div>
         </div>
@@ -37,9 +38,9 @@
   </div>
   <div class="col-md-8 phxs mtm">
     <% @product.list_items.includes(:list).order("lists.products_count").each do |item| %>
-      <div class="mtxs-plus">
+      <div class="mtm-plus">
         <%= link_to list_path(item.list) do %>
-          <div class="pam bg-15 bss bwas bc-12">
+          <div class="pam bg-15 bss bwas bc-13">
             <div class="row nmhxs">
               <div class="col-sm-3 phxs">
                 #<%= item.display_rank %> / <%= item.list.products_count %>

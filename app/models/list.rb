@@ -11,10 +11,12 @@ class List < ActiveRecord::Base
     items.create(product: product, user: user)
   end
 
-  def recalculate_ranks(start, finish)
-    items[start..finish].each do |item|
-      item.update_column(:rank, items.index(item))
-    end
+  def contributors_count
+    items.group(:user_id).count.count
+  end
+
+  def likes_count
+    items.sum(:likes_count)
   end
 
   def minimum_price
@@ -23,5 +25,11 @@ class List < ActiveRecord::Base
 
   def maximum_price
     Money.new(products.maximum("price_cents"))
+  end
+
+  def recalculate_ranks(start, finish)
+    items[start..finish].each do |item|
+      item.update_column(:rank, items.index(item))
+    end
   end
 end
