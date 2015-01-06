@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   root to: "home#index"
   devise_for :users
-  get ':username', to: 'users#show', as: :user
+  get '/users/:username', to: 'users#show', as: :user
   resources :lists, only: [:new, :index, :show]
   resources :products, only: [:show]
 
