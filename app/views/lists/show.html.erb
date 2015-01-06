@@ -3,12 +3,23 @@
 <% end %>
 <div class="row nmhxs">
   <div class="col-lg-3 phxs mtm">
-    <div class="fsm">
-      <%= @list.name %>
+    <div class="paxs bg-15 fss bss bwas bc-13">
+      <div>
+        <%= @list.name %>
+      </div>
+      <div class="mtxs">
+        <i class="fa fa-twitter fa-fw pointer"></i>
+        <i class="fa fa-facebook fa-fw pointer"></i>
+      </div>
     </div>
-    <div class="fss">
-      <i class="fa fa-twitter fa-fw pointer"></i>
-      <i class="fa fa-facebook fa-fw pointer"></i>
+    <div class="paxs mtxs bg-15 fsxs bss bwas bc-13">
+      <%= list_price_range(@list) %>
+    </div>
+    <div class="paxs mtxs bg-15 fsxs bss bwas bc-13">
+      <%= pluralize(@list.products_count, "Product") %>
+    </div>
+    <div class="paxs mtxs bg-15 fsxs bss bwas bc-13">
+      <%= pluralize(@list.contributors_count, "Contributor") %>
     </div>
   </div>
   <div class="col-lg-9 phxs">
