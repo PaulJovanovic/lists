@@ -1,19 +1,23 @@
 <div class="row nmhxs">
-  <div class="col-sm-8 phxs mtm">
+  <div class="col-md-8 col-lg-9 phxs mtm">
     <div class="pam bg-15 bss bwas bc-12">
       <div class="fsm">
         <%= @user.username %>
       </div>
     </div>
-    <div class="mtxs pam bg-15 bss bwas bc-12">
+  </div>
+</div>
+<div class="row nmhxs">
+  <div class="col-sm-5 phxs mtm">
+    <div class="paxs bg-15 bss bwas bc-12">
       <div class="row nmhxs">
-        <div class="col-sm-7 phxs">
+        <div class="col-sm-6 phxs">
           Lists contributed to:
         </div>
-        <div class="col-sm-5 c-10 text-right-sm">
+        <div class="col-sm-6 c-10 text-right-sm">
           <% @lists.each do |list|%>
             <%= link_to list_path(list) do %>             
-              <div class="mvxxxs">
+              <div class="mbxxs fsxxxs">
                 <%= list.name %> (<%= pluralize(list.products_count, "Product") %>)
               </div>
             <% end %>
@@ -29,7 +33,7 @@
         <div class="row nmhxs">
           <%= link_to item.product.url do %>
             <div class="bss bwas bc-8 mvs">
-              <div class="col-sm-3 phxs mtxs">
+              <div class="col-sm-3 plxs mtxs">
                 <%= image_tag item.product.image.url(:thumbnail), class: "img-responsive" %>
               </div>
               <div class="col-sm-7 c-10 fsxxxs mtxs">
