@@ -1,29 +1,42 @@
 <div class="row nmhxs">
   <div class="col-md-8 col-lg-9 phxs mtm">
     <div class="pam bg-15 bss bwas bc-12">
-      <div class="fsm">
-        <%= @user.username %>
-      </div>
+      <table class="full-width">
+        <tr>
+          <td class="fsm">
+            <%= @user.username %>
+          </td>
+          <td class="c-10">
+            Likes: <%= @user.likes.length %>
+          </td>
+        </tr>
+      </table>
     </div>
   </div>
 </div>
 <div class="row nmhxs">
   <div class="col-sm-5 phxs mtm">
     <div class="paxs bg-15 bss bwas bc-12">
-      <div class="row nmhxs">
-        <div class="col-sm-6 phxs">
+      <table class="full-width">
+        <tr>
+          <td>
           Lists contributed to:
-        </div>
-        <div class="col-sm-6 c-10 text-right-sm">
-          <% @lists.each do |list|%>
-            <%= link_to list_path(list) do %>             
-              <div class="mbxxs fsxxxs">
-                <%= list.name %> (<%= pluralize(list.products_count, "Product") %>)
-              </div>
-            <% end %>
+          </td>
+          <td >
+          </td>
+        </tr>
+        <% @lists.each do |list|%>
+        <tr class="mbxxs fsxxxs c-10">
+          <td>
+          </td>
+          <td>
+          <%= link_to list_path(list) do %>             
+            <%= list.name %> (<%= pluralize(list.products_count, "Product") %>)
           <% end %>
-        </div>
-      </div>
+          </td>
+        </tr>
+        <% end %>
+      </table>
     </div>
   </div>
   <div class="col-md-4 phxs mtm">
@@ -31,7 +44,7 @@
       Recent likes:
       <% @liked_items.reverse.each do |item|%>
         <div class="row nmhxs">
-          <%= link_to item.product.url do %>
+          <%= link_to product_path(item.product) do %>
             <div class="bss bwas bc-8 mvs">
               <div class="col-sm-3 plxs mtxs">
                 <%= image_tag item.product.image.url(:thumbnail), class: "img-responsive" %>
