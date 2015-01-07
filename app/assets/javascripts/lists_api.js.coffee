@@ -37,3 +37,15 @@ $(document).ready ->
 
   $(".js-lists-api-form-submit").click ->
     $(@).closest("form").submit()
+
+  $(".js-lists-api-submit-on-change").change ->
+    $(@).closest("form").submit()
+
+  $(".js-lists-form-search").each ->
+    $form = $(@)
+    searchDelay = ""
+    $(@).find(".js-lists-form-search-q").on "keydown", (e) ->
+      window.clearTimeout(searchDelay)
+      searchDelay = setTimeout =>
+        $form.submit()
+      , 500

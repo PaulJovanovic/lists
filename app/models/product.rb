@@ -1,4 +1,7 @@
 class Product < ActiveRecord::Base
+  extend FriendlyId
+  friendly_id :name, use: [:slugged, :finders]
+
   has_one :image, :as => :assetable, :class_name => "ProductImage", :dependent => :destroy
   has_many :list_items, dependent: :destroy
   has_many :lists, through: :list_items
@@ -12,17 +15,17 @@ class Product < ActiveRecord::Base
   end
 
   def sync_price
-    update_column(:price_cents, api_product_price_cents)
+    update_column(:price_cents, api_product.price_cents)
   end
 
   private
 
   def fetch_api_attributes
-    self.name = api_product_name
-    self.manufacturer = api_product_manufacturer
-    self.price_cents = api_product_price_cents
-    self.url = api_product_url
+    self.name = api_product.name
+    self.manufacturer = api_product.manufacturer
+    self.price_cents = api_product.price_cents
+    self.url = api_product.url
     build_image
-    image.attachment_from_url(api_product_image_url)
+    image.attachment_from_url(api_product.image_url)
   end
 end

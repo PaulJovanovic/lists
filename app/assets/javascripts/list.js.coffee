@@ -21,3 +21,29 @@ $(document).ready ->
       $item = $($items.shift())
       $item.find(".js-list-item-rank").html(item.rank + 1)
       $(".js-list-items").append($item)
+
+  $(".js-lists-form-products-search").on "ajax:success", (event, data, status, xhr) ->
+    $results = $($(@).data("results"))
+    html = ""
+    for product in data.products
+      html += """
+        <div class="js-lists-search-item" data-sku="#{product.sku}">
+          <div class="row nmhxs">
+            <div class="col-sm-3 phxs mtxs">
+              <img src="#{product.image_url}" class="img-responsive"/>
+            </div>
+            <div class="col-sm-9 phxs mtxs">
+              <div class="fss fwl">
+                #{product.name}
+              </div>
+              <div class="fss fwl">
+                #{product.name}
+              </div>
+            </div>
+          </div>
+        </div>
+      """
+    $results.html(html)
+
+  $("body").on "click", ".js-lists-search-item", ->
+    $(".js-products-form-new").find("input[name='sku']").val($(@).data("sku")).change()

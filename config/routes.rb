@@ -3,7 +3,6 @@ Rails.application.routes.draw do
   devise_for :users
   resources :lists, only: [:new, :index, :show]
   resources :products, only: [:show]
-  get "/amazon/search", to: "amazon#search"
 
   namespace :admin do
     root to: "lists#index"
@@ -20,6 +19,11 @@ Rails.application.routes.draw do
           end
         end
         resources :products
+        resources :stores do
+          collection do
+            get :search
+          end
+        end
         resource :user do
           collection do
             post :like
