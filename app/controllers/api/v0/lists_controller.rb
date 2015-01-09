@@ -14,7 +14,7 @@ class API::V0::ListsController < API::BaseController
   end
 
   def create
-    @list = List.new(list_params)
+    @list = List.new(list_params.merge({user: current_user}))
 
     if @list.save
       render :show

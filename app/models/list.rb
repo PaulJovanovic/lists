@@ -2,10 +2,11 @@ class List < ActiveRecord::Base
   extend FriendlyId
   friendly_id :name, use: [:slugged, :finders]
 
+  belongs_to :user
   has_many :items, class_name: "ListItem", dependent: :destroy
   has_many :products, through: :items
 
-  validates :name, presence: true
+  validates :name, :user, presence: true
 
   def add_product(product, user)
     items.create(product: product, user: user)
