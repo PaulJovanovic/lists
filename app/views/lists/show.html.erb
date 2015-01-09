@@ -1,6 +1,7 @@
 <%= content_for :title, @list.name %>
 <%= form_tag v0_list_url(@list, host: api_domain, subdomain: api_subdomain), remote: true, method: :get, class: "js-lists-api-form js-list-form" do %>
 <% end %>
+<!-- Modal -->
 <div class="row nmhxs">
   <div class="col-md-3 phxs mtm">
     <div class="paxs bg-15 fss bss bwas bc-13">
@@ -21,9 +22,41 @@
     <div class="paxs mtxs bg-15 fsxs bss bwas bc-13">
       <%= list_price_range(@list) %>
     </div>
-    <%= link_to "#" do %>
-      <div class="lists-add-product paxs mtxs bg-blue c-15 fsxs text-center">
-        add product
+    <% if current_user %>
+      <%= link_to "#" do %>
+        <div class="lists-add-product mtxs">
+          <div class="paxs bg-blue c-15 fsxs text-center" data-toggle="modal" data-target="#addProductModal">
+            add product
+          </div>
+        </div>
+      <% end %>
+      <div class="modal fade" id="addProductModal" tabindex="-1" role="dialog" aria-labelledby="addProductModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content bran">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title" id="addProductModalLabel">Search Products</h4>
+            </div>
+            <div class="modal-body">
+              <%= form_tag v0_products_url(host: api_domain, subdomain: api_subdomain), remote: true, class: "js-lists-api-form js-products-form-new" do %>
+                <%= hidden_field_tag :type, "AmazonProduct" %>
+                <%= hidden_field_tag :sku, nil, class: "js-lists-api-submit-on-change" %>
+                <%= hidden_field_tag :id, nil %>
+              <% end %>
+              <%= form_tag add_product_v0_list_url(host: api_domain, subdomain: api_subdomain), remote: true, class: "js-lists-api-form js-lists-form-add-product" do %>
+                <%= hidden_field_tag :id, @list.id %>
+                <%= hidden_field_tag :user_id, current_user.id %>
+                <%= hidden_field_tag :product_id, nil, data: { dependent: true, dependent_on_form: ".js-products-form-new", dependent_on_input: "id" } %>
+              <% end %>
+              <%= form_tag search_v0_stores_url(host: api_domain, subdomain: api_subdomain), method: :get, remote: true, class: "js-lists-api-form js-lists-form-search js-lists-form-products-search", data: { results: ".js-lists-products-search-results" } do %>
+                <%= hidden_field_tag :store, "Amazon" %>
+                <%= hidden_field_tag :page, 1 %>
+                <%= text_field_tag :q, nil, class: "paxxxs bg-15 bss bwas bc-13 full-width js-lists-form-search-q" %>
+              <% end %>
+              <div class="js-lists-products-search-results"></div>
+            </div>
+          </div>
+        </div>
       </div>
     <% end %>
   </div>
@@ -121,32 +154,6 @@
       <% end %>
     </div>
     <% if current_user %>
-      <div class="paxs mtxl bg-15 bss bwas bc-13">
-        <div class="fss">
-          Add Products
-        </div>
-      </div>
-      <div class="paxs mtxs bg-15 bss bwas bc-13">
-        <%= form_tag v0_products_url(host: api_domain, subdomain: api_subdomain), remote: true, class: "js-lists-api-form js-products-form-new" do %>
-          <%= hidden_field_tag :type, "AmazonProduct" %>
-          <%= hidden_field_tag :sku, nil, class: "js-lists-api-submit-on-change" %>
-          <%= hidden_field_tag :id, nil %>
-        <% end %>
-        <%= form_tag add_product_v0_list_url(host: api_domain, subdomain: api_subdomain), remote: true, class: "js-lists-api-form js-lists-form-add-product" do %>
-          <%= hidden_field_tag :id, @list.id %>
-          <%= hidden_field_tag :user_id, current_user.id %>
-          <%= hidden_field_tag :product_id, nil, data: { dependent: true, dependent_on_form: ".js-products-form-new", dependent_on_input: "id" } %>
-        <% end %>
-        <%= form_tag search_v0_stores_url(host: api_domain, subdomain: api_subdomain), method: :get, remote: true, class: "js-lists-api-form js-lists-form-search js-lists-form-products-search", data: { results: ".js-lists-products-search-results" } do %>
-          <%= hidden_field_tag :store, "Amazon" %>
-          <%= hidden_field_tag :page, 1 %>
-          <div>
-            <%= label_tag :q, "Search" %>
-          </div>
-          <%= text_field_tag :q, nil, class: "paxxxs bg-15 bss bwas bc-13 full-width js-lists-form-search-q" %>
-        <% end %>
-        <div class="js-lists-products-search-results"></div>
-      </div>
     <% end %>
   </div>
 </div>

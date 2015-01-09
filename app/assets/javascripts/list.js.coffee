@@ -27,17 +27,17 @@ $(document).ready ->
     html = ""
     for product in data.products
       html += """
-        <div class="js-lists-search-item" data-sku="#{product.sku}">
+        <div class="mtxs ptxs bss bwts bc-13 pointer js-lists-search-item" data-sku="#{product.sku}">
           <div class="row nmhxs">
-            <div class="col-sm-3 phxs mtxs">
+            <div class="col-xs-3 phxs mtxs">
               <img src="#{product.image_url}" class="img-responsive"/>
             </div>
-            <div class="col-sm-9 phxs mtxs">
-              <div class="fss fwl">
+            <div class="col-xs-9 phxs mtxs">
+              <div class="fsxs fwl">
                 #{product.name}
               </div>
-              <div class="fss fwl">
-                #{product.name}
+              <div class="fsxs fws">
+                #{product.manufacturer}
               </div>
             </div>
           </div>
@@ -47,3 +47,4 @@ $(document).ready ->
 
   $("body").on "click", ".js-lists-search-item", ->
     $(".js-products-form-new").find("input[name='sku']").val($(@).data("sku")).change()
+    $("#addProductModal").modal("hide")

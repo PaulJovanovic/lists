@@ -5,10 +5,13 @@
   }
 
   .lists-add-product {
+    background-color: $shade15;
     position: fixed;
     left: 0;
     bottom: 0;
     right: 0;
     z-index: 2;
+    padding: 10px;
+    border-top: solid 1px $shade13;
   }
 }
