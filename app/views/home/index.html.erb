@@ -28,7 +28,7 @@
         <div class="col-sm-6 col-md-4 phxs mtm">
           <%= link_to list_path(list) do %>
             <div class="paxs bg-15 bss bwas bc-13">
-              <%= image_tag list.items.first.product.image.url(:profile), class: "img-responsive mha" %>
+              <%= image_tag list.items.first.try(:product).try(:image).try(:url, :profile) || "http://placehold.it/300x300", class: "img-responsive mha" %>
               <div class="mtxxxs fwl truncate">
                 <%= list.name %>
               </div>
