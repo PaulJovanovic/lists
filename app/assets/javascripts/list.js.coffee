@@ -45,6 +45,29 @@ $(document).ready ->
       """
     $results.html(html)
 
+  if $(".js-lists-results").length
+    $template = $(".js-list:first").clone()
+    $(".js-lists-form-scope").on "ajax:success", (event, data, status, xhr) ->
+      $(".js-lists-results").html("")
+      for list in data.lists
+        $list = $template.clone()
+        $list.find(".js-list-name").html(list.name)
+        $list.find(".js-list-url").attr("href", list.url)
+        $list.find(".js-list-image").attr("src", list.image)
+        $list.find(".js-list-products-count").html("#{list.products_count} #{if list.products_count == 1 then "Product" else "Products"}")
+        minimum_price = Math.round(list.minimum_price)
+        maximum_price = Math.round(list.maximum_price)
+        $list.find(".js-list-minimum-price").html("$#{minimum_price}")
+        $list.find(".js-list-maximum-price").html("$#{maximum_price}")
+        if minimum_price == maximum_price
+          $list.find(".js-list-price-range").addClass("hide")
+        else
+          $list.find(".js-list-price-range").removeClass("hide")
+        $(".js-lists-results").append($list)
+
+  $("body").on "click", ".js-lists-scope-change", ->
+    $(".js-lists-form-scope input[name='scope']").val($(@).data("list-scope")).change()
+
   $("body").on "click", ".js-lists-search-item", ->
     $(".js-products-form-new").find("input[name='sku']").val($(@).data("sku")).change()
     $("#addProductModal").modal("hide")

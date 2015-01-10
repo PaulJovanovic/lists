@@ -6,7 +6,16 @@ class List < ActiveRecord::Base
   has_many :items, class_name: "ListItem", dependent: :destroy
   has_many :products, through: :items
 
+  scope :most_active, -> { where("products_count > 0").order(products_count: :asc, created_at: :desc) }
+  scope :most_popular, -> { where("products_count > 0").order(products_count: :desc, created_at: :desc) }
+  scope :needs_help, -> { where(products_count: 0).order(:created_at) }
+
   validates :name, :user, presence: true
+
+  def self.scope(scope)
+    scope ||= "all"
+    List.send(scope)
+  end
 
   def add_product(product, user)
     items.create(product: product, user: user)
@@ -14,6 +23,10 @@ class List < ActiveRecord::Base
 
   def contributors_count
     items.group(:user_id).count.count
+  end
+
+  def default_image
+    items.first.try(:product).try(:image).try(:url, :profile) || "http://placehold.it/300x300"
   end
 
   def likes_count

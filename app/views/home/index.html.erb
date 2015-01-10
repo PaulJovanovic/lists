@@ -1,38 +1,41 @@
+<%= form_tag v0_lists_url(host: api_domain, subdomain: api_subdomain), remote: true, method: :get, class: "js-lists-api-form js-lists-form-scope" do %>
+  <%= hidden_field_tag :scope, nil, class: "js-lists-api-submit-on-change" %>
+<% end %>
 <div class="row nmhxs">
   <div class="col-md-3 phxs mtm">
-    <div class="mtxs-plus active js-tab" data-group="list-display">
+    <div class="mtxs-plus active js-tab js-lists-scope-change" data-group="list-display" data-list-scope="most_popular">
       <div class="paxs bg-15 c-12 c-10-hover c-blue-active bss bwas bc-14 bc-13-hover bc-13-active pointer">
         <div class="fsxs">
           Most Popular
         </div>
       </div>
     </div>
-    <div class="mtxs-plus js-tab" data-group="list-display">
+    <div class="mtxs-plus js-tab js-lists-scope-change" data-group="list-display" data-list-scope="most_active">
       <div class="paxs bg-15 c-12 c-10-hover c-blue-active bss bwas bc-14 bc-13-hover bc-13-active pointer">
         <div class="fsxs">
-          Highest Rated
+          Most Active
         </div>
       </div>
     </div>
-    <div class="mtxs-plus js-tab" data-group="list-display">
+    <div class="mtxs-plus js-tab js-lists-scope-change" data-group="list-display" data-list-scope="needs_help">
       <div class="paxs bg-15 c-12 c-10-hover c-blue-active bss bwas bc-14 bc-13-hover bc-13-active pointer">
         <div class="fsxs">
-          Newly Added
+          Needs Help
         </div>
       </div>
     </div>
   </div>
   <div class="col-md-9 phxs">
-    <div class="row nmhxs">
+    <div class="row nmhxs js-lists-results">
       <% @lists.each do |list| %>
-        <div class="col-sm-6 col-md-4 phxs mtm">
-          <%= link_to list_path(list) do %>
+        <div class="col-sm-6 col-md-4 phxs mtm js-list">
+          <%= link_to list_path(list), class: "js-list-url" do %>
             <div class="paxs bg-15 bss bwas bc-13">
-              <%= image_tag list.items.first.try(:product).try(:image).try(:url, :profile) || "http://placehold.it/300x300", class: "img-responsive mha" %>
-              <div class="mtxxxs fwl truncate">
+              <%= image_tag list.items.first.try(:product).try(:image).try(:url, :profile), class: "img-responsive mha js-list-image" %>
+              <div class="mtxxxs fwl truncate js-list-name">
                 <%= list.name %>
               </div>
-              <div class="c-10">
+              <div class="c-10 js-list-products-count">
                 <%= pluralize(list.products_count, "Product") %>
               </div>
               <div class="c-10">

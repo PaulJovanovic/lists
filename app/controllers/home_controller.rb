@@ -1,5 +1,5 @@
 class HomeController < ApplicationController
   def index
-    @lists = List.all.order(products_count: :desc)
+    @lists = List.scope("most_popular")
   end
 end
