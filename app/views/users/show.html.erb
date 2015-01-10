@@ -1,102 +1,55 @@
+<%= content_for :title, @user.username %>
 <div class="row nmhxs">
-  <div class="col-lg-3 phxs mtm">
-    <table class="full-width bwbs bc-12 bss">
+  <div class="col-sm-3 phxs mtm">
+    <table class="full-width bwas bg-15 bc-12 bss">
       <tr>
-        <td class="fsm">
+        <td class="paxs fsm">
           <%= @user.username %>
         </td> 
-        <td class="fxxxsm">
-        (<%= @user.likes.length + @user.list_items.length %> Contributions)
+        <td class="pvxs fxxxsm">
+        (Points: <%= @user.likes.length + @user.list_items.length %>)
         </td>
       </tr>
-    </table> 
-    <div class="mtxs">
-      Recent likes:
-    </div>
-  <% @liked_items.reverse.each do |item|%>
-    <div class="paxs bg-15 bss bwas bc-12 mvxxs">
-      <div class="row nmhxs">
-        <%= link_to product_path(item.product) do %>
-          <div class="col-md-4 plxs mtxs">
-            <%= image_tag item.product.image.url(:thumbnail), class: "img-responsive" %>
-          </div>
-          <div class="col-md-8 c-10 fsxxxs mtxs">
-            <%= item.product.name %>
-          </div>
-        <% end %>
+    </table>
+    <div class="mtxs active js-tab" data-group="list-display">
+      <div class="paxs bg-15 c-12 c-10-hover c-blue-active bss bwas bc-14 bc-13-hover bc-13-active pointer">
+        <div class="fsxs">
+          Lists recently contributed to
+        </div>
       </div>
     </div>
-  <% end %>
-  </div>
-  <div class="col-lg-9 phxs mtm">
-    <div class="paxs bg-15 bss bwas bc-12">
-      <div class="row nmhxs">
-        <div class="col-lg-3">
-          Lists contributed to:
-        </div>
-        <div class="col-lg-6">
-          <% @lists.each do |list|%>
-            <div class="paxs bg-15 bss bwas bc-13">
-              <%= image_tag list.items.first.product.image.url(:thumbnail), class: "img-responsive" %>
-              <div class="mtxxxs fwl truncate">
-                <%= list.name %>
-              </div>
-              <div class="c-10">
-                <%= pluralize(list.products_count, "Product") %>
-              </div>
-              <div class="c-10">
-                <%= list_price_range(list) %>
-              </div>
-            </div>
-          <% end %>
+    <div class="mtxs js-tab" data-group="list-display">
+      <div class="paxs bg-15 c-12 c-10-hover c-blue-active bss bwas bc-14 bc-13-hover bc-13-active pointer">
+        <div class="fsxs">
+          Recent likes
         </div>
       </div>
     </div>
   </div>
-  <div class="col-md-8 col-lg-9 phxs mtm">
-    <div class="pam bg-15 bss bwas bc-12">
-      <div class="fsm">
-        <%= @user.username %>
-      </div>
-    </div>
-  </div>
-</div>
-<div class="row nmhxs">
-  <div class="col-sm-5 phxs mtm">
-    <div class="paxs bg-15 bss bwas bc-12">
-      <div class="row nmhxs">
-        <div class="col-sm-6 phxs">
-          Lists contributed to:
-        </div>
-        <div class="col-sm-6 c-10 text-right-sm">
-          <% @lists.each do |list|%>
-            <%= link_to list_path(list) do %>             
-              <div class="mbxxs fsxxxs">
-                <%= list.name %> (<%= pluralize(list.products_count, "Product") %>)
-              </div>
-            <% end %>
-          <% end %>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="col-md-4 phxs mtm">
-    <div class="paxs bg-15 bss bwas bc-12">
-      Recent likes:
-      <% @liked_items.reverse.each do |item|%>
+  <div class="col-md-9 phxs">
+    <% @lists.each do |list|%>
+      <div class="paxs bg-15 bss bwas bc-12 mtm">
         <div class="row nmhxs">
-          <%= link_to item.product.url do %>
-            <div class="bss bwas bc-8 mvs">
-              <div class="col-sm-3 plxs mtxs">
-                <%= image_tag item.product.image.url(:thumbnail), class: "img-responsive" %>
-              </div>
-              <div class="col-sm-7 c-10 fsxxxs mtxs">
-                <%= item.product.name %>
-              </div>
+          <div class="col-lg-3">
+            <%= link_to list_path(list) do %>
+              <%= image_tag list.items.first.product.image.url(:profile), class: "full-width" %>
+            <% end %>
+          </div>
+           <div class="col-lg-9">
+            <div class="mtxxxs fwl truncate">
+              <%= link_to list_path(list) do %>
+                <%= list.name %>
+              <% end %>
             </div>
-          <% end %>
+            <div class="c-10">
+              <%= pluralize(list.products_count, "Product") %>
+            </div>
+            <div class="c-10">
+              <%= list_price_range(list) %>
+            </div>
+          </div>
         </div>
-      <% end %>
-    </div>
+      </div>
+    <% end %>
   </div>
 </div>
