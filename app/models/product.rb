@@ -2,7 +2,7 @@ class Product < ActiveRecord::Base
   extend FriendlyId
   friendly_id :name, use: [:slugged, :finders]
 
-  has_one :image, :as => :assetable, :class_name => "ProductImage", :dependent => :destroy
+  has_one :image, as: :assetable, class_name: "ProductImage", dependent: :destroy
   has_many :list_items, dependent: :destroy
   has_many :lists, through: :list_items
 

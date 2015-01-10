@@ -7,6 +7,7 @@ class ListItem < ActiveRecord::Base
   validates :user, :product, :list, presence: true
 
   after_create :set_rank
+  after_create :score_creation
 
   default_scope { order(likes_count: :desc, created_at: :asc) }
 
@@ -28,7 +29,18 @@ class ListItem < ActiveRecord::Base
     list.recalculate_ranks(ranks[0], ranks[1])
   end
 
+  def score!(actionable, weight)
+    unless actionable.class.name == "Like" && actionable.user_id == user_id
+      user.score!(actionable, weight)
+    end
+    list.score!(actionable, weight)
+  end
+
   private
+
+  def score_creation
+    score!(self, 5)
+  end
 
   def set_rank
     update_column(:rank, list.items.count - 1)

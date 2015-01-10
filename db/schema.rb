@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150109072601) do
+ActiveRecord::Schema.define(version: 20150110211918) do
 
   create_table "assets", force: true do |t|
     t.string   "type"
@@ -68,6 +68,8 @@ ActiveRecord::Schema.define(version: 20150109072601) do
     t.datetime "updated_at"
     t.string   "slug"
     t.integer  "user_id"
+    t.integer  "current_score"
+    t.integer  "total_score"
   end
 
   add_index "lists", ["slug"], name: "index_lists_on_slug", unique: true, using: :btree
@@ -86,6 +88,16 @@ ActiveRecord::Schema.define(version: 20150109072601) do
 
   add_index "products", ["type", "sku"], name: "index_products_on_type_and_sku", unique: true, using: :btree
 
+  create_table "scores", force: true do |t|
+    t.string   "scorable_type"
+    t.integer  "scorable_id"
+    t.string   "actionable_type"
+    t.integer  "actionable_id"
+    t.integer  "weight"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "users", force: true do |t|
     t.string   "username"
     t.string   "email",                  default: "",     null: false
@@ -102,6 +114,8 @@ ActiveRecord::Schema.define(version: 20150109072601) do
     t.string   "role",                   default: "user"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "current_score"
+    t.integer  "total_score"
   end
 
   add_index "users", ["api_token"], name: "index_users_on_api_token", unique: true, using: :btree

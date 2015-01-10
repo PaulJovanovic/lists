@@ -1,13 +1,15 @@
 class List < ActiveRecord::Base
   extend FriendlyId
+  include Scoring
   friendly_id :name, use: [:slugged, :finders]
 
   belongs_to :user
   has_many :items, class_name: "ListItem", dependent: :destroy
   has_many :products, through: :items
+  has_many :scores, as: :scorable, dependent: :destroy
 
-  scope :most_active, -> { where("products_count > 0").order(products_count: :asc, created_at: :desc) }
-  scope :most_popular, -> { where("products_count > 0").order(products_count: :desc, created_at: :desc) }
+  scope :active, -> { where("products_count > 0").order(current_score: :desc, products_count: :desc, created_at: :desc) }
+  scope :most_popular, -> { where("products_count > 0").order(total_score: :desc, products_count: :desc, created_at: :desc) }
   scope :needs_help, -> { where(products_count: 0).order(:created_at) }
 
   validates :name, :user, presence: true

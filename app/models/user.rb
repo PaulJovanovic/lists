@@ -1,7 +1,9 @@
 class User < ActiveRecord::Base
+  include Scoring
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
+  has_many :scores, as: :scorable, dependent: :destroy
   has_many :likes
   has_many :lists
 
