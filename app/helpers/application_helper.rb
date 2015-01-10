@@ -5,7 +5,7 @@ module ApplicationHelper
 
   def api_domain
     if Rails.env.production? || Rails.env.staging?
-      'stacksocial.com'
+      'popjova.com'
     else
       request.host
     end
