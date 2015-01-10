@@ -1,4 +1,4 @@
-<%= content_for :title, @list.name %>
+<%= content_for :title, "#{@list.name} - Rankings" %>
 <%= form_tag v0_list_url(@list, host: api_domain, subdomain: api_subdomain), remote: true, method: :get, class: "js-lists-api-form js-list-form" do %>
 <% end %>
 <!-- Modal -->
