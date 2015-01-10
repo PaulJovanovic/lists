@@ -8,9 +8,9 @@ class List < ActiveRecord::Base
   has_many :products, through: :items
   has_many :scores, as: :scorable, dependent: :destroy
 
-  scope :active, -> { where("products_count > 0").order(current_score: :desc, products_count: :desc, created_at: :desc) }
-  scope :most_popular, -> { where("products_count > 0").order(total_score: :desc, products_count: :desc, created_at: :desc) }
-  scope :most_products, -> { where("products_count > 0").order(products_count: :desc, created_at: :desc) }
+  scope :most_active, -> { where("products_count > 0").order(current_score: :desc, products_count: :desc, created_at: :asc) }
+  scope :most_popular, -> { where("products_count > 0").order(total_score: :desc, products_count: :desc, created_at: :asc) }
+  scope :most_products, -> { where("products_count > 0").order(products_count: :desc, created_at: :asc) }
   scope :needs_help, -> { where(products_count: 0).order(:created_at) }
 
   validates :name, :user, presence: true
