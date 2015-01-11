@@ -1,3 +1,9 @@
+class ApiSubdomain
+  def self.matches?(request)
+    request.subdomain.to_s.split('.').first == 'api'
+  end
+end
+
 Rails.application.routes.draw do
   root to: "home#index"
   devise_for :users
@@ -9,7 +15,7 @@ Rails.application.routes.draw do
     resources :lists
   end
 
-  constraints subdomain: "api" do
+  constraints ApiSubdomain do
     scope module: :api, defaults: { format: :json } do
       namespace :v0 do
         resources :likes, only: [:create, :update]
