@@ -3,7 +3,7 @@ class Amazon::ProductAPI
     attributes = product.get_element('ItemAttributes')
     @product_sku = product.get('ASIN')
     @product_name = attributes.get("Title")
-    @product_manufacturer = attributes.get("Brand")
+    @product_manufacturer = attributes.get("Author") || attributes.get("Brand") || attributes.get("Manufacturer")
     @product_price_cents = product.get_element("OfferSummary/LowestNewPrice/Amount").try(:get_array).try(:first).to_i
     @product_url = product.get_element("DetailPageURL").get_array.first
     @product_image_url = product.get_hash('LargeImage').try(:[], "URL")
