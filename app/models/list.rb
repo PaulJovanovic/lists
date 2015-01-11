@@ -25,7 +25,7 @@ class List < ActiveRecord::Base
   end
 
   def contributors_count
-    items.group(:user_id).count.count
+    items.select("DISTINCT user_id").count
   end
 
   def default_image
