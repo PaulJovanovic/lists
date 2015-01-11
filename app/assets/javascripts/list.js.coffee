@@ -67,9 +67,12 @@ $(document).ready ->
         else
           $list.find(".js-list-price-range").removeClass("hide")
         $(".js-lists-results").append($list)
+    $(".js-lists-form-scope").on "ajax:complete", (event, xhr, status) ->
+      $(".js-lists-results").removeClass("fade-m")
 
   $("body").on "click", ".js-lists-scope-change", ->
     $(".js-lists-form-scope input[name='scope']").val($(@).data("list-scope")).change()
+    $(".js-lists-results").addClass("fade-m")
 
   $("body").on "click", ".js-lists-search-item", ->
     $(".js-products-form-new").find("input[name='sku']").val($(@).data("sku")).change()
