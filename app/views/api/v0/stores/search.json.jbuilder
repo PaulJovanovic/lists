@@ -3,7 +3,7 @@ json.products do
     json.sku product.sku
     json.name product.name
     json.manufacturer product.manufacturer
-    json.price_cents product.price_cents
+    json.price product.price.to_s
     json.url product.url
     json.image_url product.image_url
   end

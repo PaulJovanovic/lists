@@ -39,6 +39,9 @@ $(document).ready ->
               <div class="fsxs fws">
                 #{product.manufacturer}
               </div>
+              <div class="fsxs fws">
+                $#{Math.round(product.price)}
+              </div>
             </div>
           </div>
         </div>
