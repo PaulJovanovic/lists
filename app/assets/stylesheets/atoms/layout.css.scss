@@ -224,3 +224,7 @@ table {
   text-overflow: ellipsis;
   white-space: nowrap;
 }
+
+.transform-s {
+  transition: all 0.4s ease-in-out;
+}
