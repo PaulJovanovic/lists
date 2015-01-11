@@ -19,6 +19,7 @@ gem 'paperclip'
 gem 'devise'
 gem 'will_paginate'
 
+gem 'aws-sdk'
 gem 'amazon-ecs'
 gem 'money'
 gem 'friendly_id'
