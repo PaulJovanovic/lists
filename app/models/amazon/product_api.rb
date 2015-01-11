@@ -4,7 +4,7 @@ class Amazon::ProductAPI
     @product_sku = product.get('ASIN')
     @product_name = attributes.get("Title")
     @product_manufacturer = attributes.get("Author") || attributes.get("Brand") || attributes.get("Manufacturer")
-    @product_price_cents = product.get_element("OfferSummary/LowestNewPrice/Amount").try(:get_array).try(:first).to_i
+    @product_price_cents = (product.get_element("OfferSummary/LowestNewPrice/Amount").try(:get_array).try(:first) || product.get_element("OfferSummary/LowestUsedPrice/Amount").try(:get_array).try(:first)).to_i
     @product_url = product.get_element("DetailPageURL").get_array.first
     @product_image_url = product.get_hash('LargeImage').try(:[], "URL")
   end
@@ -23,6 +23,10 @@ class Amazon::ProductAPI
 
   def price_cents
     @product_price_cents
+  end
+
+  def price
+    Money.new(price_cents, "USD")
   end
 
   def url
