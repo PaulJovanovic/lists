@@ -15,21 +15,21 @@ class List < ActiveRecord::Base
   scope :needs_help, -> { where(products_count: 0).order(:created_at) }
 
   scope :most_active_by_category, lambda { |category_name|
-    joins("join categories_lists, categories").
+    joins(:categories).
     where('categories.id = categories_lists.category_id
            AND categories_lists.list_id = lists.id
            AND categories.name = ?', category_name).
     order(current_score: :desc, products_count: :desc, created_at: :asc)
   }
   scope :most_popular_by_category, lambda { |category_name|
-    joins("join categories_lists, categories").
+    joins(:categories).
     where('categories.id = categories_lists.category_id
            AND categories_lists.list_id = lists.id
            AND categories.name = ?', category_name).
     order(total_score: :desc, products_count: :desc, created_at: :asc)
   }
   scope :most_products_by_category, lambda { |category_name|
-    joins("join categories_lists, categories").
+    joins(:categories).
     where('categories.id = categories_lists.category_id
            AND categories_lists.list_id = lists.id
            AND categories.name = ?', category_name).
