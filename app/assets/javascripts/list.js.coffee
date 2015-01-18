@@ -50,6 +50,9 @@ $(document).ready ->
 
   if $(".js-lists-results").length
     $template = $(".js-list:first").clone()
+    $(".js-lists-form-scope").on "ajax:before", ->
+      $(".js-lists-results").addClass("fade-m")
+
     $(".js-lists-form-scope").on "ajax:success", (event, data, status, xhr) ->
       $(".js-lists-results").html("")
       for list in data.lists
@@ -69,10 +72,6 @@ $(document).ready ->
         $(".js-lists-results").append($list)
     $(".js-lists-form-scope").on "ajax:complete", (event, xhr, status) ->
       $(".js-lists-results").removeClass("fade-m")
-
-  $("body").on "click", ".js-lists-scope-change", ->
-    $(".js-lists-form-scope input[name='scope']").val($(@).data("list-scope")).change()
-    $(".js-lists-results").addClass("fade-m")
 
   $("body").on "click", ".js-lists-search-item", ->
     $(".js-products-form-new").find("input[name='sku']").val($(@).data("sku")).change()
