@@ -1,6 +1,6 @@
 class Amazon::QueryAPI
   def initialize(q, page)
-    @results = Amazon::Ecs.item_search(q, {:response_group => 'Medium', :search_index => 'All'})
+    @results = Amazon::Ecs.item_search(q, {:response_group => 'Large', :search_index => 'All'})
   end
 
   def error?
