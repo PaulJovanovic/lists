@@ -4,7 +4,7 @@ class API::V0::ListsController < API::BaseController
   respond_to :json
 
   def index
-    @lists = List.scope(params[:scope])
+    @lists = List.scope(params[:scope], params[:scope_params])
     render :index
   end
 

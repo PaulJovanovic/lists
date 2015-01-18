@@ -1,5 +1,6 @@
 class HomeController < ApplicationController
   def index
-    @lists = List.scope("most_popular")
+    @categories = Category.all
+    @lists = List.scope("most_active_by_category", @categories.first.name)
   end
 end

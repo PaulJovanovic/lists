@@ -49,3 +49,7 @@ $(document).ready ->
       searchDelay = setTimeout =>
         $form.submit()
       , 500
+
+  $(".js-lists-api-foreign-input").change ->
+    console.log($($(@).data("target-form")))
+    $($(@).data("target-form")).find("input[name='#{$(@).data("target-input")}']").val($(@).val()).change()

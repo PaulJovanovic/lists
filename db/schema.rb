@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150110211918) do
+ActiveRecord::Schema.define(version: 20150118025522) do
 
   create_table "assets", force: true do |t|
     t.string   "type"
@@ -23,6 +23,19 @@ ActiveRecord::Schema.define(version: 20150110211918) do
     t.datetime "attachment_updated_at"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "categories", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "categories", ["name"], name: "index_categories_on_name", using: :btree
+
+  create_table "categories_lists", force: true do |t|
+    t.integer "category_id"
+    t.integer "list_id"
   end
 
   create_table "friendly_id_slugs", force: true do |t|
@@ -84,9 +97,15 @@ ActiveRecord::Schema.define(version: 20150110211918) do
     t.datetime "updated_at"
     t.integer  "price_cents",  default: 0
     t.string   "slug"
+    t.integer  "category_id"
   end
 
   add_index "products", ["type", "sku"], name: "index_products_on_type_and_sku", unique: true, using: :btree
+
+  create_table "products_subcategories", force: true do |t|
+    t.integer "product_id"
+    t.integer "subcategory_id"
+  end
 
   create_table "scores", force: true do |t|
     t.string   "scorable_type"
@@ -97,6 +116,16 @@ ActiveRecord::Schema.define(version: 20150110211918) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "subcategories", force: true do |t|
+    t.integer  "category_id"
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "subcategories", ["category_id", "name"], name: "index_subcategories_on_category_id_and_name", unique: true, using: :btree
+  add_index "subcategories", ["name"], name: "index_subcategories_on_name", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "username"

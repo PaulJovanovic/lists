@@ -228,3 +228,17 @@ table {
 .transform-s {
   transition: all 0.4s ease-in-out;
 }
+
+.select-reset {
+  box-shadow: none;
+  background-image: none;
+  text-indent: 0.01px;
+  text-overflow: '';
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+
+  &:focus {
+    outline: none;
+  }
+}

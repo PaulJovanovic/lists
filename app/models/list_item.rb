@@ -8,8 +8,13 @@ class ListItem < ActiveRecord::Base
 
   after_create :set_rank
   after_create :score_creation
+  after_create :add_product_category_to_list
 
   default_scope { order(likes_count: :desc, created_at: :asc) }
+
+  def add_product_category_to_list
+    list.add_category(product.category)
+  end
 
   def display_rank
     rank + 1
