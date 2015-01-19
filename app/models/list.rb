@@ -38,9 +38,12 @@ class List < ActiveRecord::Base
 
   validates :name, :user, presence: true
 
-  def self.scope(scope, params=nil)
-    scope ||= "all"
-    List.send(scope, params)
+  def self.scope(scope, params = nil)
+    if params.present?
+      List.send("#{scope}_by_category", params)
+    else
+      List.send(scope)
+    end
   end
 
   def add_category(category)

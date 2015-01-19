@@ -1,13 +1,13 @@
 <%= form_tag v0_lists_url(host: api_domain, subdomain: api_subdomain), remote: true, method: :get, class: "js-lists-api-form js-lists-form-scope" do %>
-  <%= hidden_field_tag :scope, "most_popular_by_category", class: "js-lists-api-submit-on-change" %>
-  <%= hidden_field_tag :scope_params, @categories.first.name, class: "js-lists-api-submit-on-change" %>
+  <%= hidden_field_tag :scope, "most_popular", class: "js-lists-api-submit-on-change" %>
+  <%= hidden_field_tag :scope_params, nil, class: "js-lists-api-submit-on-change" %>
 <% end %>
 <div class="row nmhxs">
   <div class="col-md-3 phxs mtxs">
     <div class="row nmhxs">
       <div class="col-xs-6 col-md-12 phxs mtxs">
         <div class="relative mtxs-plus pointer">
-          <%= select_tag :category, options_for_select(@categories.map{|category| [category.name.html_safe, category.name] }), class: "select-reset paxs bg-15 c-blue fsxs full-width bss bwas bc-13 bwan bran pointer js-lists-api-foreign-input", data: { target_form: ".js-lists-form-scope", target_input: "scope_params" } %>
+          <%= select_tag :category, options_for_select([["All", nil]] + @categories.map{|category| [category.name.html_safe, category.name] }), class: "select-reset paxs bg-15 c-blue fsxs full-width bss bwas bc-13 bwan bran pointer js-lists-api-foreign-input", data: { target_form: ".js-lists-form-scope", target_input: "scope_params" } %>
           <div class="absolute top bottom right">
             <table class="full-height mrxs">
               <tr>
@@ -21,7 +21,7 @@
       </div>
       <div class="col-xs-6 col-md-12 phxs mtxs">
         <div class="relative mtxs-plus pointer">
-          <%= select_tag :scope, options_for_select([["Popular", "most_popular_by_category"], ["Active", "most_active_by_category"], ["Longest", "most_products_by_category"]]), class: "select-reset paxs bg-15 c-blue fsxs full-width bss bwas bc-13 bwan bran pointer js-lists-api-foreign-input", data: { target_form: ".js-lists-form-scope", target_input: "scope" } %>
+          <%= select_tag :scope, options_for_select([["Popular", "most_popular"], ["Active", "most_active"], ["Longest", "most_products"]]), class: "select-reset paxs bg-15 c-blue fsxs full-width bss bwas bc-13 bwan bran pointer js-lists-api-foreign-input", data: { target_form: ".js-lists-form-scope", target_input: "scope" } %>
           <div class="absolute top bottom right">
             <table class="full-height mrxs">
               <tr>
