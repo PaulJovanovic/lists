@@ -18,6 +18,7 @@ gem 'sdoc', '~> 0.4.0',          group: :doc
 gem 'paperclip'
 gem 'devise'
 gem 'will_paginate'
+gem 'newrelic_rpm'
 
 gem 'aws-sdk'
 gem 'amazon-ecs'
