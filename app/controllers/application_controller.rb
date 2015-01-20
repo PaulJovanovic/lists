@@ -10,7 +10,6 @@ class ApplicationController < ActionController::Base
 
   def lists_in_need
     @lists_in_need ||= List.needs_help
-    @lists_in_need.count
   end
   helper_method :lists_in_need
 

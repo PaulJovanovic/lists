@@ -8,10 +8,12 @@
   <meta name='viewport' content='width=device-width, minimum-scale=1.0, maximum-scale=1.0'>
 </head>
 <body>
-  <%= link_to empty_lists_path do %>
-    <div class="pvxxxxs bg-blue c-15 fsxxs text-center">
-      <%= pluralize(lists_in_need, "list") %> need your help. Click here to lend a hand.
-    </div>
+  <% if lists_in_need.count > 0 %>
+    <%= link_to empty_lists_path do %>
+      <div class="pvxxxxs bg-blue c-15 fsxxs text-center">
+        <%= pluralize(lists_in_need.count, "list") %> <%= lists_in_need.count == 1 ? "is" : "are" %> awaiting your review. Click here to lend a hand.
+      </div>
+    <% end %>
   <% end %>
   <div class="dvl lhl bg-15 bss bwbs bc-13">
     <div class="container phs">
