@@ -10,4 +10,9 @@ class ListsController < ApplicationController
   def new
     @list = List.new
   end
+
+  def empty
+    @lists = List.needs_help
+    render "index"
+  end
 end

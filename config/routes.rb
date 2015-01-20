@@ -1,7 +1,11 @@
 Rails.application.routes.draw do
   root to: "home#index"
   devise_for :users
-  resources :lists, only: [:new, :index, :show]
+  resources :lists, only: [:new, :index, :show] do
+    collection do
+      get :empty
+    end
+  end
   resources :products, only: [:show]
 
   namespace :admin do

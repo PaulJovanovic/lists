@@ -8,6 +8,11 @@
   <meta name='viewport' content='width=device-width, minimum-scale=1.0, maximum-scale=1.0'>
 </head>
 <body>
+  <%= link_to empty_lists_path do %>
+    <div class="pvxxxxs bg-blue c-15 fsxxs text-center">
+      <%= pluralize(lists_in_need, "list") %> need your help. Click here to lend a hand.
+    </div>
+  <% end %>
   <div class="dvl lhl bg-15 bss bwbs bc-13">
     <div class="container phs">
       <div class="row nmhxxxs">

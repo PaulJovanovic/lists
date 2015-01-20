@@ -8,6 +8,12 @@ class ApplicationController < ActionController::Base
   after_action :set_access_control_headers
   after_action :store_location
 
+  def lists_in_need
+    @lists_in_need ||= List.needs_help
+    @lists_in_need.count
+  end
+  helper_method :lists_in_need
+
   def store_location
     # store last url - this is needed for post-login redirect to whatever the user last visited.
     return unless request.get?

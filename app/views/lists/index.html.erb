@@ -1,0 +1,30 @@
+<div class="row nmhxs">
+  <% @lists.each do |list| %>
+    <div class="col-sm-4 col-lg-3 phxs mtm">
+      <%= link_to list_path(list) do %>
+        <div class="paxs bg-15 bss bwas bc-13">
+          <div class="relative square bg-12">
+            <div class="absolute fill">
+              <table class="full">
+                <tr>
+                  <td class="c-6 fsxxl text-center">
+                    ?
+                  </td>
+                </tr>
+              </table>
+            </div>
+          </div>
+          <div class="mtxxxs fwl truncate">
+            <%= list.name %>
+          </div>
+          <div class="c-10">
+            <%= pluralize(list.products_count, "Product") %>
+          </div>
+          <div class="c-10">
+            <%= list_price_range(list) %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+</div>
