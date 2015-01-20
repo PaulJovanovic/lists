@@ -1,4 +1,11 @@
-<%= content_for :title, "#{@list.name} - Rankings" %>
+<% content_for :title, "#{@list.name} - Rankings" %>
+<% content_for :banner do %>
+  <div class="pvl bg-3 text-center bss bwbs bc-13 hidden-xs">
+    <div class="c-14 fsxl">
+      <%= @list.name %>
+    </div>
+  </div>
+<% end %>
 <%= form_tag v0_list_url(@list, host: api_domain, subdomain: api_subdomain), remote: true, method: :get, class: "js-lists-api-form js-list-form" do %>
 <% end %>
 <!-- Modal -->
