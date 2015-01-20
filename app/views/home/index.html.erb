@@ -1,3 +1,13 @@
+<% content_for :banner do %>
+  <div class="pvl bg-3 text-center bss bwbs bc-13 hidden-xs">
+    <div class="c-14 fsl">
+      Consumer Based Shopping
+    </div>
+    <div class="c-10 fss">
+      find something that everybody likes
+    </div>
+  </div>
+<% end %>
 <%= form_tag v0_lists_url(host: api_domain, subdomain: api_subdomain), remote: true, method: :get, class: "js-lists-api-form js-lists-form-scope" do %>
   <%= hidden_field_tag :scope, "most_popular", class: "js-lists-api-submit-on-change" %>
   <%= hidden_field_tag :scope_params, nil, class: "js-lists-api-submit-on-change" %>
