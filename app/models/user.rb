@@ -24,10 +24,6 @@ class User < ActiveRecord::Base
     role == "admin"
   end
 
-  def guest?
-    role == "guest"
-  end
-
   def user?
     role == "user"
   end

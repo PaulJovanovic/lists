@@ -123,44 +123,61 @@
                   <% end %>
                 </div>
                 <div class="col-xs-6 col-sm-12 phxxxs mtxs">
-                  <div class="<%= "active " if current_or_guest_user.likes?(item) %>js-like">
-                    <div class="hide-active">
-                      <%= form_tag like_v0_user_url(host: api_domain, subdomain: api_subdomain), remote: true, class: "js-lists-api-form js-likes-form-like js-list-items-like" do %>
-                        <%= hidden_field_tag :likable_type, "ListItem" %>
-                        <%= hidden_field_tag :likable_id, item.id %>
-                        <div class="phxxs pvxxxs bg-blue c-15 fsxxxs text-center pointer js-lists-api-form-submit">
-                          <table class="mha">
-                            <tr>
-                              <td>
-                                <i class="fa fa-thumbs-up"></i>
-                              </td>
-                              <td class="visible-xs">
-                                &nbsp;Like
-                              </td>
-                            </tr>
-                          </table>
-                        </div>
-                      <% end %>
+                  <% if current_user %>
+                    <div class="<%= "active " if current_user.likes?(item) %>js-like">
+                      <div class="hide-active">
+                        <%= form_tag like_v0_user_url(host: api_domain, subdomain: api_subdomain), remote: true, class: "js-lists-api-form js-likes-form-like js-list-items-like" do %>
+                          <%= hidden_field_tag :likable_type, "ListItem" %>
+                          <%= hidden_field_tag :likable_id, item.id %>
+                          <div class="phxxs pvxxxs bg-blue c-15 fsxxxs text-center pointer js-lists-api-form-submit">
+                            <table class="mha">
+                              <tr>
+                                <td>
+                                  <i class="fa fa-thumbs-up"></i>
+                                </td>
+                                <td class="visible-xs">
+                                  &nbsp;Like
+                                </td>
+                              </tr>
+                            </table>
+                          </div>
+                        <% end %>
+                      </div>
+                      <div class="show-active">
+                        <%= form_tag unlike_v0_user_url(host: api_domain, subdomain: api_subdomain), remote: true, class: "js-lists-api-form js-likes-form-unlike js-list-items-like" do %>
+                          <%= hidden_field_tag :likable_type, "ListItem" %>
+                          <%= hidden_field_tag :likable_id, item.id %>
+                          <div class="phxxs pvxxxs bg-blue c-15 fsxxxs fade-m text-center pointer js-lists-api-form-submit">
+                            <table class="mha">
+                              <tr>
+                                <td>
+                                  <i class="fa fa-thumbs-down"></i>
+                                </td>
+                                <td class="visible-xs">
+                                  &nbsp;Unlike
+                                </td>
+                              </tr>
+                            </table>
+                          </div>
+                        <% end %>
+                      </div>
                     </div>
-                    <div class="show-active">
-                      <%= form_tag unlike_v0_user_url(host: api_domain, subdomain: api_subdomain), remote: true, class: "js-lists-api-form js-likes-form-unlike js-list-items-like" do %>
-                        <%= hidden_field_tag :likable_type, "ListItem" %>
-                        <%= hidden_field_tag :likable_id, item.id %>
-                        <div class="phxxs pvxxxs bg-blue c-15 fsxxxs fade-m text-center pointer js-lists-api-form-submit">
-                          <table class="mha">
-                            <tr>
-                              <td>
-                                <i class="fa fa-thumbs-down"></i>
-                              </td>
-                              <td class="visible-xs">
-                                &nbsp;Unlike
-                              </td>
-                            </tr>
-                          </table>
-                        </div>
-                      <% end %>
-                    </div>
-                  </div>
+                  <% else %>
+                    <%= link_to new_user_session_path do %>
+                      <div class="phxxs pvxxxs bg-blue c-15 fsxxxs text-center pointer">
+                        <table class="mha">
+                          <tr>
+                            <td>
+                              <i class="fa fa-thumbs-up"></i>
+                            </td>
+                            <td class="visible-xs">
+                              &nbsp;Like
+                            </td>
+                          </tr>
+                        </table>
+                      </div>
+                    <% end %>
+                  <% end %>
                 </div>
               </div>
             </div>

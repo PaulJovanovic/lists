@@ -41,9 +41,11 @@
   <div class="container phs pbxxxxl">
     <%= yield %>
   </div>
-  <script>
-    Lists.globals.apiToken = "<%= current_or_guest_user.api_token || current_or_guest_user.generate_api_token %>";
-  </script>
+  <% if current_user %>
+    <script>
+      Lists.globals.apiToken = "<%= current_user.api_token || current_user.generate_api_token %>";
+    </script>
+  <% end %>
   <%= content_for :javascript %>
 </body>
 </html>

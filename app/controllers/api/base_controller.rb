@@ -12,12 +12,6 @@ private
     end
   end
 
-  def disallow_guests
-    if user_from_api_token.guest?
-      render json: { status: 'Unauthorized' }, status: :unauthorized
-    end
-  end
-
   def set_response_authentication_credentials(user)
     response.headers["X-Lists-Authentication-Credentials"] = (user.api_token || user.generate_api_token)
   end

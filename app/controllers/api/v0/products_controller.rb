@@ -1,6 +1,5 @@
 class API::V0::ProductsController < API::BaseController
   skip_filter :authenticate, only: [:index]
-  before_action :disallow_guests, only: [:create]
   respond_to :json
 
   def index
