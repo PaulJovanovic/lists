@@ -77,7 +77,7 @@
   </div>
   <div class="col-md-9 phxs">
     <div class="js-list-items">
-      <% @list.items.each do |item| %>
+      <% @list.items_ordered_by_rank.each do |item| %>
         <div class="container-sm-height pvxs mtm bg-15 bss bwas bc-13 js-list-item" data-id="<%= item.id %>">
           <div class="row row-sm-height mhn nmtxs">
             <div class="list-rank col-sm-2 col-sm-height phxs mtxs text-center">

@@ -51,7 +51,7 @@
         <div class="col-sm-4 col-md-4 phxs mtm js-list">
           <%= link_to list_path(list), class: "js-list-url" do %>
             <div class="paxs bg-15 bss bwas bc-13">
-              <%= image_tag list.items.first.try(:product).try(:image).try(:url, :profile), class: "img-responsive mha js-list-image" %>
+              <%= image_tag list.items_ordered_by_rank.first.try(:product).try(:image).try(:url, :profile), class: "img-responsive mha js-list-image" %>
               <div class="mtxxxs fwl truncate js-list-name">
                 <%= list.name %>
               </div>

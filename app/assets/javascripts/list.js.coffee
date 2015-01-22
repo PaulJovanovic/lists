@@ -13,12 +13,8 @@ $(document).ready ->
 
   $(".js-list-form").on "ajax:success", (event, data, status, xhr) ->
     list = data.list
-    $items = $(".js-list-item").detach()
-    ordered_list_ids = (item.id for item in list.items)
-    $items.sort (a, b) ->
-      ordered_list_ids.indexOf($(a).data("id")) > ordered_list_ids.indexOf($(b).data("id"))
     for item in list.items
-      $item = $($items.shift())
+      $item = $(".js-list-item[data-id='#{item.id}']").detach()
       $item.find(".js-list-item-rank").html(item.rank + 1)
       $(".js-list-items").append($item)
 

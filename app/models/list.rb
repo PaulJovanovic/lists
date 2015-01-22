@@ -46,6 +46,21 @@ class List < ActiveRecord::Base
     end
   end
 
+  def self.from_amazon_listmania_url(url)
+    doc = Nokogiri::HTML(open(url))
+    user = User.first
+    list = List.create(name: doc.css("h1.largeTitle")[0].content, user: user)
+    doc.css("input[name^='asin']").each do |input|
+      sku = input["value"]
+      begin
+        product = Product.where(type: "AmazonProduct", sku: sku).last || Product.create(type: "AmazonProduct", sku: sku)
+        list.add_product(product, user)
+      rescue
+        puts "#{sku} failed"
+      end
+    end
+  end
+
   def add_category(category)
     if !category_ids.include?(category.id)
       categories << category
@@ -54,7 +69,9 @@ class List < ActiveRecord::Base
   end
 
   def add_product(product, user)
-    items.create(product: product, user: user)
+    if items.map(&:product_id).exclude?(product.id)
+      items.create(product: product, user: user)
+    end
   end
 
   def contributors_count
@@ -77,9 +94,18 @@ class List < ActiveRecord::Base
     Money.new(products.maximum("price_cents"))
   end
 
+  def items_ordered_by_rank
+    items.order(rank: :asc, created_at: :asc)
+  end
+
+  def items_ordered_by_most_likes
+    items.order(likes_count: :desc, created_at: :asc)
+  end
+
   def recalculate_ranks(start, finish)
-    items[start..finish].each do |item|
-      item.update_column(:rank, items.index(item))
+    ordered_items = items_ordered_by_most_likes
+    ordered_items[start..finish].each do |item|
+      item.update_column(:rank, ordered_items.index(item))
     end
   end
 end

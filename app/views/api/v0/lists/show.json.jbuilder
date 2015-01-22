@@ -2,7 +2,7 @@ json.list do
   json.id @list.id
   json.slug @list.slug
   json.items do
-    json.array! @list.items.includes(product: :image).each do |item|
+    json.array! @list.items_ordered_by_rank.includes(product: :image).each do |item|
       json.id item.id
       json.rank item.rank
       json.product do
