@@ -49,7 +49,7 @@ class List < ActiveRecord::Base
   def self.from_amazon_listmania_url(url)
     doc = Nokogiri::HTML(open(url))
     user = User.first
-    list = List.create(name: doc.css("h1.largeTitle")[0].content, user: user)
+    list = List.create(name: doc.css("h1.largeTitle")[0].content.titleize, user: user)
     doc.css("input[name^='asin']").each do |input|
       sku = input["value"]
       begin
