@@ -78,8 +78,12 @@ class List < ActiveRecord::Base
     items.select("DISTINCT user_id").count
   end
 
-  def default_image
-    items.first.try(:product).try(:image).try(:url, :profile) || "http://placehold.it/300x300"
+  def default_image(category=nil)
+    if category
+      items_ordered_by_rank.includes(:product).where(products: { category_id: category.id }).first.product.image.url(:profile)
+    else
+      items_ordered_by_rank.first.try(:product).try(:image).try(:url, :profile) || "http://placehold.it/300x300"
+    end
   end
 
   def likes_count

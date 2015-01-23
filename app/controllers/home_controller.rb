@@ -1,6 +1,5 @@
 class HomeController < ApplicationController
   def index
-    @categories = Category.all
-    @lists = List.scope("most_popular")
+    @categories = Category.order(current_score: :desc)
   end
 end

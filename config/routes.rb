@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   root to: "home#index"
   devise_for :users
+  resources :categories, only: [:show]
   resources :lists, only: [:new, :index, :show] do
     collection do
       get :empty

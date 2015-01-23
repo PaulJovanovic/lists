@@ -8,50 +8,19 @@
     </div>
   </div>
 <% end %>
-<%= form_tag v0_lists_url(host: api_domain, subdomain: api_subdomain), remote: true, method: :get, class: "js-lists-api-form js-lists-form-scope" do %>
-  <%= hidden_field_tag :scope, "most_popular", class: "js-lists-api-submit-on-change" %>
-  <%= hidden_field_tag :scope_params, nil, class: "js-lists-api-submit-on-change" %>
-<% end %>
-<div class="row nmhxs">
-  <div class="col-md-3 phxs mtxs">
-    <div class="row nmhxs">
-      <div class="col-xs-6 col-md-12 phxs mtxs">
-        <div class="relative mtxs-plus pointer">
-          <%= select_tag :category, options_for_select([["All", nil]] + @categories.map{|category| [category.name.html_safe, category.name] }), class: "select-reset paxs bg-15 c-blue fsxs full-width bss bwas bc-13 bwan bran pointer js-lists-api-foreign-input", data: { target_form: ".js-lists-form-scope", target_input: "scope_params" } %>
-          <div class="absolute top bottom right">
-            <table class="full-height mrxs">
-              <tr>
-                <td>
-                  <i class="fa fa-caret-down c-blue fsm"></i>
-                </td>
-              </tr>
-            </table>
-          </div>
-        </div>
-      </div>
-      <div class="col-xs-6 col-md-12 phxs mtxs">
-        <div class="relative mtxs-plus pointer">
-          <%= select_tag :scope, options_for_select([["Popular", "most_popular"], ["Active", "most_active"], ["Longest", "most_products"]]), class: "select-reset paxs bg-15 c-blue fsxs full-width bss bwas bc-13 bwan bran pointer js-lists-api-foreign-input", data: { target_form: ".js-lists-form-scope", target_input: "scope" } %>
-          <div class="absolute top bottom right">
-            <table class="full-height mrxs">
-              <tr>
-                <td>
-                  <i class="fa fa-caret-down c-blue fsm"></i>
-                </td>
-              </tr>
-            </table>
-          </div>
-        </div>
-      </div>
+<% @categories.each do |category| %>
+  <div class="mtm-plus">
+    <div class="c-6 fsm fwl">
+      <%= link_to category_path(category) do %>
+        <%= category.name.html_safe %>
+      <% end %>
     </div>
-  </div>
-  <div class="col-md-9 phxs">
     <div class="row nmhxs transform-s js-lists-results">
-      <% @lists.each do |list| %>
-        <div class="col-sm-4 col-md-4 phxs mtm js-list">
+      <% category.lists.order(current_score: :desc, created_at: :asc).limit(4).each do |list| %>
+        <div class="col-sm-3 phxs mtm js-list">
           <%= link_to list_path(list), class: "js-list-url" do %>
             <div class="paxs bg-15 bss bwas bc-13">
-              <%= image_tag list.items_ordered_by_rank.first.try(:product).try(:image).try(:url, :profile), class: "img-responsive mha js-list-image" %>
+              <%= image_tag list.default_image(category), class: "img-responsive mha js-list-image" %>
               <div class="mtxxxs fwl truncate js-list-name">
                 <%= list.name %>
               </div>
@@ -67,4 +36,4 @@
       <% end %>
     </div>
   </div>
-</div>
+<% end %>

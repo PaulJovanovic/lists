@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150118025522) do
+ActiveRecord::Schema.define(version: 20150123060146) do
 
   create_table "assets", force: true do |t|
     t.string   "type"
@@ -29,9 +29,13 @@ ActiveRecord::Schema.define(version: 20150118025522) do
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "total_score",   default: 0
+    t.integer  "current_score", default: 0
+    t.string   "slug"
   end
 
   add_index "categories", ["name"], name: "index_categories_on_name", using: :btree
+  add_index "categories", ["slug"], name: "index_categories_on_slug", unique: true, using: :btree
 
   create_table "categories_lists", force: true do |t|
     t.integer "category_id"
