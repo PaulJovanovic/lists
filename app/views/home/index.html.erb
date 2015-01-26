@@ -1,39 +1,41 @@
 <% content_for :banner do %>
   <div class="ptl pbm c-6 text-center">
     <div class="fsxl fwl">
-      Take Control of Your Health
+      Make Life More Epic
     </div>
     <div class="fsm fws">
-      the best tools for getting fit
+      gaming accesorries for nerds, by nerds
     </div>
   </div>
 <% end %>
-<% @categories.each do |category| %>
-  <div class="mtm-plus">
-    <div class="c-6 fsm fwl">
-      <%= link_to category_path(category) do %>
-        <%= category.name.html_safe %>
-      <% end %>
+<div class="row nmhxs">
+  <% @categories.each do |category| %>
+    <div class="col-sm-<%= category.lists.order(current_score: :desc, created_at: :asc).limit(4).count * 3 %> phxs mtm-plus">
+      <div class="c-6 fsm fwl">
+        <%= link_to category_path(category) do %>
+          <%= category.name.html_safe %>
+        <% end %>
+      </div>
+      <div class="row nmhxs transform-s js-lists-results">
+        <% category.lists.order(current_score: :desc, created_at: :asc).limit(4).each do |list| %>
+          <div class="col-sm-<%= 12/ category.lists.order(current_score: :desc, created_at: :asc).limit(4).count%> phxs mtm js-list">
+            <%= link_to list_path(list), class: "js-list-url" do %>
+              <div class="paxs bg-15 bss bwas bc-13">
+                <%= image_tag list.default_image(category), class: "img-responsive mha js-list-image" %>
+                <div class="mtxxxs fwl truncate js-list-name">
+                  <%= list.name %>
+                </div>
+                <div class="c-10 js-list-products-count">
+                  <%= pluralize(list.products_count, "Product") %>
+                </div>
+                <div class="c-10">
+                  <%= list_price_range(list) %>
+                </div>
+              </div>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
     </div>
-    <div class="row nmhxs transform-s js-lists-results">
-      <% category.lists.order(current_score: :desc, created_at: :asc).limit(4).each do |list| %>
-        <div class="col-sm-3 phxs mtm js-list">
-          <%= link_to list_path(list), class: "js-list-url" do %>
-            <div class="paxs bg-15 bss bwas bc-13">
-              <%= image_tag list.default_image(category), class: "img-responsive mha js-list-image" %>
-              <div class="mtxxxs fwl truncate js-list-name">
-                <%= list.name %>
-              </div>
-              <div class="c-10 js-list-products-count">
-                <%= pluralize(list.products_count, "Product") %>
-              </div>
-              <div class="c-10">
-                <%= list_price_range(list) %>
-              </div>
-            </div>
-          <% end %>
-        </div>
-      <% end %>
-    </div>
-  </div>
-<% end %>
+  <% end %>
+</div>
