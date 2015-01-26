@@ -69,11 +69,10 @@ class List < ActiveRecord::Base
   end
 
   def add_product(product, user)
-    if items.map(&:product_id).exclude?(product.id)
-      items.create(product: product, user: user)
-      calculate_minimum_price
-      calculate_maximum_price
-    end
+    item = items.where(product_id: product.id).last || items.create(product: product, user: user)
+    calculate_minimum_price
+    calculate_maximum_price
+    item
   end
 
   def calculate_minimum_price
