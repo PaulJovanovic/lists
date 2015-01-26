@@ -1,5 +1,5 @@
 class HomeController < ApplicationController
   def index
-    @categories = Category.order(current_score: :desc)
+    @categories = Category.includes(:lists).order(current_score: :desc)
   end
 end

@@ -18,4 +18,8 @@ class Category < ActiveRecord::Base
   def calculate_total_score
     update_column(:total_score, lists.sum(:total_score))
   end
+
+  def most_active_lists
+    lists.most_active
+  end
 end
