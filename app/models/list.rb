@@ -71,7 +71,17 @@ class List < ActiveRecord::Base
   def add_product(product, user)
     if items.map(&:product_id).exclude?(product.id)
       items.create(product: product, user: user)
+      calculate_minimum_price
+      calculate_maximum_price
     end
+  end
+
+  def calculate_minimum_price
+    update_column(:minimum_price_cents, products.minimum("price_cents"))
+  end
+
+  def calculate_maximum_price
+    update_column(:maximum_price_cents, products.maximum("price_cents"))
   end
 
   def contributors_count
@@ -86,24 +96,24 @@ class List < ActiveRecord::Base
     end
   end
 
-  def likes_count
-    items.sum(:likes_count)
-  end
-
-  def minimum_price
-    Money.new(products.minimum("price_cents"))
-  end
-
-  def maximum_price
-    Money.new(products.maximum("price_cents"))
-  end
-
   def items_ordered_by_rank
     items.order(rank: :asc, created_at: :asc)
   end
 
   def items_ordered_by_most_likes
     items.order(likes_count: :desc, created_at: :asc)
+  end
+
+  def likes_count
+    items.sum(:likes_count)
+  end
+
+  def minimum_price
+    Money.new(minimum_price_cents)
+  end
+
+  def maximum_price
+    Money.new(maximum_price_cents)
   end
 
   def recalculate_ranks(start, finish)

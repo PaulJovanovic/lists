@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150123060146) do
+ActiveRecord::Schema.define(version: 20150126223254) do
 
   create_table "assets", force: true do |t|
     t.string   "type"
@@ -78,15 +78,17 @@ ActiveRecord::Schema.define(version: 20150123060146) do
   add_index "list_items", ["list_id", "product_id"], name: "index_list_items_on_list_id_and_product_id", unique: true, using: :btree
 
   create_table "lists", force: true do |t|
-    t.boolean  "active",         default: false
+    t.boolean  "active",              default: false
     t.string   "name"
-    t.integer  "products_count", default: 0
+    t.integer  "products_count",      default: 0
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "slug"
     t.integer  "user_id"
     t.integer  "current_score"
     t.integer  "total_score"
+    t.integer  "minimum_price_cents"
+    t.integer  "maximum_price_cents"
   end
 
   add_index "lists", ["slug"], name: "index_lists_on_slug", unique: true, using: :btree
