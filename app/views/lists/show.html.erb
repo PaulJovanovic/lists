@@ -2,6 +2,7 @@
 <% content_for :facebook_meta_tags do %>
   <meta property="og:title" content="<%= @list.name %>"/>
   <meta property="og:url" content="<%= list_url(@list) %>"/>
+  <meta property="og:description" content="See what the world thinks."/>
   <meta property="og:image" content="<%= @list.items_ordered_by_rank.first.product.image.url(:profile) %>"/>
 <% end %>
 <% content_for :banner do %>
