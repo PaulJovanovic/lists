@@ -1,16 +1,58 @@
 <% content_for :banner do %>
-  <div class="ptl pbm c-6 text-center">
-    <div class="fsxl fwl">
-      Make Life More Epic
+  <div class="relative pvxl bg-blue c-15 text-center">
+    <div class="container container-sm-height phs">
+      <div class="row row-sm-height nmhxs">
+        <div class="col-sm-6 col-sm-height phxs">
+          <div class="container-xs-height">
+            <div class="row row-xs-height nmhxs">
+              <div class="col-xs-4 col-xs-height phxs">
+                <%= image_tag "controller.png", class: "img-responsive mha" %>
+              </div>
+              <div class="col-xs-4 col-xs-height phxs">
+                <%= image_tag "headset.png", class: "img-responsive mha" %>
+              </div>
+              <div class="col-xs-4 col-xs-height phxs">
+                <%= image_tag "chair.png", class: "img-responsive mha" %>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-6 col-sm-height phxs">
+          <div class="container-xs-height">
+            <div class="row row-xs-height nmhxs">
+              <div class="col-xs-4 col-xs-height phxs">
+                <%= image_tag "keyboard.png", class: "img-responsive mha" %>
+              </div>
+              <div class="col-xs-4 col-xs-height phxs">
+                <%= image_tag "monitor.png", class: "img-responsive mha" %>
+              </div>
+              <div class="col-xs-4 col-xs-height phxs">
+                <%= image_tag "mouse.png", class: "img-responsive mha" %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="fsm fws">
-      products for gamers, suggested by gamers
+    <div class="absolute fill">
+      <table class="full">
+        <tr>
+          <td>
+            <div class="fsxxl fwl ff-rw">
+              Make Life More Epic
+            </div>
+            <div class="fsm fws ff-rw">
+              products for gamers, suggested by gamers
+            </div>
+          </td>
+        </tr>
+      </table>
     </div>
   </div>
 <% end %>
 <div class="row nmhxs">
   <% @categories.each do |category| %>
-    <div class="col-sm-<%= category.most_active_lists.limit(4).count * 3 %> phxs mtm-plus">
+    <div class="col-sm-<%= category.most_active_lists.limit(4).count * 3 %> phxs mts">
       <div class="c-blue fsm fwl">
         <%= link_to category_path(category) do %>
           <%= category.name.html_safe %> <i class="fa fa-chevron-right fsxxs"></i>
