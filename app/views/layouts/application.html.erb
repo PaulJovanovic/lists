@@ -17,7 +17,7 @@
       </div>
     <% end %>
   <% end %>
-  <div class="dvl lhl bg-15 bss bwbs bc-13">
+  <div class="dvl lhl bg-15 bss bwbs bc-13 no-select">
     <div class="container phs">
       <div class="row nmhxxxs">
         <div class="col-xs-9 phxxxs">
@@ -30,37 +30,55 @@
                   <% end %>
                 </div>
               </td>
-              <td>
-                <div class="mls das lhs bss bwas bc-14 text-center">
-                  <i class="fa fa-reorder fsxs"></i>
+              <td class="relative">
+                <div class="js-toggle js-navbar-dropdown" data-toggle-target="#navbar-categories-dropdown" data-toggle-class="hide">
+                  <div class="relative mls das lhs bg-blue-active c-15-active bss bwas bc-14 bc-13-hover bc-14-active text-center pointer">
+                    <i class="fa fa-reorder fsxs"></i>
+                  </div>
+                </div>
+                <div id="navbar-categories-dropdown" class="absolute n-top left mls phxs bg-15 bss bwhs bwbs bc-13 zl hide" style="width: 380px;">
+                  <div class="row nmhxs">
+                    <% Category.all.order(name: :asc).each_slice((Category.count / 2.0).ceil) do |categories_col| %>
+                      <div class="col-sm-6 phxs">
+                        <% categories_col.each do |category| %>
+                          <%= link_to category_path(category) do %>
+                            <div class="lhm c-6 c-blue-hover text-left">
+                              <%= category.name.html_safe %>
+                            </div>
+                          <% end %>
+                        <% end %>
+                      </div>
+                    <% end %>
+                  </div>
                 </div>
               </td>
               <td>
-                <div class="mls das lhs bss bwas bc-14 text-center">
-                  <i class="fa fa-microphone fsxs"></i>
-                </div>
-              </td>
-              <td>
-                <div class="mls das lhs bss bwas bc-14 text-center">
-                  <i class="fa fa-paper-plane fsxs"></i>
-                </div>
-              </td>
-              <td>
-                <div class="mls das lhs bss bwas bc-14 text-center">
-                  <i class="fa fa-refresh fsxs"></i>
-                </div>
+                <%= link_to new_list_path do %>
+                  <div class="mls das lhs bss bwas bc-14 bc-13-hover text-center">
+                    <i class="fa fa-plus fsxs"></i>
+                  </div>
+                <% end %>
               </td>
             </tr>
           </table>
         </div>
         <div class="col-xs-3 phxxxs">
-          <div class="c-3 text-right">
-            <% if current_user %>
-              <%= link_to "+ list", new_list_path %> | <%= link_to "logout", destroy_user_session_path, method: :delete %>
-            <% else %>
-              <%= link_to "login", new_user_session_path %>
+          <% if current_user %>
+            <div class="phxxs mtxs dvs lhs bss bwas bc-14 bc-13-hover text-center pull-right">
+              <%= link_to "logout", destroy_user_session_path, method: :delete %>
+            </div>
+          <% else %>
+            <%= link_to new_user_registration_path do %>
+              <div class="phxxs mtxs mls dvs lhs bss bwas bc-14 bc-13-hover text-center pull-right">
+                signup
+              </div>
             <% end %>
-          </div>
+            <%= link_to new_user_session_path do %>
+              <div class="phxxs mtxs dvs lhs bss bwas bc-14 bc-13-hover text-center pull-right">
+                login
+              </div>
+            <% end %>
+          <% end %>
         </div>
       </div>
     </div>

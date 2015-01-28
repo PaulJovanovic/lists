@@ -5,5 +5,11 @@ $(document).ready ->
     $activeTab.removeClass("active")
     $(@).addClass("active")
 
+  $("body").on "click", ".js-toggle", (e) ->
+    e.preventDefault()
+    e.stopPropagation()
+    $($(@).data("toggle-target")).toggleClass($(@).data("toggle-class"))
+    $(@).toggleClass("active")
+
   $("img.lazy").lazyload
     threshold: 400
