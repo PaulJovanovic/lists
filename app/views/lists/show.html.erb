@@ -1,4 +1,9 @@
 <% content_for :title, "#{@list.name} - Rankings" %>
+<% content_for :facebook_meta_tags do %>
+  <meta property="og:title" content="<%= @list.name %>"/>
+  <meta property="og:url" content="<%= list_url(@list) %>"/>
+  <meta property="og:image" content="<%= @list.items_ordered_by_rank.first.product.image.url(:profile) %>"/>
+<% end %>
 <% content_for :banner do %>
   <div class="ptl pbs c-6 text-center">
     <div class="fsxl fwl">

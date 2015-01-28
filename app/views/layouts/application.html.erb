@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title><%= content_for?(:title) ? "#{ content_for(:title).html_safe } | popjova" : "popjova" %></title>
+  <title><%= content_for?(:title) ? "#{ content_for(:title).html_safe } | popjova" : "Make Life More Epic | popjova" %></title>
   <%= stylesheet_link_tag    'application', media: 'all' %>
   <%= javascript_include_tag 'application' %>
   <%= csrf_meta_tags %>
+  <meta property="og:site_name" content="popjova"/>
+  <%= content_for(:facebook_meta_tags) %>
   <meta name='viewport' content='width=device-width, minimum-scale=1.0, maximum-scale=1.0'>
 </head>
 <body>
@@ -15,15 +17,41 @@
       </div>
     <% end %>
   <% end %>
-  <div class="dvl lhl bg-15">
+  <div class="dvl lhl bg-15 bss bwbs bc-13">
     <div class="container phs">
       <div class="row nmhxxxs">
         <div class="col-xs-9 phxxxs">
-          <div class="c-3 fsl">
-            <%= link_to root_path do %>
-              <i class="icon-popjova lhl c-blue" style="font-size: 98px"></i>
-            <% end %>
-          </div>
+          <table>
+            <tr>
+              <td>
+                <div class="dvl no-overflow">
+                  <%= link_to root_path do %>
+                    <i class="icon-popjova lhl c-blue" style="font-size: 98px"></i>
+                  <% end %>
+                </div>
+              </td>
+              <td>
+                <div class="mls das lhs bss bwas bc-14 text-center">
+                  <i class="fa fa-reorder fsxs"></i>
+                </div>
+              </td>
+              <td>
+                <div class="mls das lhs bss bwas bc-14 text-center">
+                  <i class="fa fa-microphone fsxs"></i>
+                </div>
+              </td>
+              <td>
+                <div class="mls das lhs bss bwas bc-14 text-center">
+                  <i class="fa fa-paper-plane fsxs"></i>
+                </div>
+              </td>
+              <td>
+                <div class="mls das lhs bss bwas bc-14 text-center">
+                  <i class="fa fa-refresh fsxs"></i>
+                </div>
+              </td>
+            </tr>
+          </table>
         </div>
         <div class="col-xs-3 phxxxs">
           <div class="c-3 text-right">
