@@ -1,6 +1,9 @@
 .dvn, .dan {
   height: 0px;
 }
+.dvxxxxs, .daxxxxs {
+  height: $dimension-xxxxs;
+}
 .dvxxxs, .daxxxs {
   height: $dimension-xxxs;
 }
@@ -38,6 +41,9 @@
 .dhn, .dan {
   width: 0px;
 }
+.dhxxxxs, .daxxxxs {
+  width: $dimension-xxxxs;
+}
 .dhxxxs, .daxxxs {
   width: $dimension-xxxs;
 }
@@ -74,6 +80,9 @@
 
 .dvn-max, .dan-max {
   max-height: 0px;
+}
+.dvxxxxs-max, .daxxxxs-max {
+  max-height: $dimension-xxxxs;
 }
 .dvxxxs-max, .daxxxs-max {
   max-height: $dimension-xxxs;
@@ -115,6 +124,9 @@
 .dhxxxs-max, .daxxxs-max {
   max-width: $dimension-xxxs;
 }
+.dhxxxxs-max, .daxxxxs-max {
+  max-width: $dimension-xxxxs;
+}
 .dhxxs-max, .daxxs-max {
   max-width: $dimension-xxs;
 }
@@ -148,6 +160,9 @@
 
 .lhn {
   line-height: 0px;
+}
+.lhxxxxs {
+  line-height: $dimension-xxxxs;
 }
 .lhxxxs {
   line-height: $dimension-xxxs;

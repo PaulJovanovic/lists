@@ -32,6 +32,14 @@ class ListItem < ActiveRecord::Base
     list.recalculate_ranks(ranks[0], ranks[1])
   end
 
+  def likes_count_percent
+    if list.likes_count > 0
+      likes_count.to_f / list.likes_count
+    else
+      0.0
+    end
+  end
+
   def score!(actionable, weight)
     unless actionable.class.name == "Like" && actionable.user_id == user_id
       user.score!(actionable, weight)
