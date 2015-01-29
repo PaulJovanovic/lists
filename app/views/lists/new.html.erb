@@ -1,7 +1,7 @@
 <div class="row nmhxs">
   <div class="col-md-8 phxs mtm">
     <div class="paxs bg-15 fss bss bwas bc-13">
-      New List
+      Create a List
     </div>
     <div class="paxs mtxs bg-15 bss bwas bc-13">
       <%= form_tag v0_lists_url(host: api_domain, subdomain: api_subdomain), remote: true, class: "js-lists-api-form js-lists-form-new" do %>
@@ -18,6 +18,25 @@
           <%= submit_tag "Create", class: "paxs bg-blue c-15 full-width", data: { disable_with: "Creating" } %>
         </div>
       <% end %>
+    </div>
+    <div class="paxs mtm bg-15 fss bss bwas bc-13">
+      Reasons To Create a List
+    </div>
+    <div class="paxs mtxs bg-15 bss bwas bc-13">
+      <div class="row nmhxs">
+        <div class="col-sm-6 phxs">
+          <div class="fsxs fwl">A) Express Your Opinion</div>
+          <div class="ptxxxs mtxxxs fsxxs bss bwts bc-13">
+            Everyone has an opinion. Use the create a list tool to show the world what products you like. Who knows, maybe other people feel the same way!
+          </div>
+        </div>
+        <div class="col-sm-6 phxs">
+          <div class="fsxs fwl">B) Get Some Help</div>
+          <div class="ptxxxs mtxxxs fsxxs bss bwts bc-13">
+            Don't know which product is better? Create a list! Start a list with little or no products and have a community of gamers fill it up over time.
+          </div>
+        </div>
+      </div>
     </div>
   </div>
   <div class="col-md-4 phxs mtm">
