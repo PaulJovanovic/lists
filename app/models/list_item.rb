@@ -33,8 +33,8 @@ class ListItem < ActiveRecord::Base
   end
 
   def likes_count_percent
-    if list.likes_count > 0
-      likes_count.to_f / list.likes_count
+    if list.maximum_likes_count > 0
+      likes_count.to_f / list.maximum_likes_count
     else
       0.0
     end

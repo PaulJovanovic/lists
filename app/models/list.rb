@@ -115,6 +115,10 @@ class List < ActiveRecord::Base
     Money.new(maximum_price_cents)
   end
 
+  def maximum_likes_count
+    items.maximum(:likes_count)
+  end
+
   def recalculate_ranks(start, finish)
     ordered_items = items_ordered_by_most_likes
     ordered_items[start..finish].each do |item|
