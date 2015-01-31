@@ -72,3 +72,9 @@ $(document).ready ->
   $("body").on "click", ".js-lists-search-item", ->
     $(".js-products-form-new").find("input[name='sku']").val($(@).data("sku")).change()
     $("#addProductModal").modal("hide")
+
+  $("body").on "mouseenter", ".js-lists-results .js-list", ->
+    $(@).addClass("active")
+
+  $("body").on "mouseleave", ".js-lists-results .js-list", ->
+    $(@).removeClass("active")

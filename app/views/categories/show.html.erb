@@ -9,45 +9,22 @@
   <%= hidden_field_tag :scope, "most_popular", class: "js-lists-api-submit-on-change" %>
   <%= hidden_field_tag :scope_params, @category.name, class: "js-lists-api-submit-on-change" %>
 <% end %>
-<div class="row nmhxs">
-  <div class="col-md-3 phxs mtxs">
-    <div class="row nmhxs">
-      <div class="col-xs-6 col-md-12 phxs mtxs">
-        <div class="relative mtxs-plus pointer">
-          <%= select_tag :scope, options_for_select([["Popular", "most_popular"], ["Active", "most_active"], ["Longest", "most_products"]]), class: "select-reset paxs bg-15 c-blue fsxs full-width bss bwas bc-13 bwan bran pointer js-lists-api-foreign-input", data: { target_form: ".js-lists-form-scope", target_input: "scope" } %>
-          <div class="absolute top bottom right">
-            <table class="full-height mrxs">
-              <tr>
-                <td>
-                  <i class="fa fa-caret-down c-blue fsm"></i>
-                </td>
-              </tr>
-            </table>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="col-md-9 phxs">
-    <div class="row nmhxs transform-s js-lists-results">
-      <% @lists.each do |list| %>
-        <div class="col-sm-4 col-md-4 phxs mtm js-list">
-          <%= link_to list_path(list), class: "js-list-url" do %>
-            <div class="paxs bg-15 bss bwas bc-13">
-              <%= image_tag list.default_image(@category), class: "img-responsive mha js-list-image" %>
-              <div class="mtxxxs fwl truncate js-list-name">
-                <%= list.name %>
-              </div>
-              <div class="c-10 js-list-products-count">
-                <%= pluralize(list.products_count, "Product") %>
-              </div>
-              <div class="c-10">
-                <%= list_price_range(list) %>
-              </div>
+<div class="row nmhxs js-lists-results">
+  <% @lists.each do |list| %>
+    <div class="col-sm-3 phxs mtm js-list">
+      <%= link_to list_path(list), class: "js-list-url" do %>
+        <div class="relative bg-15 bss bwas bc-13 bc-12-active">
+          <%= image_tag list.default_image(@category), class: "lazy img-responsive mha js-list-image" %>
+          <div class="absolute left right bottom phxs pvxxxs bg-2 c-15 fade-xs fade-n-active">
+            <div class="fwl truncate js-list-name">
+              <%= list.name %>
             </div>
-          <% end %>
+            <div class="c-10 js-list-products-count">
+              <%= pluralize(list.products_count, "Product") %>
+            </div>
+          </div>
         </div>
       <% end %>
     </div>
-  </div>
+  <% end %>
 </div>
