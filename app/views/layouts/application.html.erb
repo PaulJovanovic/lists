@@ -108,7 +108,7 @@
   <div class="container phs pbxxxxl">
     <%= yield %>
   </div>
-  <div class="pvxxl bg-3">
+  <!-- <div class="pvxxl bg-3">
     <div class="container phs">
       <div class="row nmhs">
         <div class="col-sm-4 phs">
@@ -134,7 +134,7 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
   <% if current_user %>
     <script>
       Lists.globals.apiToken = "<%= current_user.api_token || current_user.generate_api_token %>";
