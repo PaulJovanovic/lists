@@ -10,7 +10,7 @@
   <meta property="og:description" content="Make Life More Epic. Products for gamers, suggested by gamers."/>
   <meta name='viewport' content='width=device-width, minimum-scale=1.0, maximum-scale=1.0'>
   <link href='http://fonts.googleapis.com/css?family=Raleway:900,300' rel='stylesheet' type='text/css'>
-  <%= content_for(:tracking_pixels) %>
+  <%= content_for(:tracking_pixel) %>
 </head>
 <body>
   <% if lists_in_need.count > 0 %>
@@ -107,6 +107,33 @@
   <%= content_for :banner %>
   <div class="container phs pbxxxxl">
     <%= yield %>
+  </div>
+  <div class="pvxxl bg-3">
+    <div class="container phs">
+      <div class="row nmhs">
+        <div class="col-sm-4 phs">
+          <i class="icon-popjova c-15" style="font-size: 220px;"></i>
+        </div>
+        <div class="col-sm-8 phs">
+          <div class="c-15 fsl">
+            CONTACT
+          </div>
+          <div class="row nmhxs">
+            <div class="col-sm-6 phxs">
+              <div class="mtxxxs">
+                <%= link_to "contact", "#", class: "c-14 c-blue-hover fsxs" %>
+              </div>
+              <div class="mtxxxs">
+                <%= link_to "contact", "#", class: "c-14 c-blue-hover fsxs" %>
+              </div>
+            </div>
+            <div class="col-sm-6 phxs">
+              prou
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
   <% if current_user %>
     <script>
