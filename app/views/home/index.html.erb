@@ -5,7 +5,7 @@
   <meta property="og:image" content="https://s3.amazonaws.com/popjova/assets/popjova_square.png"/>
 <% end %>
 <% content_for :banner do %>
-  <div class="relative pvxl bg-blue c-15 text-center">
+  <div class="relative pvxxl bg-blue c-15 text-center">
     <div class="container container-sm-height phs">
       <div class="row row-sm-height nmhxs">
         <div class="col-sm-6 col-sm-height phxs">
@@ -44,12 +44,25 @@
       <table class="full">
         <tr>
           <td>
-            <div class="fsxxl fwl ff-rw">
+            <div class="fsxl fwl ff-rw">
               Make Life More Epic
             </div>
             <div class="fsm fws ff-rw">
               products for gamers, suggested by gamers
             </div>
+            <% if !current_user %>
+              <div class="container phs">
+                <div class="row nmhxs">
+                  <div class="col-sm-4 col-sm-offset-4 col-lg-2 col-lg-offset-5 phxs">
+                    <%= link_to new_user_registration_path do %>
+                      <div class="paxs bg-3 bg-4-hover c-14 c-15-hover mts">
+                        become a master looter
+                      </div>
+                    <% end %>
+                  </div>
+                </div>
+              </div>
+            <% end %>
           </td>
         </tr>
       </table>
