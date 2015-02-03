@@ -58,7 +58,7 @@
 <% end %>
 <div class="row nmhxs">
   <% @categories.each do |category| %>
-    <div class="col-sm-<%= list_display_row_size(category.homepage_lists.count) %> phxs mtl">
+    <div class="col-sm-<%= list_display_row_size(category.homepage_lists.count) %> phxs mtm">
       <div class="c-blue fsm fwl">
         <%= link_to category_path(category) do %>
           <%= category.name.html_safe %> <i class="fa fa-chevron-right fsxxs"></i>
@@ -66,7 +66,7 @@
       </div>
       <div class="row nmhxs transform-s js-lists-results">
         <% category.homepage_lists.each do |list| %>
-          <div class="col-sm-<%= list_display_column_size(category.homepage_lists.count) %> phxs mtm js-list">
+          <div class="col-sm-<%= list_display_column_size(category.homepage_lists.count) %> phxs mtl js-list">
             <%= link_to list_path(list), class: "js-list-url" do %>
               <div class="relative bg-15 bss bwas bc-13 bc-12-active">
                 <div class="paxs">
