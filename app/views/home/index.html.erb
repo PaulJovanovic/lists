@@ -58,17 +58,15 @@
 <% end %>
 <div class="row nmhxs">
   <% @categories.each do |category| %>
-    <% active_lists = category.most_active_lists.limit(4) %>
-    <% active_lists = active_lists.take(2) if active_lists.count == 3 %>
-    <div class="col-sm-<%= active_lists.count * 3 %> phxs mts">
+    <div class="col-sm-<%= list_display_row_size(category.homepage_lists.count) %> phxs mts">
       <div class="c-blue fsm fwl">
         <%= link_to category_path(category) do %>
           <%= category.name.html_safe %> <i class="fa fa-chevron-right fsxxs"></i>
         <% end %>
       </div>
       <div class="row nmhxs transform-s js-lists-results">
-        <% active_lists.each do |list| %>
-          <div class="col-sm-<%= 12/ active_lists.count%> phxs mtm js-list">
+        <% category.homepage_lists.each do |list| %>
+          <div class="col-sm-<%= list_display_column_size(category.homepage_lists.count) %> phxs mtm js-list">
             <%= link_to list_path(list), class: "js-list-url" do %>
               <div class="relative bg-15 bss bwas bc-13 bc-12-active">
                 <div class="paxs">
