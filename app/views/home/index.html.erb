@@ -59,7 +59,7 @@
 <div class="row nmhxs">
   <% @categories.each do |category| %>
     <% active_lists = category.most_active_lists.limit(4) %>
-    <% active_lists.pop if active_lists.count == 3 %>
+    <% active_lists = active_lists.take(2) if active_lists.count == 3 %>
     <div class="col-sm-<%= active_lists.count * 3 %> phxs mts">
       <div class="c-blue fsm fwl">
         <%= link_to category_path(category) do %>
