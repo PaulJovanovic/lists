@@ -85,8 +85,24 @@
                 <div class="fsxl">
                   #<span class="js-list-item-rank"><%= item.display_rank %></span>
                 </div>
-                <div class="c-10 fsxxxs hidden-xs">
-                  <span class="fsxs js-likes-count" data-like-word="point" data-likable="ListItem-<%= item.id %>"><%= item.likes_count %></span> <span class="js-likes-word" data-likable="ListItem-<%= item.id %>"><%= "point".pluralize(item.likes_count) %></span>
+                <div class="c-blue fsxxxs hidden-xs">
+                  <span class="pointer js-list-item-likes" data-toggle="modal" data-target="#list-item-<%= item.id %>-likes">
+                    <%= form_tag v0_list_list_item_url(@list, item, host: api_domain, subdomain: api_subdomain), method: :get, remote: true, class: "js-lists-api-form js-list-item-form-likes" do %>
+                    <% end %>
+                    <span class="fsxs js-likes-count" data-like-word="like" data-likable="ListItem-<%= item.id %>"><%= item.likes_count %></span> <span class="js-likes-word" data-likable="ListItem-<%= item.id %>"><%= "like".pluralize(item.likes_count) %></span>
+                  </span>
+                  <div class="modal fade" id="list-item-<%= item.id %>-likes" tabindex="-1" role="dialog" aria-labelledby="addProductModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                      <div class="modal-content bran">
+                        <div class="modal-header">
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                          <h4 class="modal-title" id="addProductModalLabel">Likes</h4>
+                        </div>
+                        <div class="modal-body text-left">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
               <div class="col-sm-2 col-sm-height col-sm-height-top phxs mtxs bss bwls bc-13">
@@ -101,8 +117,8 @@
                 <div class="fws">
                   <%= item.product.manufacturer %>
                 </div>
-                <div class="fsxxxs fws c-blue">
-                  [ <%= item.user.username %> ]
+                <div class="fsxxxs fws c-10">
+                  added by <span class="c-blue"><%= item.user.username %></span>
                 </div>
               </div>
               <div class="col-sm-2 col-sm-height col-sm-height-top phxs">

@@ -78,3 +78,10 @@ $(document).ready ->
 
   $("body").on "mouseleave", ".js-lists-results .js-list", ->
     $(@).removeClass("active")
+
+  $(".js-list-item-likes").click ->
+    $(@).find(".js-list-item-form-likes").submit()
+
+  $(".js-list-item-form-likes").on "ajax:success", (event, data, status, xhr) ->
+    usernames = ("<div class='c-4 fsxs fws'>#{like.user.username} <span class='c-10'>(#{like.user.total_score})</span></div>" for like in data.list_item.likes)
+    $($(@).closest(".js-list-item-likes").data("target")).find(".modal-body").html(usernames.join(""))

@@ -22,6 +22,7 @@ Rails.application.routes.draw do
           member do
             post :add_product
           end
+          resources :list_items, only: [:show]
         end
         resources :products
         resources :stores do
