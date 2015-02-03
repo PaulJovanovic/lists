@@ -65,8 +65,10 @@
         <% end %>
       </div>
       <div class="row nmhxs transform-s js-lists-results">
-        <% category.most_active_lists.limit(4).each do |list| %>
-          <div class="col-sm-<%= 12/ category.most_active_lists.limit(4).count%> phxs mtm js-list">
+        <% active_lists = category.most_active_lists.limit(4) %>
+        <% active_lists = active_lists.take(2) if active_lists.count == 3 %>
+        <% active_lists.each do |list| %>
+          <div class="col-sm-<%= 12/ active_lists.count%> phxs mtm js-list">
             <%= link_to list_path(list), class: "js-list-url" do %>
               <div class="relative bg-15 bss bwas bc-13 bc-12-active">
                 <div class="paxs">
