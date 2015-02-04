@@ -14,7 +14,16 @@
         <%= @list.name %>
       </div>
       <div class="mtxs">
-        <div class="fb-share-button" data-href="<%= list_url(@list) %>" data-layout="button"></div>
+        <table>
+          <tr>
+            <td>
+              <div class="fb-share-button" data-href="<%= list_url(@list) %>" data-layout="button"></div>
+            </td>
+            <td class="plxs">
+              <a class="twitter-share-button" href="<%= list_url(@list) %>" data-text="<%= @list.name %> | popjova" data-count="none">Tweet</a>
+            </td>
+          </tr>
+        </table>
       </div>
     </div>
     <div class="paxs mtxs bg-15 fsxs bss bwas bc-13">
