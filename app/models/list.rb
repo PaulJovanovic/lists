@@ -64,6 +64,7 @@ class List < ActiveRecord::Base
   def add_category(category)
     if !category_ids.include?(category.id)
       categories << category
+      Category.increment_counter(:lists_count, category.id)
     end
     save
   end

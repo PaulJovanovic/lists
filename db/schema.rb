@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150126223254) do
+ActiveRecord::Schema.define(version: 20150204083051) do
 
   create_table "assets", force: true do |t|
     t.string   "type"
@@ -32,6 +32,7 @@ ActiveRecord::Schema.define(version: 20150126223254) do
     t.integer  "total_score",   default: 0
     t.integer  "current_score", default: 0
     t.string   "slug"
+    t.integer  "lists_count",   default: 0
   end
 
   add_index "categories", ["name"], name: "index_categories_on_name", using: :btree

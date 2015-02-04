@@ -25,7 +25,7 @@ class Category < ActiveRecord::Base
 
   def homepage_lists
     active_lists = most_active_lists.limit(8)
-    active_lists.take(number_of_lists_to_display(active_lists.count))
+    active_lists.take(number_of_lists_to_display(lists_count))
   end
 
   private
