@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title><%= content_for?(:title) ? "#{ content_for(:title).html_safe } | popjova" : "Make Life More Epic | popjova" %></title>
+  <title><%= (content_for?(:title) ? "#{ content_for(:title) } | popjova" : "Make Life More Epic | popjova").html_safe %></title>
   <%= stylesheet_link_tag    'application', media: 'all' %>
   <%= javascript_include_tag 'application' %>
   <%= csrf_meta_tags %>
