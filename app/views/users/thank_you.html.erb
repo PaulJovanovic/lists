@@ -1,0 +1,38 @@
+<% content_for(:tracking_pixel) do %>
+  <script>(function() {
+    var _fbq = window._fbq || (window._fbq = []);
+    if (!_fbq.loaded) {
+      var fbds = document.createElement('script');
+      fbds.async = true;
+      fbds.src = '//connect.facebook.net/en_US/fbds.js';
+      var s = document.getElementsByTagName('script')[0];
+      s.parentNode.insertBefore(fbds, s);
+      _fbq.loaded = true;
+    }
+  })();
+  window._fbq = window._fbq || [];
+  window._fbq.push(['track', '6020670451036', {'value':'0.00','currency':'USD'}]);
+  </script>
+  <noscript><img height="1" width="1" alt="" style="display:none" src="https://www.facebook.com/tr?ev=6020670451036&amp;cd[value]=0.00&amp;cd[currency]=USD&amp;noscript=1" /></noscript>
+<% end %>
+<div class="row nmhxs mtm">
+  <div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 col-lg-4 col-lg-offset-4 phxs mtl">
+    <div class="dvxs hidden-xs"></div>
+    <div class="c-blue fsxxl fwl text-center">
+      THANK YOU
+    </div>
+    <div class="mtxs fsl text-center">
+      FOR JOINING
+    </div>
+    <div class="mtxs fsl text-center">
+      THE LOOT COUNCIL
+    </div>
+    <div class="mtxxl">
+      <%= link_to session[:previous_url] || root_path do %>
+        <div class="paxs bg-blue c-15 fsm text-center">
+          Continue
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
