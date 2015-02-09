@@ -34,7 +34,7 @@ class Category < ActiveRecord::Base
     case lists_count
     when 3, 4, 5
       3
-    when 6
+    else
       6
     end
   end
