@@ -14,7 +14,7 @@ class Like < ActiveRecord::Base
   def score
     likable.score!(likable.list, self, 1)
     unless likable.user == user
-      likable.user.score!(likable.list, actionable, 1)
+      likable.user.score!(likable.list, self, 1)
     end
   end
 

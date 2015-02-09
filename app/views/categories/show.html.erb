@@ -9,11 +9,11 @@
   <%= hidden_field_tag :scope, "most_popular", class: "js-lists-api-submit-on-change" %>
   <%= hidden_field_tag :scope_params, @category.name, class: "js-lists-api-submit-on-change" %>
 <% end %>
-<div class="mtl bg-15 bss bwhs bwbs bc-13 js-lists-results">
+<div class="mtl bg-15 bss bwrs bwbs bc-13 js-lists-results">
   <% @lists.each_slice(3) do |lists_row| %>
     <div class="row mhn">
       <% lists_row.each do |list| %>
-        <div class="col-sm-4 phn bss bwls-plus bwts bc-13">
+        <div class="col-sm-4 phn bss bwls bwts bc-13">
           <div class="js-list">
             <%= link_to list_path(list), class: "js-list-url" do %>
               <div class="phm pvl bg-15">
