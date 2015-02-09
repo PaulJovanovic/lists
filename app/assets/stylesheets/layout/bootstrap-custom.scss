@@ -43,20 +43,40 @@ body {
     outline-width: 0px;
   }
 
-  .container-xs-height {
-    display:table;
-    padding-left:0px;
-    padding-right:0px;
+  @media (min-width: 1200px) {
+    .container {
+      width: 970px;
+    }
   }
 
-  .row-xs-height {
-    display:table-row;
+  @media (min-width: 992px) {
+    .container-md-height {
+      display:table;
+      padding-left:0px;
+      padding-right:0px;
+    }
+
+    .row-md-height {
+      display:table-row;
+    }
+
+    .col-md-height {
+      display:table-cell;
+      float:none;
+      vertical-align:middle;
+    }
+
+    .text-right-md {
+      text-align: right;
+    }
+
+    .text-center-md {
+      text-align: center;
+    }
   }
 
-  .col-xs-height {
-    display:table-cell;
-    float:none;
-    vertical-align:middle;
+  .fb_iframe_widget span {
+    vertical-align: baseline !important;
   }
 
   @media (min-width: 768px) {
@@ -89,34 +109,19 @@ body {
     }
   }
 
-
-  @media (min-width: 992px) {
-    .container-md-height {
-      display:table;
-      padding-left:0px;
-      padding-right:0px;
-    }
-
-    .row-md-height {
-      display:table-row;
-    }
-
-    .col-md-height {
-      display:table-cell;
-      float:none;
-      vertical-align:middle;
-    }
-
-    .text-right-md {
-      text-align: right;
-    }
-
-    .text-center-md {
-      text-align: center;
-    }
+  .container-xs-height {
+    display:table;
+    padding-left:0px;
+    padding-right:0px;
   }
 
-  .fb_iframe_widget span {
-    vertical-align: baseline !important;
+  .row-xs-height {
+    display:table-row;
+  }
+
+  .col-xs-height {
+    display:table-cell;
+    float:none;
+    vertical-align:middle;
   }
 }

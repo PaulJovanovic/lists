@@ -7,8 +7,6 @@ module ListHelper
 
   def list_display_row_size(lists_count)
     case lists_count
-    when 1
-      3
     when 2
       6
     when 4, 8
@@ -18,12 +16,10 @@ module ListHelper
 
   def list_display_column_size(lists_count)
     case lists_count
-    when 1
-      12
     when 2
-      6
+      12
     when 4, 8
-      3
+      6
     end
   end
 end

@@ -12,7 +12,10 @@ class Like < ActiveRecord::Base
   private
 
   def score
-    likable.score!(self, 1)
+    likable.score!(likable.list, self, 1)
+    unless likable.user == user
+      likable.user.score!(likable.list, actionable, 1)
+    end
   end
 
   def decrement_like_count

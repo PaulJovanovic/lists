@@ -1,12 +1,11 @@
 class List < ActiveRecord::Base
   extend FriendlyId
-  include Scoring
   friendly_id :name, use: [:slugged, :finders]
 
   belongs_to :user
   has_many :items, class_name: "ListItem", dependent: :destroy
   has_many :products, through: :items
-  has_many :scores, as: :scorable, dependent: :destroy
+  has_many :scores
   has_and_belongs_to_many :categories
 
   scope :most_active, -> { where("products_count > 0").order(current_score: :desc, products_count: :desc, created_at: :asc) }
@@ -76,6 +75,22 @@ class List < ActiveRecord::Base
     item
   end
 
+  def contributor_breakdown
+    @contributor_breakdown ||= Hash[scores.where(scorable_type: "User").group(:scorable_id).sum(:weight).sort_by{|k, v| v}.reverse]
+  end
+
+  def contributor_ids
+    contributor_breakdown.keys
+  end
+
+  def contributor_points
+    contributor_breakdown.values
+  end
+
+  def contributors
+    User.find(contributor_ids).index_by(&:id).slice(*contributor_ids).values
+  end
+
   def calculate_minimum_price
     update_column(:minimum_price_cents, products.minimum("price_cents"))
   end
@@ -84,8 +99,17 @@ class List < ActiveRecord::Base
     update_column(:maximum_price_cents, products.maximum("price_cents"))
   end
 
-  def contributors_count
-    items.select("DISTINCT user_id").count
+  def calculate_scores
+    calculate_current_score
+    calculate_total_score
+  end
+
+  def calculate_current_score
+    update_column(:current_score, scores.sum(:weight))
+  end
+
+  def calculate_total_score
+    update_column(:total_score, scores.sum(:weight))
   end
 
   def default_image(category=nil)

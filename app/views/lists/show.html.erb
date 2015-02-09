@@ -27,9 +27,6 @@
       </div>
     </div>
     <div class="paxs mtxs bg-15 fsxs bss bwas bc-13">
-      <%= pluralize(@list.contributors_count, "Contributor") %>
-    </div>
-    <div class="paxs mtxs bg-15 fsxs bss bwas bc-13">
       <%= pluralize(@list.products_count, "Product") %>
     </div>
     <div class="paxs mtxs bg-15 fsxs bss bwas bc-13">
@@ -81,154 +78,121 @@
       <% end %>
     <% end %>
   </div>
-  <div class="col-md-9 phxs mtxs">
+  <div class="col-md-6 phxs mtm">
     <div class="js-list-items">
-      <% @list.items_ordered_by_rank.each do |item| %>
-        <div class="mtxs bss bwts bc-n js-list-item" data-id="<%= item.id %>">
-          <div class="relative dvxxxxs bg-13">
-            <div class="absolute left top bottom bg-blue" style="width: <%= (item.likes_count_percent * 100) %>%;"></div>
-          </div>
-          <div class="container-sm-height pvxs bg-15 bss bwhs bwbs bc-13">
-            <div class="row row-sm-height mhn nmtxs">
-              <div class="list-rank col-sm-2 col-sm-height phxs mtxs text-center">
-                <div class="fsxl">
-                  #<span class="js-list-item-rank"><%= item.display_rank %></span>
-                </div>
-                <div class="c-blue fsxxxs hidden-xs">
-                  <span class="pointer js-list-item-likes" data-toggle="modal" data-target="#list-item-<%= item.id %>-likes">
-                    <%= form_tag v0_list_list_item_url(@list, item, host: api_domain, subdomain: api_subdomain), method: :get, remote: true, class: "js-lists-api-form js-list-item-form-likes" do %>
-                    <% end %>
-                    <span class="fsxs js-likes-count" data-like-word="like" data-likable="ListItem-<%= item.id %>"><%= item.likes_count %></span> <span class="js-likes-word" data-likable="ListItem-<%= item.id %>"><%= "like".pluralize(item.likes_count) %></span>
-                  </span>
-                  <div class="modal fade" id="list-item-<%= item.id %>-likes" tabindex="-1" role="dialog" aria-labelledby="addProductModalLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                      <div class="modal-content bran">
-                        <div class="modal-header">
-                          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                          <h4 class="modal-title" id="addProductModalLabel">Likes</h4>
-                        </div>
-                        <div class="modal-body text-left">
-                        </div>
+      <% @list.items_ordered_by_rank.includes(:user).each do |item| %>
+        <div class="mtm-plus js-list-item" data-id="<%= item.id %>">
+          <div class="paxs bg-15 bss bwas bc-13 paxxxs">
+            <div class="relative">
+              <%= link_to user_path(item.user) do %>
+                <table>
+                  <tr>
+                    <td>
+                      <%= image_tag item.user.profile_image, class: "dam bss bwas bc-13" %>
+                    </td>
+                    <td class="plxxxs">
+                      <div class="c-blue">
+                        <%= item.user.username %>
                       </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-sm-2 col-sm-height col-sm-height-top phxs mtxs bss bwls bc-13">
-                <%= link_to product_path(item.product) do %>
-                  <%= image_tag item.product.image.url(:profile), class: "full-width" %>
-                <% end %>
-              </div>
-              <div class="col-sm-6 col-sm-height col-sm-height-top phxs mtxs">
-                <div class="fsxs fwl">
-                  <%= link_to item.product.name.html_safe, product_path(item.product) %>
-                </div>
-                <div class="fws">
-                  <%= item.product.manufacturer %>
-                </div>
-                <div class="fsxxxs fws c-10">
-                  added by <span class="c-blue"><%= item.user.username %></span>
-                </div>
-              </div>
-              <div class="col-sm-2 col-sm-height col-sm-height-top phxs">
-                <div class="row nmhxxxs">
-                  <div class="col-xs-6 col-sm-12 phxxxs mtxs">
-                    <%= link_to item.product.url do %>
-                      <div class="phxxs pvxxxs bg-blue c-15 fsxxxs text-center">
-                        <table class="mha">
-                          <tr>
-                            <td>
-                              <%= number_to_currency item.product.price, precision: 0 %>
-                            </td>
-                            <td class="visible-xs">
-                              &nbsp;on <%= item.product.store_name %>
-                            </td>
-                          </tr>
-                        </table>
+                      <div class="c-10 fsxxxs">
+                        <%= item.created_at.strftime("%m/%d/%y") %>
                       </div>
-                    <% end %>
-                  </div>
-                  <div class="col-xs-6 col-sm-12 phxxxs mtxs">
+                    </td>
+                  </tr>
+                </table>
+              <% end %>
+              <div class="absolute top right c-blue fsm text-right">
+                <span class="fsxs fws">#</span><span class="fwl js-list-item-rank"><%= item.rank + 1 %></span>
+              </div>
+            </div>
+            <div class="mtxs">
+              <%= link_to product_path(item.product) do %>
+                <%= image_tag item.product.image.url(:profile), class: "img-responsive mha" %>
+              <% end %>
+            </div>
+            <div class="mtxs">
+              <%= link_to item.product.name, product_path(item.product) %>
+            </div>
+            <div class="c-10 fws">
+              <%= item.product.manufacturer %>
+            </div>
+            <div class="mtxs">
+              <%= link_to item.product.url do %>
+                <div class="paxxs bg-blue c-15 fsxxs text-center">
+                  Get it on <%= item.product.store_name %> (<%= number_to_currency item.product.price, precision: 0 %>)
+                </div>
+              <% end %>
+            </div>
+            <div class="mtxs ptxxxs bg-15 fsxxs bss bwts bc-13">
+              <table>
+                <tr>
+                  <td>
                     <% if current_user %>
                       <div class="<%= "active " if current_user.likes?(item) %>js-like">
                         <div class="hide-active">
                           <%= form_tag like_v0_user_url(host: api_domain, subdomain: api_subdomain), remote: true, class: "js-lists-api-form js-likes-form-like js-list-items-like" do %>
                             <%= hidden_field_tag :likable_type, "ListItem" %>
                             <%= hidden_field_tag :likable_id, item.id %>
-                            <div class="phxxs pvxxxs bg-blue c-15 fsxxxs text-center pointer js-lists-api-form-submit">
-                              <table class="mha">
-                                <tr>
-                                  <td>
-                                    <i class="fa fa-thumbs-up"></i>
-                                  </td>
-                                  <td class="visible-xs">
-                                    &nbsp;Like
-                                  </td>
-                                </tr>
-                              </table>
-                            </div>
+                            <span class="c-blue pointer js-lists-api-form-submit">
+                              like
+                            </span>
                           <% end %>
                         </div>
                         <div class="show-active">
                           <%= form_tag unlike_v0_user_url(host: api_domain, subdomain: api_subdomain), remote: true, class: "js-lists-api-form js-likes-form-unlike js-list-items-like" do %>
                             <%= hidden_field_tag :likable_type, "ListItem" %>
                             <%= hidden_field_tag :likable_id, item.id %>
-                            <div class="phxxs pvxxxs bg-blue c-15 fsxxxs fade-m text-center pointer js-lists-api-form-submit">
-                              <table class="mha">
-                                <tr>
-                                  <td>
-                                    <i class="fa fa-thumbs-down"></i>
-                                  </td>
-                                  <td class="visible-xs">
-                                    &nbsp;Unlike
-                                  </td>
-                                </tr>
-                              </table>
-                            </div>
+                            <span class="c-blue pointer js-lists-api-form-submit">
+                              unlike
+                            </span>
                           <% end %>
                         </div>
                       </div>
                     <% else %>
-                      <%= link_to new_user_registration_path do %>
-                        <div class="phxxs pvxxxs bg-blue c-15 fsxxxs text-center pointer">
-                          <table class="mha">
-                            <tr>
-                              <td>
-                                <i class="fa fa-thumbs-up"></i>
-                              </td>
-                              <td class="visible-xs">
-                                &nbsp;Like
-                              </td>
-                            </tr>
-                          </table>
-                        </div>
-                      <% end %>
+                      <%= link_to "like", new_user_registration_path, class: "c-blue" %>
                     <% end %>
-                  </div>
-                </div>
-              </div>
+                  </td>
+                  <td class="plxxxs c-blue">
+                    <i class="fa fa-thumbs-o-up"></i> <span class="fsxs js-likes-count" data-likable="ListItem-<%= item.id %>"><%= item.likes_count %></span>
+                  </td>
+                </tr>
+              </table>
             </div>
           </div>
         </div>
       <% end %>
     </div>
-    <div class="mtxl">
-      <div id="disqus_thread"></div>
-      <script type="text/javascript">
-          /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
-          var disqus_shortname = "popjova";
-          var disqus_identifier = "list-<%= @list.id %>";
-          var disqus_title = "<%= @list.name %>";
-          var disqus_url = "<%= list_url(@list) %>";
-
-          /* * * DON'T EDIT BELOW THIS LINE * * */
-          (function() {
-              var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-              dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-              (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-          })();
-      </script>
-      <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+  <div class="col-md-3 phxs mtm">
+    <div class="paxxxs bg-15 bss bwas bc-13">
+      <% @list.contributors.each do |contributor| %>
+        <div class="mtxxxs-plus">
+          <%= link_to user_path(contributor) do %>
+            <div class="row nmhxxxs">
+              <div class="col-xs-3 phxxxs">
+                <%= image_tag contributor.profile_image, class: "img-responsive bss bwas bc-13" %>
+              </div>
+              <div class="col-xs-9 phxxxs">
+                <div class="relative">
+                  <div class="c-blue fsxxxs">
+                    <%= contributor.username %>
+                  </div>
+                  <div class="fsxxxs">
+                    <span class="phxxxs pvxxxxs bg-blue c-15 bss bwbs bc-11 braxs">
+                      <span class="fsxxs">+</span> <%= @list.contributor_breakdown[contributor.id] %>
+                    </span>
+                  </div>
+                  <% if contributor.owner_of?(@list) %>
+                    <div class="absolute top right nmtxxxs">
+                      <i class="fa fa-flag fsxxxs c-blue" title="list creator"></i>
+                    </div>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
     </div>
   </div>
 </div>

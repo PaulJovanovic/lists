@@ -1,13 +1,19 @@
 class User < ActiveRecord::Base
+  extend FriendlyId
   include Scoring
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
+  friendly_id :username, use: [:slugged, :finders]
+
+  has_one :image, as: :assetable, class_name: "Image", dependent: :destroy
   has_many :scores, as: :scorable, dependent: :destroy
   has_many :likes
   has_many :lists
 
   validates :username, :uniqueness => { :case_sensitive => false }
+
+  accepts_nested_attributes_for :image
 
   attr_accessor :login
 
@@ -53,5 +59,13 @@ class User < ActiveRecord::Base
       token = SecureRandom.urlsafe_base64
     end while self.class.exists?(api_token: token)
     update_column(:api_token, token) && token
+  end
+
+  def owner_of?(item)
+    item.user_id == id
+  end
+
+  def profile_image(size="thumbnail")
+    image.try(:url, size) || "http://placehold.it/300x300"
   end
 end

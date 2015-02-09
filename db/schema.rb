@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150204083051) do
+ActiveRecord::Schema.define(version: 20150208233811) do
 
   create_table "assets", force: true do |t|
     t.string   "type"
@@ -73,7 +73,9 @@ ActiveRecord::Schema.define(version: 20150204083051) do
     t.integer  "rank"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "likes_count", default: 0
+    t.integer  "likes_count",   default: 0
+    t.integer  "total_score",   default: 0
+    t.integer  "current_score", default: 0
   end
 
   add_index "list_items", ["list_id", "product_id"], name: "index_list_items_on_list_id_and_product_id", unique: true, using: :btree
@@ -122,6 +124,7 @@ ActiveRecord::Schema.define(version: 20150204083051) do
     t.integer  "weight"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "list_id"
   end
 
   create_table "subcategories", force: true do |t|
@@ -152,11 +155,13 @@ ActiveRecord::Schema.define(version: 20150204083051) do
     t.datetime "updated_at"
     t.integer  "current_score"
     t.integer  "total_score"
+    t.string   "slug"
   end
 
   add_index "users", ["api_token"], name: "index_users_on_api_token", unique: true, using: :btree
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
+  add_index "users", ["slug"], name: "index_users_on_slug", unique: true, using: :btree
   add_index "users", ["username"], name: "index_users_on_username", unique: true, using: :btree
 
 end

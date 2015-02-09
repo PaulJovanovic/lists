@@ -3,7 +3,7 @@ class Product < ActiveRecord::Base
   friendly_id :name, use: [:slugged, :finders]
 
   belongs_to :category
-  has_one :image, as: :assetable, class_name: "ProductImage", dependent: :destroy
+  has_one :image, as: :assetable, class_name: "Image", dependent: :destroy
   has_many :list_items, dependent: :destroy
   has_many :lists, through: :list_items
   has_and_belongs_to_many :subcategories

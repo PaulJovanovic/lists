@@ -1,0 +1,15 @@
+<%= form_for @user do |f| %>
+  <% if @user.image.attachment? %>
+    <div>
+      <%= image_tag @user.image.url(:profile), class: "img-responsive" %>
+    </div>
+  <% end %>
+  <div>
+    <%= f.fields_for :image do |image_fields| %>
+      <%= image_fields.file_field :attachment %>
+    <% end %>
+  </div>
+  <div>
+    <%= f.submit "Update", class: "phxs pvxxxs bg-blue c-15 text-center", data: { disable_with: "Updating" } %>
+  </div>
+<% end %>

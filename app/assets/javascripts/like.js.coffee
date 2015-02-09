@@ -2,15 +2,11 @@ incrementLikesCount = (likableType, likableId) ->
   $likeCounts = $(".js-likes-count[data-likable='#{likableType}-#{likableId}']")
   nextValue = parseInt($likeCounts.html(), 10) + 1
   $likeCounts.html(nextValue)
-  if (word = $likeCounts.data("like-word")).length
-    $(".js-likes-word[data-likable='#{likableType}-#{likableId}']").html(if nextValue == 1 then word else "#{word}s")
 
 decrementLikesCount = (likableType, likableId) ->
   $likeCounts = $(".js-likes-count[data-likable='#{likableType}-#{likableId}']")
   nextValue = parseInt($likeCounts.html(), 10) - 1
   $likeCounts.html(Math.max(nextValue, 0))
-  if (word = $likeCounts.data("like-word")).length
-    $(".js-likes-word[data-likable='#{likableType}-#{likableId}']").html(if nextValue == 1 then word else "#{word}s")
 
 $(document).ready ->
   $(".js-likes-form-like").on "submit", ->

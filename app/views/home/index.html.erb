@@ -5,101 +5,80 @@
   <meta property="og:image" content="https://s3.amazonaws.com/popjova/assets/popjova_square.png"/>
 <% end %>
 <% content_for :banner do %>
-  <div class="relative pvxxl bg-blue c-15 text-center">
-    <div class="container container-sm-height phs">
-      <div class="row row-sm-height nmhxs">
-        <div class="col-sm-6 col-sm-height phxs">
+  <div class="pvm bg-15 bss bwvs bc-13">
+    <div class="c-5 text-center">
+      <div class="fsxl fwl ff-rw">
+        Make Life More Epic
+      </div>
+    </div>
+    <div class="container phs mtm">
+      <div class="row nmhs">
+        <div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 phs">
           <div class="container-xs-height">
             <div class="row row-xs-height nmhxs">
-              <div class="col-xs-4 col-xs-height phxs">
-                <%= image_tag "controller.png", class: "img-responsive mha" %>
+              <div class="col-xs-2 col-xs-height phxs">
+                <div class="square bg-contain bg-center bg-repeat-n" style="background-image: url('<%= asset_path("controller.png") %>')"></div>
               </div>
-              <div class="col-xs-4 col-xs-height phxs">
-                <%= image_tag "headset.png", class: "img-responsive mha" %>
+              <div class="col-xs-2 col-xs-height phxs">
+                <div class="square bg-contain bg-center bg-repeat-n" style="background-image: url('<%= asset_path("headset.png") %>')"></div>
               </div>
-              <div class="col-xs-4 col-xs-height phxs">
-                <%= image_tag "chair.png", class: "img-responsive mha" %>
+              <div class="col-xs-2 col-xs-height phxs">
+                <div class="square bg-contain bg-center bg-repeat-n" style="background-image: url('<%= asset_path("chair.png") %>')"></div>
               </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-sm-6 col-sm-height phxs">
-          <div class="container-xs-height">
-            <div class="row row-xs-height nmhxs">
-              <div class="col-xs-4 col-xs-height phxs">
-                <%= image_tag "keyboard.png", class: "img-responsive mha" %>
+              <div class="col-xs-2 col-xs-height phxs">
+                <div class="square bg-contain bg-center bg-repeat-n" style="background-image: url('<%= asset_path("keyboard.png") %>')"></div>
               </div>
-              <div class="col-xs-4 col-xs-height phxs">
-                <%= image_tag "monitor.png", class: "img-responsive mha" %>
+              <div class="col-xs-2 col-xs-height phxs">
+                <div class="square bg-contain bg-center bg-repeat-n" style="background-image: url('<%= asset_path("monitor.png") %>')"></div>
               </div>
-              <div class="col-xs-4 col-xs-height phxs">
-                <%= image_tag "mouse.png", class: "img-responsive mha" %>
+              <div class="col-xs-2 col-xs-height phxs">
+                <div class="square bg-contain bg-center bg-repeat-n" style="background-image: url('<%= asset_path("mouse.png") %>')"></div>
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-    <div class="absolute fill">
-      <table class="full">
-        <tr>
-          <td>
-            <div class="fsxl fwl ff-rw">
-              Make Life More Epic
-            </div>
-            <div class="fsm fws ff-rw">
-              products for gamers, suggested by gamers
-            </div>
-            <% if !current_user %>
-              <div class="container phs">
-                <div class="row nmhxs">
-                  <div class="col-sm-4 col-sm-offset-4 col-lg-2 col-lg-offset-5 phxs">
-                    <%= link_to new_user_registration_path do %>
-                      <div class="paxs bg-3 bg-4-hover c-14 c-15-hover mts">
-                        join the loot council
-                      </div>
-                    <% end %>
-                  </div>
-                </div>
-              </div>
-            <% end %>
-          </td>
-        </tr>
-      </table>
+    <div class="mtl c-10 text-center">
+      <div class="fss fws ff-rw">
+        products for gamers, suggested by gamers
+      </div>
     </div>
   </div>
 <% end %>
-<div class="row nmhs">
-  <% @categories.each do |category| %>
-    <div class="col-sm-<%= list_display_row_size(category.homepage_lists.count) %> phs mtm">
-      <div class="c-blue fsm fwl">
-        <%= link_to category_path(category) do %>
-          <%= category.name.html_safe %> <i class="fa fa-chevron-right fsxxs"></i>
-        <% end %>
-      </div>
-      <div class="row nmhs nmts transform-s js-lists-results">
-        <% category.homepage_lists.each do |list| %>
-          <div class="col-sm-<%= list_display_column_size(category.homepage_lists.count) %> phs mtl">
-            <div class="js-list">
-              <%= link_to list_path(list), class: "js-list-url" do %>
-                <div class="relative bg-15 bss bwas bc-13 bc-12-active">
-                  <div class="paxs">
-                    <%= image_tag list.default_image(category), class: "lazy img-responsive mha js-list-image" %>
-                  </div>
-                  <div class="absolute bottom left right phxs pvxxxs bg-2 c-15 fade-xs fade-n-active">
-                    <div class="fwl truncate js-list-name">
+<div class="mtm bg-15 bss bwhs bwbs bc-13">
+  <div class="row mhn">
+    <% @categories.each do |category| %>
+      <div class="col-md-<%= list_display_row_size(category.homepage_lists.count) %> phn">
+        <div class="paxs bg-15 c-blue fsm fwl bss bwts bc-13">
+          <%= link_to category_path(category) do %>
+            <%= category.name.html_safe %> <i class="fa fa-chevron-right fsxxs"></i>
+          <% end %>
+        </div>
+        <div class="row mhn">
+          <% category.homepage_lists.each do |list| %>
+            <div class="col-sm-4 phn bss bwls-plus bwts bc-13">
+              <div class="js-list">
+                <%= link_to list_path(list), class: "js-list-url" do %>
+                  <div class="phm pvl bg-15">
+                    <div class="phxl">
+                      <%= image_tag list.default_image(category), class: "lazy img-responsive mha js-list-image" %>
+                    </div>
+                    <div class="ptxs mtm c-6 fsxxxs fwl truncate bss bwts bc-13 js-list-name">
                       <%= list.name %>
                     </div>
-                    <div class="c-10 show-active js-list-products-count">
-                      <%= pluralize(list.products_count, "Product") %>
+                    <div class="row nmhxxxs">
+                      <div class="col-xs-6 phxxxs c-10 fsxxxs fws">
+                        <%= pluralize(list.products_count, "product") %>
+                      </div>
                     </div>
                   </div>
-                </div>
-              <% end %>
+                <% end %>
+              </div>
             </div>
-          </div>
-        <% end %>
+          <% end %>
+        </div>
       </div>
-    </div>
-  <% end %>
+    <% end %>
+  </div>
 </div>

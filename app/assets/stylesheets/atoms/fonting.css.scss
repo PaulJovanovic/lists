@@ -66,15 +66,15 @@
 
 //font weights
 
-.fws {
+.fws, .active .fws-active  {
   font-weight: $font-weight-s;
 }
 
-.fwm {
+.fwm, .active .fwm-active {
   font-weight: $font-weight-m;
 }
 
-.fwl {
+.fwl, .active .fwl-active {
   font-weight: $font-weight-l;
 }
 

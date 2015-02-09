@@ -1,0 +1,65 @@
+<div class="row nmhxs">
+  <div class="col-sm-4 col-md-3 phxs mtm">
+    <div class="paxs bg-15 bss bwas bc-13">
+      <div class="relative hover-action">
+        <%= image_tag @user.profile_image(:profile), class: "img-responsive mha" %>
+      </div>
+      <% if @user.id == current_user.try(:id) %>
+        <%= link_to edit_user_path(@user) do %>
+          <div class="phxs pvxxxs mtxs bg-blue c-15 text-center">
+            <i class="fa fa-edit"></i> edit
+          </div>
+        <% end %>
+      <% end %>
+      <table class="mtxs full-width">
+        <tr>
+          <td class="c-6 fws">
+            Username:
+          </td>
+          <td class="c-4 text-right">
+            <%= @user.username %>
+          </td>
+        </tr>
+        <tr>
+          <td class="c-6 fws">
+            Member Since:
+          </td>
+          <td class="c-4 text-right">
+            <%= @user.created_at.strftime("%m/%Y") %>
+          </td>
+        </tr>
+        <tr>
+          <td class="c-6 fws">
+            Score:
+          </td>
+          <td class="c-4 text-right">
+            <%= @user.total_score.to_i %>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+  <div class="col-sm-8 col-md-9 phxs mtm">
+    <% @user.lists.each do |list| %>
+      <div class="mtxs-plus">
+        <%= link_to list_path(list) do %>
+          <div class="paxs bg-15 bss bwas bc-13">
+            <div class="row nmhxs">
+              <div class="col-sm-2 col-md-1 phxs">
+                <%= image_tag list.default_image, class: "img-responsive mha" %>
+              </div>
+              <div class="col-sm-10 col-md-11 phxs">
+                <div class="c-blue">
+                  <%= list.name.html_safe %>
+                </div>
+                <div class="c-6 fws">
+                  <%= pluralize(list.products_count, "product") %>
+                </div>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+</div>

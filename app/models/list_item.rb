@@ -1,8 +1,10 @@
 class ListItem < ActiveRecord::Base
+  include Scoring
   belongs_to :list, counter_cache: :products_count
   belongs_to :product
   belongs_to :user
   has_many :likes, as: :likable, dependent: :destroy
+  has_many :scores, as: :scorable, dependent: :destroy
 
   validates :user, :product, :list, presence: true
 
@@ -40,17 +42,11 @@ class ListItem < ActiveRecord::Base
     end
   end
 
-  def score!(actionable, weight)
-    unless actionable.class.name == "Like" && actionable.user_id == user_id
-      user.score!(actionable, weight)
-    end
-    list.score!(actionable, weight)
-  end
-
   private
 
   def score_creation
-    score!(self, 5)
+    score!(self.list, self, 5)
+    user.score!(self.list, self, 5)
   end
 
   def set_rank

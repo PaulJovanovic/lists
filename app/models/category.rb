@@ -24,7 +24,7 @@ class Category < ActiveRecord::Base
   end
 
   def homepage_lists
-    active_lists = most_active_lists.limit(8)
+    active_lists = most_active_lists.limit(6)
     active_lists.take(number_of_lists_to_display(lists_count))
   end
 
@@ -32,14 +32,10 @@ class Category < ActiveRecord::Base
 
   def number_of_lists_to_display(lists_count)
     case lists_count
-    when 1
-      1
-    when 2, 3
-      2
-    when 4, 5, 6, 7
-      4
-    else
-      8
+    when 3, 4, 5
+      3
+    when 6
+      6
     end
   end
 end

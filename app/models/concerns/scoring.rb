@@ -3,8 +3,8 @@ module Scoring
     # base.after_save :calculate_score, if: "scores_count.changed?"
   end
 
-  def score!(actionable, weight)
-    Score.create(scorable: self, actionable: actionable, weight: weight)
+  def score!(list, actionable, weight)
+    Score.create(list: list, scorable: self, actionable: actionable, weight: weight)
     calculate_scores
   end
 

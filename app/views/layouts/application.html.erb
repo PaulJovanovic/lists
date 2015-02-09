@@ -26,7 +26,7 @@
     </script>
   <% if lists_in_need.count > 0 %>
     <%= link_to empty_lists_path do %>
-      <div class="pvxxxxs bg-4 c-15 fsxxs text-center">
+      <div class="pvxxxxs bg-blue c-15 fsxxs text-center">
         <%= pluralize(lists_in_need.count, "list") %> <%= lists_in_need.count == 1 ? "is" : "are" %> awaiting your review. Click here to lend a hand.
       </div>
     <% end %>
@@ -46,7 +46,7 @@
               </td>
               <td class="relative hidden-xs">
                 <div class="js-toggle js-navbar-dropdown" data-toggle-target="#navbar-categories-dropdown" data-toggle-class="hide">
-                  <div class="relative mls phxxs dvs lhs bg-blue-active c-15-active bss bwas bc-14 bc-13-hover bc-14-active text-center pointer">
+                  <div class="relative mls phxs dvl lhl c-1-active bss bwls bc-13 text-center pointer">
                     <table>
                       <tr>
                         <td>
@@ -77,7 +77,7 @@
               </td>
               <td>
                 <%= link_to new_list_path do %>
-                  <div class="mls phxxs dvs lhs bss bwas bc-14 bc-13-hover text-center">
+                  <div class="phxs dvl lhl bss bwls bc-13 text-center">
                     <table>
                       <tr>
                         <td>
@@ -96,17 +96,40 @@
         </div>
         <div class="col-xs-6 col-sm-3 phxxxs">
           <% if current_user %>
-            <div class="phxxs mtxs dvs lhs bss bwas bc-14 bc-13-hover text-center pull-right">
-              <%= link_to "logout", destroy_user_session_path, method: :delete %>
+            <div class="relative pull-right">
+              <div class="js-toggle" data-toggle-target="#navbar-account-dropdown" data-toggle-class="hide">
+                <div class="phxs dvl lhl c-1-active bss bwhs bc-13 text-center pointer">
+                  <table>
+                    <tr>
+                      <td>
+                        <div class="das bss bwas bc-13">
+                          <%= image_tag current_user.profile_image(:thumbnail), class: "img-responsive" %>
+                        </div>
+                      </td>
+                      <td class="plxxxs fsxxxs">
+                        <%= current_user.username %>
+                      </td>
+                    </tr>
+                  </table>
+                </div>
+              </div>
+              <div id="navbar-account-dropdown" class="absolute n-top right pvxs phm lhxs bg-15 bss bwhs bwbs bc-13 zl hide">
+                <div class="mtxs-plus">
+                  <%= link_to "profile", user_path(current_user), class: "c-6 c-blue-hover" %>
+                </div>
+                <div class="mtxs-plus">
+                  <%= link_to "logout", destroy_user_session_path, method: :delete, class: "c-6 c-blue-hover" %>
+                </div>
+              </div>
             </div>
           <% else %>
             <%= link_to new_user_registration_path do %>
-              <div class="phxxs mtxs mls dvs lhs bss bwas bc-14 bc-13-hover text-center pull-right">
+              <div class="phxxxs dvl lhl text-center pull-right">
                 signup
               </div>
             <% end %>
             <%= link_to new_user_session_path do %>
-              <div class="phxxs mtxs dvs lhs bss bwas bc-14 bc-13-hover text-center pull-right">
+              <div class="phxxxs dvl lhl text-center pull-right">
                 login
               </div>
             <% end %>
@@ -115,22 +138,20 @@
       </div>
     </div>
   </div>
-  <div class="bg-14 bss bwbs bc-13">
-    <div class="container phs">
-      <table>
-        <tr>
-          <td class="ptxxxs">
-            <div class="fb-like" data-href="https://www.facebook.com/superpopjova" data-layout="button" data-action="like" data-show-faces="true" data-share="false"></div>
-          </td>
-          <td class="plxs ptxxxs">
-            <a class="twitter-follow-button" href="https://twitter.com/popjova" data-show-count="false" data-lang="en" data-show-screen-name="false">follow @popjova</a>
-          </td>
-          <td class="plxs">
-            Every like helps<span class="hidden-xs"> grow the community of master looters</span>
-          </td>
-        </tr>
-      </table>
-    </div>
+  <div class="container phs">
+    <table>
+      <tr>
+        <td class="ptxxxs">
+          <div class="fb-like" data-href="https://www.facebook.com/superpopjova" data-layout="button" data-action="like" data-show-faces="true" data-share="false"></div>
+        </td>
+        <td class="plxs ptxxxs">
+          <a class="twitter-follow-button" href="https://twitter.com/popjova" data-show-count="false" data-lang="en" data-show-screen-name="false">follow @popjova</a>
+        </td>
+        <td class="plxs">
+          Every like helps<span class="hidden-xs"> grow the community of master looters</span>
+        </td>
+      </tr>
+    </table>
   </div>
   <%= content_for :banner %>
   <div class="container phs pbxxxxl">
