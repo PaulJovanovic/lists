@@ -152,13 +152,6 @@
                       <%= link_to "like", new_user_registration_path, class: "c-blue" %>
                     <% end %>
                   </td>
-                  <td class="plxxxs">
-                    <% if current_user %>
-                      <%= link_to "comment", "#", class: "c-blue js-toggle", data: { toggle_target: "#list-item-#{ item.id }-comments", toggle_class: "active" } %>
-                    <% else %>
-                      <%= link_to "comment", new_user_registration_path, class: "c-blue" %>
-                    <% end %>
-                  </td>
                   <td class="plxs c-blue">
                     <i class="fa fa-thumbs-o-up"></i> <span class="fsxs js-likes-count" data-likable="ListItem-<%= item.id %>"><%= item.likes_count %></span>
                   </td>
@@ -169,7 +162,7 @@
               </table>
             </div>
             <div id="list-item-<%= item.id %>-comments" class="js-list-item-comments">
-              <div class="mtxs bss bwts bc-13 show-active">
+              <div class="mtxs bss bwts bc-13">
                 <div class="js-list-item-comments-list">
                   <% item.comments.includes(:user).each do |comment| %>
                     <div class="ptxs-plus mtxs bss bwts-plus bc-13">
