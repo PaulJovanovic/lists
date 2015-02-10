@@ -1,30 +1,35 @@
-<div class="row nmhxs">
-  <% @lists.each do |list| %>
-    <div class="col-sm-4 col-lg-3 phxs mtm">
-      <%= link_to list_path(list) do %>
-        <div class="paxs bg-15 bss bwas bc-13">
-          <div class="relative square bg-12">
-            <div class="absolute fill">
-              <table class="full">
-                <tr>
-                  <td class="c-6 fsxxl text-center">
-                    ?
-                  </td>
-                </tr>
-              </table>
+<div class="mtm bg-15 bss bwrs bwbs bc-13">
+  <div class="row mhn">
+    <% @lists.each do |list| %>
+      <div class="col-sm-4 phn bss bwls bwts bc-13">
+        <div class="js-list">
+          <%= link_to list_path(list), class: "js-list-url" do %>
+            <div class="phm pvl bg-15">
+              <div class="phxl">
+                <div class="square relative mha bg-14 fsxxl text-center" style="max-width: 100%;">
+                  <div class="absolute fill">
+                    <table class="full">
+                      <tr>
+                        <td>
+                          <i class="fa fa-question"></i>
+                        </td>
+                      </tr>
+                    </table>
+                  </div>
+                </div>
+              </div>
+              <div class="ptxs mtm c-6 fsxxxs fwl truncate bss bwts bc-13 js-list-name">
+                <%= list.name %>
+              </div>
+              <div class="row nmhxxxs">
+                <div class="col-xs-6 phxxxs c-10 fsxxxs fws">
+                  <%= pluralize(list.products_count, "product") %>
+                </div>
+              </div>
             </div>
-          </div>
-          <div class="mtxxxs fwl truncate">
-            <%= list.name %>
-          </div>
-          <div class="c-10">
-            <%= pluralize(list.products_count, "Product") %>
-          </div>
-          <div class="c-10">
-            <%= list_price_range(list) %>
-          </div>
+          <% end %>
         </div>
-      <% end %>
-    </div>
-  <% end %>
+      </div>
+    <% end %>
+  </div>
 </div>
