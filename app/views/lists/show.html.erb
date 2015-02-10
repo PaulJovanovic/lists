@@ -251,9 +251,9 @@
         </div>
       <% end %>
     </div>
-    <div class="paxs mtxs bg-15 bss bwas bc-13">
+    <div class="mtxs bg-15 bss bwas bc-13">
       <% @list.categories.shuffle.first.lists.shuffle.select{|list| list.id != @list.id}.take(3).each do |list| %>
-        <div class="mtm-plus">
+        <div class="paxs mtm-plus bss bwts-plus bc-13">
           <%= link_to list_path(list) do %>
             <div class="phl">
               <%= image_tag list.default_image, class: "img-responsive mha" %>
