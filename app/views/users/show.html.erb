@@ -2,15 +2,15 @@
   <div class="col-sm-4 col-md-3 phxs mtm">
     <div class="paxs bg-15 bss bwas bc-13">
       <div class="relative hover-action">
-        <%= image_tag @user.profile_image(:profile), class: "img-responsive mha" %>
-      </div>
-      <% if @user.id == current_user.try(:id) %>
-        <%= link_to edit_user_path(@user) do %>
-          <div class="phxs pvxxxs mtxs bg-blue c-15 text-center">
-            <i class="fa fa-edit"></i> edit
+        <%= image_tag @user.profile_image(300), class: "img-responsive mha" %>
+        <% if @user.id == current_user.try(:id) %>
+          <div class="absolute top right">
+            <%= link_to "http://en.gravatar.com/emails/", class: "paxxxs bg-blue c-15" do %>
+              <i class="fa fa-edit"></i> edit
+            <% end %>
           </div>
         <% end %>
-      <% end %>
+      </div>
       <table class="mtxs full-width">
         <tr>
           <td class="c-6 fws">

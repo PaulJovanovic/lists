@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150210053423) do
+ActiveRecord::Schema.define(version: 20150210181006) do
 
   create_table "assets", force: true do |t|
     t.string   "type"
@@ -170,6 +170,7 @@ ActiveRecord::Schema.define(version: 20150210053423) do
     t.integer  "current_score"
     t.integer  "total_score"
     t.string   "slug"
+    t.string   "image_url"
   end
 
   add_index "users", ["api_token"], name: "index_users_on_api_token", unique: true, using: :btree

@@ -6,14 +6,13 @@ class User < ActiveRecord::Base
 
   friendly_id :username, use: [:slugged, :finders]
 
-  has_one :image, as: :assetable, class_name: "Image", dependent: :destroy
   has_many :scores, as: :scorable, dependent: :destroy
   has_many :likes
   has_many :lists
 
   validates :username, :uniqueness => { :case_sensitive => false }
 
-  accepts_nested_attributes_for :image
+  before_create :set_image_url
 
   attr_accessor :login
 
@@ -65,7 +64,13 @@ class User < ActiveRecord::Base
     item.user_id == id
   end
 
-  def profile_image(size="thumbnail")
-    image.try(:url, size) || "http://placehold.it/300x300"
+  def profile_image(size=64)
+    "#{image_url}?s=#{size}&d=identicon"
+  end
+
+  private
+
+  def set_image_url
+    self.image_url = "http://www.gravatar.com/avatar/#{Digest::MD5.hexdigest(email)}"
   end
 end

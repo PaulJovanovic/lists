@@ -177,7 +177,7 @@
                         <div class="col-xs-2 col-sm-1 phxxxs">
                           <%= link_to user_path(comment.user) do %>
                             <div class="bss bwas bc-13">
-                              <%= image_tag comment.user.profile_image(:thumbnail), class: "img-responsive" %>
+                              <%= image_tag comment.user.profile_image, class: "img-responsive" %>
                             </div>
                           <% end %>
                         </div>
@@ -198,7 +198,7 @@
                     <div class="row nmhxxxs">
                       <div class="col-xs-2 col-sm-1 phxxxs">
                         <div class="bss bwas bc-13">
-                          <%= image_tag current_user.profile_image(:thumbnail), class: "img-responsive" %>
+                          <%= image_tag current_user.profile_image, class: "img-responsive" %>
                         </div>
                       </div>
                       <div class="col-xs-10 col-sm-11 phxxxs fsxxs c-5">

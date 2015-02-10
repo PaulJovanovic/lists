@@ -8,6 +8,6 @@ json.comment do
     json.id @comment.user.id
     json.username @comment.user.username
     json.profile_url user_url(@comment.user, subdomain: nil)
-    json.profile_image @comment.user.profile_image(:thumbnail)
+    json.profile_image @comment.user.profile_image
   end
 end
