@@ -123,7 +123,7 @@
                 </div>
               <% end %>
             </div>
-            <div class="mtxs ptxxxs bg-15 fsxxs bss bwts bc-13">
+            <div class="mtxs ptxxxs bg-15 fsxxs">
               <table>
                 <tr>
                   <td>
@@ -152,11 +152,68 @@
                       <%= link_to "like", new_user_registration_path, class: "c-blue" %>
                     <% end %>
                   </td>
-                  <td class="plxxxs c-blue">
+                  <td class="plxxxs">
+                    <% if current_user %>
+                      <%= link_to "comment", "#", class: "c-blue js-toggle", data: { toggle_target: "#list-item-#{ item.id }-comments", toggle_class: "active" } %>
+                    <% else %>
+                      <%= link_to "comment", new_user_registration_path, class: "c-blue" %>
+                    <% end %>
+                  </td>
+                  <td class="plxs c-blue">
                     <i class="fa fa-thumbs-o-up"></i> <span class="fsxs js-likes-count" data-likable="ListItem-<%= item.id %>"><%= item.likes_count %></span>
+                  </td>
+                  <td class="plxxs c-blue">
+                    <i class="fa fa-comment-o"></i> <span class="fsxs js-comments-count" data-commentable="ListItem-<%= item.id %>"><%= item.comments_count %></span>
                   </td>
                 </tr>
               </table>
+            </div>
+            <div id="list-item-<%= item.id %>-comments" class="js-list-item-comments">
+              <div class="mtxs bss bwts bc-13 show-active">
+                <div class="js-list-item-comments-list">
+                  <% item.comments.includes(:user).each do |comment| %>
+                    <div class="ptxs-plus mtxs bss bwts-plus bc-13">
+                      <div class="row nmhxxxs">
+                        <div class="col-xs-2 col-sm-1 phxxxs">
+                          <%= link_to user_path(comment.user) do %>
+                            <div class="bss bwas bc-13">
+                              <%= image_tag comment.user.profile_image(:thumbnail), class: "img-responsive" %>
+                            </div>
+                          <% end %>
+                        </div>
+                        <div class="col-xs-10 col-sm-11 phxxxs fsxxs c-5">
+                          <div>
+                            <%= link_to comment.user.username, user_path(comment.user), class: "c-blue" %> <span class="c-10 fsxxxs"><%= comment.created_at.strftime("%m/%d/%y") %></span>
+                          </div>
+                          <div>
+                            <%= sanitize(simple_format(comment.text), tags: %w(br) ) %>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  <% end %>
+                </div>
+                <div class="mtxs">
+                  <% if current_user %>
+                    <div class="row nmhxxxs">
+                      <div class="col-xs-2 col-sm-1 phxxxs">
+                        <div class="bss bwas bc-13">
+                          <%= image_tag current_user.profile_image(:thumbnail), class: "img-responsive" %>
+                        </div>
+                      </div>
+                      <div class="col-xs-10 col-sm-11 phxxxs fsxxs c-5">
+                        <%= form_tag comment_v0_user_url(host: api_domain, subdomain: api_subdomain), remote: true, class: "js-lists-api-form js-comments-form js-list-item-comments-add" do %>
+                          <%= hidden_field_tag :commentable_type, "ListItem" %>
+                          <%= hidden_field_tag :commentable_id, item.id %>
+                          <%= text_area_tag :text, nil, placeholder: "add a comment", class: "paxxs bss bwas bc-blue full-width js-lists-api-submit-on-enter" %>
+                        <% end %>
+                      </div>
+                    </div>
+                  <% else %>
+                    <%= link_to "sign up to comment", new_user_registration_path, class: "c-blue" %>
+                  <% end %>
+                </div>
+              </div>
             </div>
           </div>
         </div>

@@ -24,4 +24,13 @@ class API::V0::UsersController < API::BaseController
       render json: { class: "like", errors: likable.errors }, status: :unprocessable_entity
     end
   end
+
+  def comment
+    @comment = Comment.new(commentable_type: params[:commentable_type], commentable_id: params[:commentable_id], user: current_user, text: params[:text])
+    if @comment.save
+      render "api/v0/comments/show"
+    else
+      render json: { class: "comment", errors: @comment.errors }, status: :unprocessable_entity
+    end
+  end
 end

@@ -13,3 +13,5 @@ $(document).ready ->
 
   $("img.lazy").lazyload
     threshold: 400
+
+  $('textarea').autosize();

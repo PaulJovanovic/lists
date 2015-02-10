@@ -41,6 +41,12 @@ $(document).ready ->
   $(".js-lists-api-submit-on-change").change ->
     $(@).closest("form").submit()
 
+  $(".js-lists-api-submit-on-enter").keydown (e) ->
+    if e.keyCode == 13  && !e.shiftKey
+      e.preventDefault()
+      $(@).closest("form").submit()
+      $(@).val("")
+
   $(".js-lists-form-search").each ->
     $form = $(@)
     searchDelay = ""

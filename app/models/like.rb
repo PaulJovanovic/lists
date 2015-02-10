@@ -5,9 +5,9 @@ class Like < ActiveRecord::Base
 
   validates :likable, :user, presence: true
 
-  after_create :increment_like_count
+  after_create :increment_likes_count
   after_create :score
-  after_destroy :decrement_like_count
+  after_destroy :decrement_likes_count
 
   private
 
@@ -18,12 +18,12 @@ class Like < ActiveRecord::Base
     end
   end
 
-  def decrement_like_count
+  def decrement_likes_count
     likable_type.constantize.decrement_counter(:likes_count, likable_id)
     likable.unliked
   end
 
-  def increment_like_count
+  def increment_likes_count
     likable_type.constantize.increment_counter(:likes_count, likable_id)
     likable.liked
   end

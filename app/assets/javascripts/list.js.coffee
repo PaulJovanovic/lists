@@ -79,3 +79,28 @@ $(document).ready ->
   $(".js-list-item-form-likes").on "ajax:success", (event, data, status, xhr) ->
     usernames = ("<div class='c-4 fsxs fws'>#{like.user.username} <span class='c-10'>(#{like.user.total_score})</span></div>" for like in data.list_item.likes)
     $($(@).closest(".js-list-item-likes").data("target")).find(".modal-body").html(usernames.join(""))
+
+  $(".js-list-item-comments-add").on "ajax:success", (event, data, status, xhr) ->
+    comment = data.comment
+    console.log($(@).closest(".js-list-item-comments"))
+    $(@).closest(".js-list-item-comments").find(".js-list-item-comments-list").append """
+      <div class="ptxs-plus mtxs bss bwts-plus bc-13">
+        <div class="row nmhxxxs">
+          <div class="col-xs-2 col-sm-1 phxxxs">
+            <a href="#{comment.user.profile_url}">
+              <div class="bss bwas bc-13">
+                <img class="img-responsive" src="#{comment.user.profile_image}">
+              </div>
+            </a>
+          </div>
+          <div class="col-xs-10 col-sm-11 phxxxs fsxxs c-5">
+            <div>
+              <a class="c-blue" href="#{comment.user.profile_url}">#{comment.user.username}</a> <span class="c-10 fsxxxs">#{comment.created_at}</span>
+            </div>
+            <div>
+              #{comment.text}
+            </div>
+          </div>
+        </div>
+      </div>
+    """

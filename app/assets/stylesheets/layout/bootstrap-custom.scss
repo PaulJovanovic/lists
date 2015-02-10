@@ -38,6 +38,10 @@ body {
     text-decoration: none;
   }
 
+  textarea {
+    resize: none;
+  }
+
   * {
     border-width: 0px;
     outline-width: 0px;
