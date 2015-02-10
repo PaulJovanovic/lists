@@ -7,7 +7,7 @@ json.comment do
   json.user do
     json.id @comment.user.id
     json.username @comment.user.username
-    json.profile_url user_url(@comment.user)
+    json.profile_url user_url(@comment.user, subdomain: nil)
     json.profile_image @comment.user.profile_image(:thumbnail)
   end
 end
