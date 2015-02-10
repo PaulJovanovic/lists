@@ -251,5 +251,24 @@
         </div>
       <% end %>
     </div>
+    <div class="paxs mtxs bg-15 bss bwas bc-13">
+      <% @list.categories.shuffle.first.lists.shuffle.select{|list| list.id != @list.id}.take(3).each do |list| %>
+        <div class="mtm-plus">
+          <%= link_to list_path(list) do %>
+            <div class="phl">
+              <%= image_tag list.default_image, class: "img-responsive mha" %>
+            </div>
+            <div class="ptxs mtm c-6 fsxxxs fwl truncate bss bwts bc-13 js-list-name">
+              <%= list.name %>
+            </div>
+            <div class="row nmhxxxs">
+              <div class="col-xs-6 phxxxs c-10 fsxxxs fws">
+                <%= pluralize(list.products_count, "product") %>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
   </div>
 </div>
