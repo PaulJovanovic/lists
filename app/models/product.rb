@@ -6,6 +6,7 @@ class Product < ActiveRecord::Base
   has_one :image, as: :assetable, class_name: "Image", dependent: :destroy
   has_many :list_items, dependent: :destroy
   has_many :lists, through: :list_items
+  has_many :comments, through: :list_items
   has_and_belongs_to_many :subcategories
 
   before_create :fetch_api_attributes

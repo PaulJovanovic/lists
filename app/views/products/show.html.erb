@@ -1,16 +1,16 @@
 <%= content_for :title, "#{@product.name} - Rankings" %>
 <div class="row nmhxs">
-  <div class="col-md-4 phxs mtm">
-    <div class="pam bg-15 bss bwas bc-13">
-      <%= image_tag @product.image.url(:original), class: "img-responsive" %>
-      <div class="fsm">
+  <div class="col-sm-4 col-md-3 phxs mtm">
+    <div class="paxs bg-15 bss bwas bc-13">
+      <%= image_tag @product.image.url(:profile), class: "img-responsive mha" %>
+      <div class="mtxs">
         <%= @product.name %>
       </div>
-      <div class="fss c-10">
+      <div class="fws c-10">
         <%= @product.manufacturer %>
       </div>
       <%= link_to @product.url do %>
-        <div class="paxs mtxs bg-blue c-15 fsxs text-center">
+        <div class="phxs pvxxs mtxs bg-blue c-15 fsxs text-center">
           <table class="mha">
             <tr>
               <td>
@@ -37,19 +37,49 @@
       </div>
     </div>
   </div>
-  <div class="col-md-8 phxs mtm">
-    <% @product.list_items.includes(:list).order("lists.products_count").each do |item| %>
-      <div class="mtm-plus">
+  <div class="col-sm-8 col-md-9 phxs mtm">
+    <% @product.list_items.includes("list").each do |item| %>
+      <div class="mtxs-plus bg-15 bss bwas bc-13">
         <%= link_to list_path(item.list) do %>
-          <div class="pam bg-15 bss bwas bc-13">
+          <div class="paxs">
             <div class="row nmhxs">
-              <div class="col-sm-3 phxs">
-                #<%= item.display_rank %> / <%= item.list.products_count %>
+              <div class="col-sm-2 col-md-1 phxs">
+                <%= image_tag item.list.default_image, class: "img-responsive mha" %>
               </div>
-              <div class="col-sm-9 phxs c-10 text-right-sm">
-                <%= item.list.name %>
+              <div class="col-sm-10 col-md-11 phxs">
+                <div class="c-blue">
+                  <%= item.list.name.html_safe %>
+                </div>
+                <div class="c-6 fws">
+                  #<%= item.display_rank %> / <%= item.list.products_count %>
+                </div>
               </div>
             </div>
+          </div>
+        <% end %>
+        <% if item.comments.count > 0 %>
+          <div class="paxs bss bwts bc-13">
+            <% item.comments.includes(:user).each do |comment| %>
+              <div class="ptxs-plus mtxs-plus">
+                <div class="row nmhxxxs">
+                  <div class="col-xs-2 col-sm-1 phxxxs">
+                    <%= link_to user_path(comment.user) do %>
+                      <div class="bss bwas bc-13">
+                        <%= image_tag comment.user.profile_image, class: "img-responsive" %>
+                      </div>
+                    <% end %>
+                  </div>
+                  <div class="col-xs-10 col-sm-11 phxxxs fsxxs c-5">
+                    <div>
+                      <%= link_to comment.user.username, user_path(comment.user), class: "c-blue" %> <span class="c-10 fsxxxs"><%= comment.created_at.strftime("%m/%d/%y") %></span>
+                    </div>
+                    <div>
+                      <%= sanitize(simple_format(comment.text), tags: %w(br) ) %>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            <% end %>
           </div>
         <% end %>
       </div>
