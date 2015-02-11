@@ -244,24 +244,26 @@
         </div>
       <% end %>
     </div>
-    <div class="mtxs bg-15 bss bwas bc-13">
-      <% @list.categories.shuffle.first.lists.shuffle.select{|list| list.id != @list.id}.take(3).each do |list| %>
-        <div class="paxs mtm-plus bss bwts-plus bc-13">
-          <%= link_to list_path(list) do %>
-            <div class="phl">
-              <%= image_tag list.default_image, class: "img-responsive mha" %>
-            </div>
-            <div class="ptxs mtm c-6 fsxxxs fwl truncate bss bwts bc-13 js-list-name">
-              <%= list.name %>
-            </div>
-            <div class="row nmhxxxs">
-              <div class="col-xs-6 phxxxs c-10 fsxxxs fws">
-                <%= pluralize(list.products_count, "product") %>
+    <% if @list.items.products_count > 0 %>
+      <div class="mtxs bg-15 bss bwas bc-13">
+        <% @list.categories.shuffle.first.lists.shuffle.select{|list| list.id != @list.id}.take(3).each do |list| %>
+          <div class="paxs mtm-plus bss bwts-plus bc-13">
+            <%= link_to list_path(list) do %>
+              <div class="phl">
+                <%= image_tag list.default_image, class: "img-responsive mha" %>
               </div>
-            </div>
-          <% end %>
-        </div>
-      <% end %>
-    </div>
+              <div class="ptxs mtm c-6 fsxxxs fwl truncate bss bwts bc-13 js-list-name">
+                <%= list.name %>
+              </div>
+              <div class="row nmhxxxs">
+                <div class="col-xs-6 phxxxs c-10 fsxxxs fws">
+                  <%= pluralize(list.products_count, "product") %>
+                </div>
+              </div>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
   </div>
 </div>
