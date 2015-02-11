@@ -244,7 +244,7 @@
         </div>
       <% end %>
     </div>
-    <% if @list.items.products_count > 0 %>
+    <% if @list.products_count > 0 %>
       <div class="mtxs bg-15 bss bwas bc-13">
         <% @list.categories.shuffle.first.lists.shuffle.select{|list| list.id != @list.id}.take(3).each do |list| %>
           <div class="paxs mtm-plus bss bwts-plus bc-13">
