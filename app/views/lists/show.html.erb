@@ -4,43 +4,45 @@
   <meta property="og:url" content="<%= list_url(@list) %>"/>
   <meta property="og:image" content="<%= @list.default_image %>"/>
 <% end %>
-<% content_for :banner do %>
-  <div class="pvm bg-15 bss bwvs bc-13 hidden-xs">
-    <div class="c-5 text-center">
-      <div class="fsxl fwl">
-        <%= @list.name.titlecase %>
-      </div>
-    </div>
-    <div class="container phs mtl">
-      <div class="row nmhs">
-        <div class="col-sm-6 phs">
-          <%= link_to "#item-#{@list.items_ordered_by_rank.first.id}" do %>
-            <%= image_tag @list.default_image, class: "img-responsive mha" %>
-            <div class="mha mtxs dhxxxxxl-max fsm text-center">
-              <span class="c-blue fwl">#<%= @list.items_ordered_by_rank.first.rank + 1 %></span> <%= @list.items_ordered_by_rank.first.product.name.html_safe %>
-            </div>
-          <% end %>
+<% if @list.items_ordered_by_rank.count > 2 %>
+  <% content_for :banner do %>
+    <div class="pvm bg-15 bss bwvs bc-13 hidden-xs">
+      <div class="c-5 text-center">
+        <div class="fsxl fwl">
+          <%= @list.name.titlecase %>
         </div>
-        <div class="col-sm-6 phs">
-          <% @list.items_ordered_by_rank.slice(1, 5).each do |item| %>
-            <%= link_to "#item-#{item.id}" do %>
-              <div class="row nmhxs mtxs">
-                <div class="col-xs-1 phxs fsl fwl">
-                  <div class="dvl lhl c-blue">
-                    #<%= item.rank + 1 %>
-                  </div>
-                </div>
-                <div class="col-xs-11 phxs fsxs lhl truncate">
-                  <%= image_tag item.product.image.url(:thumbnail), class: "dal mrxxxs" %>
-                  <%= item.product.name.html_safe %>
-                </div>
+      </div>
+      <div class="container phs mtl">
+        <div class="row nmhs">
+          <div class="col-sm-6 phs">
+            <%= link_to "#item-#{@list.items_ordered_by_rank.first.id}" do %>
+              <%= image_tag @list.default_image, class: "img-responsive mha" %>
+              <div class="mha mtxs dhxxxxxl-max fsm text-center">
+                <span class="c-blue fwl">#<%= @list.items_ordered_by_rank.first.rank + 1 %></span> <%= @list.items_ordered_by_rank.first.product.name.html_safe %>
               </div>
             <% end %>
-          <% end %>
+          </div>
+          <div class="col-sm-6 phs">
+            <% @list.items_ordered_by_rank.slice(1, 5).each do |item| %>
+              <%= link_to "#item-#{item.id}" do %>
+                <div class="row nmhxs mtxs">
+                  <div class="col-xs-1 phxs fsl fwl">
+                    <div class="dvl lhl c-blue">
+                      #<%= item.rank + 1 %>
+                    </div>
+                  </div>
+                  <div class="col-xs-11 phxs fsxs lhl truncate">
+                    <%= image_tag item.product.image.url(:thumbnail), class: "dal mrxxxs" %>
+                    <%= item.product.name.html_safe %>
+                  </div>
+                </div>
+              <% end %>
+            <% end %>
+          </div>
         </div>
       </div>
     </div>
-  </div>
+  <% end %>
 <% end %>
 <%= form_tag v0_list_url(@list, host: api_domain, subdomain: api_subdomain), remote: true, method: :get, class: "js-lists-api-form js-list-form" do %>
 <% end %>
