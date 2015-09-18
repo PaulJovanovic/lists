@@ -90,6 +90,7 @@ Rails.application.configure do
       origins "*"
       resource "/assets/*", headers: :any, methods: :get
       resource "/v0/*", headers: :any, methods: [:get, :post, :put, :patch, :options, :delete]
+      resource "/v1/*", headers: :any, methods: [:get, :post, :put, :patch, :options, :delete]
     end
   end
 end
