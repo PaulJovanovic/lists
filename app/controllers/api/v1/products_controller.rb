@@ -1,5 +1,5 @@
 class API::V1::ProductsController < API::BaseController
-  skip_filter :authenticate, only: [:index]
+  skip_filter :authenticate, only: [:index, :show]
   respond_to :json
 
   def index
