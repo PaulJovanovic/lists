@@ -38,6 +38,7 @@ class List < ActiveRecord::Base
   validates :name, :user, presence: true
 
   def self.scope(scope, params = nil)
+    scope = scope || "most_active"
     if params.present?
       List.send("#{scope}_by_category", params)
     else
