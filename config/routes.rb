@@ -44,6 +44,30 @@ Rails.application.routes.draw do
           end
         end
       end
+
+      namespace :v1 do
+        resources :likes, only: [:create, :update]
+        resources :lists do
+          member do
+            post :add_product
+          end
+          resources :list_items, only: [:show]
+        end
+        resources :list_items
+        resources :products
+        resources :stores do
+          collection do
+            get :search
+          end
+        end
+        resource :user do
+          collection do
+            post :like
+            post :unlike
+            post :comment
+          end
+        end
+      end
     end
   end
 end
