@@ -4,7 +4,10 @@ class API::V0::ProductsController < API::BaseController
 
   def index
     @products = Product.order(:name)
-    render :index
+  end
+
+  def show
+    @product = Product.find(params[:id])
   end
 
   def create
