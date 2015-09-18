@@ -29,6 +29,7 @@ Rails.application.routes.draw do
           end
           resources :list_items, only: [:show]
         end
+        resources :list_items
         resources :products
         resources :stores do
           collection do
