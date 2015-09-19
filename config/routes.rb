@@ -60,13 +60,8 @@ Rails.application.routes.draw do
             get :search
           end
         end
-        resource :user do
-          collection do
-            post :like
-            post :unlike
-            post :comment
-          end
-        end
+
+        resources :users, only: [:show]
       end
     end
   end
