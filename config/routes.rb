@@ -46,6 +46,7 @@ Rails.application.routes.draw do
       end
 
       namespace :v1 do
+        resources :comments, only: [:show]
         resources :likes, only: [:create, :update]
         resources :lists do
           member do
