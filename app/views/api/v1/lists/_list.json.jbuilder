@@ -1,6 +1,5 @@
-json.id list.id
+json.id list.slug
 json.name list.name
-json.slug list.slug
 json.image list.default_image
 json.minimumPrice list.minimum_price.to_s
 json.maximumPrice list.maximum_price.to_s
