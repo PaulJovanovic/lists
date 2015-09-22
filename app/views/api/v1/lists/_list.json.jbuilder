@@ -1,5 +1,6 @@
 json.id list.id
 json.slug list.slug
+json.user list.user_id
 json.name list.name
 json.image list.default_image
 json.minimumPrice list.minimum_price.to_s
