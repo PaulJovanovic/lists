@@ -9,3 +9,5 @@ json.listItems list.items_ordered_by_rank.pluck(:id)
 json.productsCount list.products_count
 json.currentScore list.current_score
 json.totalScore list.total_score
+json.createdAt list.created_at.iso8601
+json.updatedAt list.updated_at.iso8601
